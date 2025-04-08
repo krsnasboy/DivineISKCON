@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Donations & Support | ISKCON Burla</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #6C4AB6;
+            --secondary: #8D72E1;
+            --accent: #B9E0FF;
+            --light: #F8F6F4;
+            --dark: #2D2727;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(248, 246, 244, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+        
+        .logo img {
+            height: 45px;
+            transition: var(--transition);
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 180px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            color: var(--dark);
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: rgba(108, 74, 182, 0.1);
+            color: var(--primary);
+            padding-left: 25px;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            width: 28px;
+            height: 22px;
+            position: relative;
+        }
+        
+        .hamburger div {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+            transform-origin: center;
+        }
+        
+        .hamburger div:nth-child(1) {
+            top: 0;
+            left: 0;
+        }
+        
+        .hamburger div:nth-child(2) {
+            top: 9px;
+            left: 0;
+            opacity: 1;
+        }
+        
+        .hamburger div:nth-child(3) {
+            bottom: 0;
+            left: 0;
+        }
+        
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 9px;
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            text-align: center;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 74, 182, 0.7), rgba(141, 114, 225, 0.5));
+            z-index: -1;
+        }
+        
+        .page-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.8;
+        }
+        
+        .page-hero-content {
+            max-width: 800px;
+            color: white;
+        }
+        
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .page-hero p {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+        
+        /* Donation Options */
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .donation-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .donation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .donation-card:hover::before {
+            opacity: 1;
+        }
+        
+        .donation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(108, 74, 182, 0.15);
+        }
+        
+        .donation-card:hover h3,
+        .donation-card:hover .amount,
+        .donation-card:hover p {
+            color: white;
+        }
+        
+        .donation-card:hover .donate-button {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .donation-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 18px rgba(108, 74, 182, 0.25);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .donation-card:hover .donation-icon {
+            transform: rotateY(180deg);
+            background: white;
+            color: var(--primary);
+        }
+        
+        .donation-card h3 {
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            margin-bottom: 15px;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .amount {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        
+        .donation-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .donate-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(108, 74, 182, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .donate-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 74, 182, 0.4);
+        }
+        
+        /* Other Ways to Support */
+        .support-section {
+            background-color: #f9f9f9;
+            padding: 60px 5%;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .support-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(108, 74, 182, 0.1);
+        }
+        
+        .support-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .support-card h3 i {
+            font-size: 1.3rem;
+        }
+        
+        .support-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Testimonials */
+        .testimonial-section {
+            margin: 60px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            color: rgba(108, 74, 182, 0.1);
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            color: #555;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background-color: #f9f9f9;
+            padding: 60px 5%;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            color: var(--primary);
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .faq-answer p {
+            color: #555;
+            line-height: 1.6;
+            padding-bottom: 20px;
+        }
+        
+        .faq-item.active .faq-question {
+            color: var(--primary);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 60px 0;
+            border-radius: 15px;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: white;
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button.outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 5% 25px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .footer-logo img {
+            height: 45px;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 18px rgba(108, 74, 182, 0.35);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            color: white;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: var(--light);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
+            
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                background-color: transparent;
+                padding: 10px 0 0 20px;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            
+            .logo {
+                order: 2;
+            }
+            
+            .hamburger {
+                order: 1;
+            }
+            
+            .page-hero {
+                height: 40vh;
+                margin-top: 70px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo img {
+                height: 30px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .page-hero {
+                height: 35vh;
+            }
+            
+            .donation-card {
+                padding: 30px 20px;
+            }
+        }
+    
+@media (max-width: 768px) {
+    .logo img {
+        height: 60px !important;
+    }
+    .logo-text {
+        font-size: 1.6rem !important;
+    }
+    nav ul li a {
+        font-size: 1.3rem !important;
+    }
+    .dropdown-content a {
+        font-size: 1.2rem !important;
+    }
+}
+@media (max-width: 480px) {
+    .logo img {
+        height: 50px !important;
+    }
+    .logo-text {
+        font-size: 1.4rem !important;
+    }
+    nav ul li a {
+        font-size: 1.2rem !important;
+    }
+}
+
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">
+            <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
+            <span class="logo-text">ISKCON Burla</span>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Events <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Event 1</a>
+                        <a href="#">Event 2</a>
+                        <a href="#">Event 3</a>
+                        <a href="#">Event 4</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Courses <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Course 1</a>
+                        <a href="#">Course 2</a>
+                        <a href="#">Course 3</a>
+                        <a href="#">Course 4</a>
+                    </div>
+                </li>
+                <li><a href="#">Temple Store</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <img alt="Temple donation" class="page-hero-bg" src="https://i.imgur.com/JzXjQYh.jpg"/>
+        <div class="page-hero-content">
+            <h1>Donations & Support</h1>
+            <p>Your generous contributions help sustain our temple and spread Krishna consciousness</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section>
+            <div class="section-title">
+                <h2>Support Our Mission</h2>
+                <p>Every donation, big or small, helps us maintain the temple, conduct programs, and serve the community</p>
+            </div>
+            
+            <div class="donation-options">
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>General Donation</h3>
+                    <div class="amount">Any Amount</div>
+                    <p>Support the daily operations of the temple including deity worship, maintenance, and community programs.</p>
+                    <button class="donate-button">Donate Now</button>
+                </div>
+                
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-brick"></i>
+                    </div>
+                    <h3>Temple Construction</h3>
+                    <div class="amount">₹1,100+</div>
+                    <p>Contribute to our upcoming temple project. Donors will be recognized in our temple donor book.</p>
+                    <button class="donate-button">Donate Now</button>
+                </div>
+                
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-cow"></i>
+                    </div>
+                    <h3>Goshala Support</h3>
+                    <div class="amount">₹2,100+</div>
+                    <p>Help maintain our cow protection program which provides pure milk for deity worship.</p>
+                    <button class="donate-button">Donate Now</button>
+                </div>
+                
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Prasadam Fund</h3>
+                    <div class="amount">₹1,000+</div>
+                    <p>Sponsor sanctified food distribution to devotees and visitors.</p>
+                    <button class="donate-button">Donate Now</button>
+                </div>
+                
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Book Distribution</h3>
+                    <div class="amount">₹5,100+</div>
+                    <p>Help print and distribute Srila Prabhupada's books to spread spiritual knowledge.</p>
+                    <button class="donate-button">Donate Now</button>
+                </div>
+                
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Youth Programs</h3>
+                    <div class="amount">₹3,100+</div>
+                    <p>Support our educational initiatives for children and teenagers.</p>
+                    <button class="donate-button">Donate Now</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="support-section">
+            <div class="section-title">
+                <h2>Other Ways to Support</h2>
+                <p>There are many ways to contribute beyond monetary donations</p>
+            </div>
+            
+            <div class="support-grid">
+                <div class="support-card">
+                    <h3><i class="fas fa-hands"></i> Volunteer Service</h3>
+                    <p>Offer your time and skills in temple activities like cooking, cleaning, gardening, or event organization.</p>
+                </div>
+                
+                <div class="support-card">
+                    <h3><i class="fas fa-gift"></i> In-Kind Donations</h3>
+                    <p>Contribute groceries, supplies, or equipment needed for temple operations and events.</p>
+                </div>
+                
+                <div class="support-card">
+                    <h3><i class="fas fa-bullhorn"></i> Spread the Word</h3>
+                    <p>Share our mission with friends and family, or help with social media and outreach programs.</p>
+                </div>
+                
+                <div class="support-card">
+                    <h3><i class="fas fa-briefcase"></i> Corporate Matching</h3>
+                    <p>Check if your employer offers donation matching to double your contribution's impact.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonial-section">
+            <div class="section-title">
+                <h2>Donor Experiences</h2>
+                <p>Hear from those who have supported our temple</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Supporting ISKCON Burla has been the most fulfilling experience. Seeing how my contributions help maintain the beautiful deities and feed devotees brings me immense joy.</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/JzXjQYh.jpg" alt="Ramesh Patel" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Ramesh Patel</h4>
+                            <p>Monthly Donor since 2022</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Our family sponsors the Sunday feast regularly. There's no better feeling than knowing you're helping provide prasadam to hundreds of devotees each week.</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/9XmJQzT.jpg" alt="Priya Sharma" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Prasadam Sponsor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Volunteering at the temple has enriched my life spiritually. The service opportunities have helped me grow closer to Krishna while contributing meaningfully.</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/5XmJQzT.jpg" alt="Amit Kumar" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Amit Kumar</h4>
+                            <p>Weekly Volunteer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="faq-section">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions about donating to ISKCON Burla</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How will my donation be used?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>All donations are used strictly for temple operations including deity worship, facility maintenance, prasadam distribution, educational programs, and community services. We maintain complete transparency in our financial reporting.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is my donation tax-deductible?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, ISKCON Burla is a registered charitable trust under Section 12A of the Income Tax Act. All donations are eligible for tax exemption under Section 80G. You will receive a receipt for your records.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I donate in memory of someone?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. We offer memorial donations where you can honor a loved one. The temple will perform special prayers for their spiritual benefit.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How can I become a monthly donor?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>You can set up recurring donations through our website or by contacting our donation coordinator. Monthly donors receive special updates and invitations to exclusive events.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What are the benefits of donating?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Beyond tax benefits, donors receive spiritual merits by supporting Krishna's mission. Major donors are recognized in our temple and receive special blessings from the deities.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Make a Difference?</h2>
+                <p>Your support helps preserve Vedic culture and spread the message of Krishna consciousness in our community.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button">Donate Now</a>
+                    <a href="#" class="cta-button outline">Contact Our Team</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img alt="ISKCON Burla Logo" src="https://i.imgur.com/CqBYC04.png"/>
+                    <span class="footer-logo-text">ISKCON Burla</span>
+                </div>
+                <p>Founded in 2023, ISKCON Burla is dedicated to spreading love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Our Gurudev</a></li>
+                    <li><a href="#">His teachings</a></li>
+                    <li><a href="#">Founder Acharya</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Online Classes</a></li>
+                    <li><a href="#">Daily Inspiration</a></li>
+                    <li><a href="#">Books & Scriptures</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">info@iskconburla.org</a></li>
+                    <li><a href="#">+91 00000 00000</a></li>
+                    <li><a href="#">Visit Us</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 ISKCON Burla. All rights reserved. | <a href="#" style="color: var(--accent);">Privacy Policy</a> | <a href="#" style="color: var(--accent);">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            
+            // Toggle body scroll when menu is open
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+        
+        // Hide Header on Scroll Down
+        let lastScroll = 0;
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                header.classList.remove('hidden');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+                header.classList.add('hidden');
+            } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+                header.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Mobile dropdown tap support
+        document.querySelectorAll('.dropdown > a').forEach(drop => {
+            drop.addEventListener('click', e => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const content = drop.nextElementSibling;
+                    const isVisible = content.style.display === 'block';
+                    content.style.display = isVisible ? 'none' : 'block';
+                }
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                
+                const answer = question.nextElementSibling;
+                if (item.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = '0';
+                }
+            });
+        });
+
+        // Better touch feedback for mobile buttons
+        document.querySelectorAll('button, a').forEach(element => {
+            element.addEventListener('touchstart', () => {
+                element.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', () => {
+                element.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
