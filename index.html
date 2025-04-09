@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Spiritual Harmony | Elevate Your Consciousness</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ISKCON Burla | Spiritual Harmony</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
         :root {
             --primary: #6C4AB6;
             --secondary: #8D72E1;
@@ -119,6 +118,10 @@
         }
         
         .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
             position: absolute;
             top: 100%;
             left: 0;
@@ -135,6 +138,10 @@
         }
         
         .dropdown:hover .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
@@ -303,7 +310,7 @@
             transform: translateX(100%);
         }
         
-        /* Why Choose Us Section */
+        /* Features Section */
         .features {
             padding: 80px 5%;
             background-color: white;
@@ -383,6 +390,9 @@
         .feature-card:nth-child(2) { animation-delay: 0.2s; }
         .feature-card:nth-child(3) { animation-delay: 0.3s; }
         .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+        .feature-card:nth-child(7) { animation-delay: 0.7s; }
         
         .feature-card:hover {
             transform: translateY(-8px) scale(1.02);
@@ -428,7 +438,7 @@
             font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
         
-        /* Enhanced Newsletter Section */
+        /* Newsletter Section */
         .newsletter {
             padding: 80px 5%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -535,6 +545,39 @@
             background-color: #1a1a1a;
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Floating Home Button */
+        .floating-home-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .floating-home-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .floating-home-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(108, 74, 182, 0.4);
         }
         
         /* Footer */
@@ -703,12 +746,11 @@
         
         /* Mobile Styles */
         @media (max-width: 768px) {
-
-            nav ul li a {
-                font-size: 1.2rem;
-                padding: 12px 0;
+            nav {
+                width: 45%;
+                left: -45%;
+                left: -45%;
             }
-
             header {
                 padding: 12px 5%;
             }
@@ -720,15 +762,18 @@
             nav {
                 position: fixed;
                 top: 0;
-                left: -100%;
-                width: 100%;
+                left: -45%;
+                width: 45%;
                 height: 100vh;
-                background-color: var(--light);
+                background-color: white;
                 display: flex;
-                align-items: center;
-                justify-content: center;
+                flex-direction: column;
+                justify-content: flex-start;
                 transition: var(--transition);
                 z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                padding-top: 80px;
+                overflow-y: auto;
             }
             
             nav.active {
@@ -737,24 +782,59 @@
             
             nav ul {
                 flex-direction: column;
-                align-items: center;
-                gap: 25px;
+                gap: 0;
+                width: 100%;
+                padding: 0;
+            }
+            
+            nav ul li {
+                width: 100%;
+                padding: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px 20px;
+                font-size: 1rem;
+                color: var(--dark);
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
                 position: static;
                 width: 100%;
                 box-shadow: none;
-                background-color: transparent;
-                padding: 10px 0 0 20px;
+                background-color: rgba(0, 0, 0, 0.02);
+                padding: 0;
                 display: none;
-            }
-            
-            .dropdown:hover .dropdown-content {
-                display: block;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
+                border-radius: 0;
+            }
+            
+            .dropdown-content a {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+                color: #555;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown:hover .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
+                display: block;
             }
             
             .logo {
@@ -765,29 +845,59 @@
                 order: 1;
             }
             
-            .features {
-                padding: 70px 5%;
+            /* Nav overlay */
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
             }
             
-            .section-title {
-                margin-bottom: 40px;
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
             }
-            
-            .newsletter {
-                padding: 70px 5%;
+
+            .hero-bg {
+                content: url('https://i.imgur.com/Ds2uuU6.jpeg');
+                object-position: center top;
             }
-            
-            .newsletter-form input,
-            .newsletter-form button {
-                padding: 15px 18px;
+
+            .floating-home-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
             }
         }
-        
-        @media (max-width: 480px) {
 
-.hero-bg {
-    object-position: center top;
-}
+        @media (max-width: 480px) {
+            nav {
+                width: 45%;
+                left: -45%;
+                left: -80%;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem !important;
+                padding: 12px 15px !important;
+            }
+            
+            .dropdown-content a {
+                font-size: 0.85rem !important;
+                padding: 10px 25px !important;
+            }
+
+            .hero-bg {
+                object-position: center top;
+            }
 
             .logo img {
                 height: 30px;
@@ -820,323 +930,354 @@
                 height: 42px;
                 font-size: 1rem;
             }
+
+            .floating-home-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                bottom: 15px;
+                right: 15px;
+            }
         }
-    
-@media (max-width: 768px) {
-    .hero-bg {
-        content: url('https://i.imgur.com/Ds2uuU6.jpeg');
-        object-position: center top;
-    }
-}
-
-@media (max-width: 768px) {
-    .logo img {
-        height: 60px !important;
-    }
-    .logo-text {
-        font-size: 1.6rem !important;
-    }
-    nav ul li a {
-        font-size: 1.3rem !important;
-    }
-    .dropdown-content a {
-        font-size: 1.2rem !important;
-    }
-}
-@media (max-width: 480px) {
-    .logo img {
-        height: 50px !important;
-    }
-    .logo-text {
-        font-size: 1.4rem !important;
-    }
-    nav ul li a {
-        font-size: 1.2rem !important;
-    }
-}
-
-</style>
+    </style>
 </head>
 <body>
-<!-- Header -->
-<header id="header">
-<div class="logo">
-<img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
-<span class="logo-text">ISKCON Burla</span>
-</div>
-<nav id="nav">
-<ul>
-<li><a href="#">Home</a></li>
-<li class="dropdown">
-<a href="#">Events <i class="fas fa-chevron-down"></i></a>
-<div class="dropdown-content">
-<a href="#">Event 1</a>
-<a href="#">Event 2</a>
-<a href="#">Evenr 3</a>
-<a href="#">Event 4</a>
-</div>
-</li>
-<li class="dropdown">
-<a href="#">Courses <i class="fas fa-chevron-down"></i></a>
-<div class="dropdown-content">
-<a href="#">Course 1</a>
-<a href="#">Course 2</a>
-<a href="#">Course 3</a>
-<a href="#">Course 4</a>
-</div>
-</li>
-<li><a href="#">Temple Store</a></li>
-<li><a href="#">Contact Us</a></li>
-</ul>
-</nav>
-<div class="hamburger" id="hamburger">
-<div></div>
-<div></div>
-<div></div>
-</div>
-</header><div style="margin-top: 80px; text-align: center; padding: 10px 20px; background-color: var(--accent); font-weight: bold; font-size: 1.05rem; color: var(--dark);">Under Construction by IYF - Iskcon Youth Forum Burla</div>
-<!-- Hero Section -->
-<section class="hero">
-<img alt="ISKCON Burla template" class="hero-bg" src="https://krsnasboy.github.io/DivineISKCON/images/iskcon-banner.webp " style="object-position: center top;"/>
-<div class="hero-content">
-<h1>Welcome to ISKCON Burla </h1>
-<p>where hearts connect through devotion, and souls find their way to Krishna.</p>
-<a class="cta-button" href="Login.html">IYF Admin login</a>
-</div>
-<div class="floating-elements">
-<div class="floating-element" style="width: 40px; height: 40px; top: 20%; left: 10%; animation-delay: 0s;"></div>
-<div class="floating-element" style="width: 25px; height: 25px; top: 50%; left: 80%; animation-delay: 2s; animation-duration: 12s;"></div>
-<div class="floating-element" style="width: 60px; height: 60px; top: 70%; left: 30%; animation-delay: 4s;"></div>
-</div>
-</section>
-<!-- Why Choose Us Section -->
-<section class="features">
-<div class="section-title reveal">
-<h2> Every Service towards Krishna counts!</h2>
-<p>No service is too small when offered with love. Whether through time, effort, or donation — every act of devotion brings us closer to our beloved, Krishna
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">
+            <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
+            <span class="logo-text">ISKCON Burla</span>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Events <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Event 1</a>
+                        <a href="#">Event 2</a>
+                        <a href="#">Event 3</a>
+                        <a href="#">Event 4</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Courses <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Course 1</a>
+                        <a href="#">Course 2</a>
+                        <a href="#">Course 3</a>
+                        <a href="#">Course 4</a>
+                    </div>
+                </li>
+                <li><a href="#">Temple Store</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div style="margin-top: 80px; text-align: center; padding: 10px 20px; background-color: var(--accent); font-weight: bold; font-size: 1.05rem; color: var(--dark);">Under Construction by IYF - Iskcon Youth Forum Burla</div>
 
-            </p>
-</div>
-<div class="features-grid">
-<button class="feature-card reveal" onclick="window.location.href='TempleProject.html'">
-<div class="feature-icon">
-<i class="fa-solid fa-gopuram"></i>
-</div>
-<h3>Upcoming Temple Project</h3>
-<p> We are humbled and excited to announce the upcoming temple project — a divine initiative to create a spiritual oasis dedicated to Lord Krishna and Srila Prabhupada's vision. </p>
-</button>
-<button class="feature-card reveal" onclick="window.location.href='Deities&Darshan.html'">
-<div class="feature-icon">
-<i class="fas fa-heart"></i>
-</div>
-<h3>Deities &amp; Darshan</h3>
-<p>Our temple is blessed with the divine presence of Sri Sita-Ram, Lakshman, and Hanuman. Daily darshan offers devotees a chance to connect with their grace and mercy. Come, receive their blessings and experience the joy of bhakti.</p>
-</button>
-<button class="feature-card reveal" onclick="window.location.href='SevaOpportunities.html'">
-<div class="feature-icon">
-<i class="fas fa-users"></i>
-</div>
-<h3>Seva Opportunities</h3>
-<p>Offer your time, skills, or donations in service to the Lord. Whether it's helping in the temple, supporting events, or contributing financially, every seva is a step toward Krishna. Be a part of this divine mission.</p>
-</button>
-<button class="feature-card reveal" onclick="window.location.href='Donation&Support.html'">
-<div class="feature-icon">
-<i class="fa-solid fa-hand-holding-heart"></i>
-</div>
-<h3> Donations &amp; Support</h3>
-<p>Support our temple through your generous donations. Your contribution helps us maintain daily services, festivals, and the upcoming temple project. Every offering counts in Krishna's service.</p>
-</button>
-</div>
-</section>
-<!-- Enhanced Newsletter Section -->
-<section class="newsletter">
-<div class="newsletter-content reveal">
-<h2>Connect With Devotees and latest updates</h2>
-<p>Leave your details and we'll add you to the Official WhatsApp Group of our temple.</p>
-<form class="newsletter-form">
-<div class="form-group">
-<input placeholder="Your Name" required="" type="text"/>
-</div>
-<div class="form-group">
-<input placeholder="Phone Number" required="" type="tel"/>
-</div>
-<button type="submit">Join Us Now!</button>
-</form>
-</div>
-</section>
-<!-- Footer -->
-<footer class="reveal">
-<div class="footer-content">
-<div class="footer-about">
-<div class="footer-logo">
-<img alt="Spiritual Harmony Logo" src="https://i.imgur.com/CqBYC04.png"/>
-<span class="footer-logo-text">ISKCON Burla</span>
-</div>
-<p>Founded in --, ISKCON Burla is dedicated to spread love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
-<div class="social-links">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-instagram"></i></a>
-<a href="#"><i class="fab fa-youtube"></i></a>
-</div>
-</div>
-<div class="footer-links">
-<h3>About Us</h3>
-<ul>
-<li><a href="#">Our Mission</a></li>
-<li><a href="#">Our Gurudev</a></li>
-<li><a href="#">His teachings</a></li>
-<li><a href="#">Founder Acharya</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h3>Resources</h3>
-<ul>
-<li><a href="#">Online Classes / Courses</a></li>
-<li><a href="#">Daily Inspiration</a></li>
-<li><a href="#">Books &amp; Scriptures</a></li>
-<li><a href="#">FAQ</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h3>Contact</h3>
-<ul>
-<li><a href="#">info@divineiskcon.com</a></li>
-<li><a href="#">+91 00000 00000</a></li>
-<li><a href="#">Visit Us</a></li>
-<li><a href="#">Volunteer</a></li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2025 Divine ISKCON. All rights reserved. | <a href="#" style="color: rgb(85, 113, 213)>Privacy Policy </a> | <a href="#">Terms of Service</a></p>
-</div>
-</footer>
-<script>
-        // Mobile Navigation
-        const hamburger = document.getElementById('hamburger');
-        const nav = document.getElementById('nav');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            nav.classList.toggle('active');
+    <!-- Hero Section -->
+    <section class="hero">
+        <img alt="ISKCON Burla template" class="hero-bg" src="https://i.imgur.com/pUuNtq1.jpeg" style="object-position: center top;"/>
+        <div class="hero-content">
+            <h1>Welcome to ISKCON Burla </h1>
+            <p>where hearts connect through devotion, and souls find their way to Krishna.</p>
+            <a class="cta-button" href="#">IYF Admin login</a>
+        </div>
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 40px; height: 40px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+            <div class="floating-element" style="width: 25px; height: 25px; top: 50%; left: 80%; animation-delay: 2s; animation-duration: 12s;"></div>
+            <div class="floating-element" style="width: 60px; height: 60px; top: 70%; left: 30%; animation-delay: 4s;"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title reveal">
+            <h2> Every Service towards Krishna counts!</h2>
+            <p>No service is too small when offered with love. Whether through time, effort, or donation — every act of devotion brings us closer to our beloved, Krishna</p>
+        </div>
+        <div class="features-grid">
+            <button class="feature-card reveal" onclick="window.location.href='TempleProject.html'">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-gopuram"></i>
+                </div>
+                <h3>Upcoming Temple Project</h3>
+                <p>We are humbled and excited to announce the upcoming temple project — a divine initiative to create a spiritual oasis dedicated to Lord Krishna and Srila Prabhupada's vision.</p>
+            </button>
+            <button class="feature-card reveal" onclick="window.location.href='UpcomingEvents.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Upcoming Events</h3>
+                <p>Stay updated with our temple's upcoming events, festivals, and special programs. Join us in celebrations that bring devotees together in Krishna consciousness.</p>
+            </button>
+            <button class="feature-card reveal" onclick="window.location.href='SponsorFeast.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Sponsor Sunday Feast</h3>
+                <p>Participate in the divine service of sponsoring Sunday Love Feast. Your sponsorship helps feed devotees and spreads Krishna's mercy through prasadam distribution.</p>
+            </button>
+            <button class="feature-card reveal" onclick="window.location.href='Deities&Darshan.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Deities &amp; Darshan</h3>
+                <p>Our temple is blessed with the divine presence of Sri Sita-Ram, Lakshman, and Hanuman. Daily darshan offers devotees a chance to connect with their grace and mercy.</p>
+            </button>
+            <button class="feature-card reveal" onclick="window.location.href='SevaOpportunities.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Seva Opportunities</h3>
+                <p>Offer your time, skills, or donations in service to the Lord. Whether it's helping in the temple, supporting events, or contributing financially, every seva is a step toward Krishna.</p>
+            </button>
+            <button class="feature-card reveal" onclick="window.location.href='Donation&Support.html'">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <h3>Donations &amp; Support</h3>
+                <p>Support our temple through your generous donations. Your contribution helps us maintain daily services, festivals, and the upcoming temple project.</p>
+            </button>
+            <button class="feature-card reveal" onclick="window.location.href='SundayClasses.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Sunday Value Education Classes</h3>
+                <p>Join our weekly Sunday classes for children and youth, where we teach Vedic values, Bhagavad-gita wisdom, and practical life lessons through interactive sessions.</p>
+            </button>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-content reveal">
+            <h2>Connect With Devotees and latest updates</h2>
+            <p>Leave your details and we'll add you to the Official WhatsApp Group of our temple.</p>
+            <form class="newsletter-form">
+                <div class="form-group">
+                    <input placeholder="Your Name" required="" type="text"/>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Phone Number" required="" type="tel"/>
+                </div>
+                <button type="submit">Join Us Now!</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Floating Home Button -->
+    <a href="#" id="home-button" class="floating-home-button">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img alt="Spiritual Harmony Logo" src="https://i.imgur.com/CqBYC04.png"/>
+                    <span class="footer-logo-text">ISKCON Burla</span>
+                </div>
+                <p>Founded in --, ISKCON Burla is dedicated to spread love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Our Gurudev</a></li>
+                    <li><a href="#">His teachings</a></li>
+                    <li><a href="#">Founder Acharya</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Online Classes / Courses</a></li>
+                    <li><a href="#">Daily Inspiration</a>
+                        <li><a href="#">Books &amp; Scriptures</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">info@divineiskcon.com</a></li>
+                        <li><a href="#">+91 00000 00000</a></li>
+                        <li><a href="#">Visit Us</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Divine ISKCON. All rights reserved. | <a href="#" style="color: rgb(85, 113, 213)">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </footer>
+    
+        <script>
+            // Mobile Navigation
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+            const navOverlay = document.getElementById('navOverlay');
+            const body = document.body;
             
-            // Toggle body scroll when menu is open
-            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-        });
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    hamburger.classList.remove('active');
-                    nav.classList.remove('active');
-                    document.body.style.overflow = '';
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+                navOverlay.classList.toggle('active');
+                body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            navOverlay.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        hamburger.classList.remove('active');
+                        nav.classList.remove('active');
+                        navOverlay.classList.remove('active');
+                        body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // Mobile dropdown tap support
+            document.querySelectorAll('.dropdown > a').forEach(drop => {
+                drop.addEventListener('click', e => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const content = drop.nextElementSibling;
+                        const isVisible = content.style.display === 'block';
+                        
+                        // Close all other dropdowns first
+                        document.querySelectorAll('.dropdown-content').forEach(d => {
+                            if (d !== content) {
+                                d.style.display = 'none';
+                            }
+                        });
+                        
+                        content.style.display = isVisible ? 'none' : 'block';
+                    }
+                });
+            });
+    
+            // Hide Header on Scroll Down
+            let lastScroll = 0;
+            const header = document.getElementById('header');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll <= 0) {
+                    header.classList.remove('hidden');
+                    return;
+                }
+                
+                if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+                    header.classList.add('hidden');
+                } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+                    header.classList.remove('hidden');
+                }
+                
+                lastScroll = currentScroll;
+            });
+            
+            // Scroll Reveal Animation using Intersection Observer
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        if (entry.target.classList.contains('section-title')) {
+                            entry.target.classList.add('animate');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+    
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            
+            // Logo animation on scroll
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const logoImg = document.getElementById('logo-img');
+                const logoText = document.querySelector('.logo-text');
+                
+                if (scrollPosition > 50) {
+                    logoImg.style.height = '30px';
+                    logoText.style.fontSize = '1.1rem';
+                } else {
+                    logoImg.style.height = '35px';
+                    logoText.style.fontSize = '1.3rem';
                 }
             });
-        });
-        
-        // Hide Header on Scroll Down
-        let lastScroll = 0;
-        const header = document.getElementById('header');
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
             
-            if (currentScroll <= 0) {
-                header.classList.remove('hidden');
-                return;
-            }
-            
-            if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
-                header.classList.add('hidden');
-            } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
-                header.classList.remove('hidden');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Scroll Reveal Animation using Intersection Observer
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            if (entry.target.classList.contains('section-title')) {
-                entry.target.classList.add('animate');
-            }
-            observer.unobserve(entry.target);
-        }
-    });
-}, {
-    threshold: 0.1
-});
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        
-        // Logo animation on scroll
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            const logoImg = document.getElementById('logo-img');
-            const logoText = document.querySelector('.logo-text');
-            
-            if (scrollPosition > 50) {
-                logoImg.style.height = '30px';
-                logoText.style.fontSize = '1.1rem';
-            } else {
-                logoImg.style.height = '35px';
-                logoText.style.fontSize = '1.3rem';
-            }
-        });
-        
-        // Floating elements animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const floatingContainer = document.querySelector('.floating-elements');
-            
-            // Create more floating elements
-            for (let i = 0; i < 8; i++) {
-                const size = Math.random() * 25 + 15;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 10 + 10;
+            // Floating elements animation
+            document.addEventListener('DOMContentLoaded', () => {
+                const floatingContainer = document.querySelector('.floating-elements');
                 
-                const element = document.createElement('div');
-                element.className = 'floating-element';
-                element.style.width = `${size}px`;
-                element.style.height = `${size}px`;
-                element.style.top = `${posY}%`;
-                element.style.left = `${posX}%`;
-                element.style.animationDelay = `${delay}s`;
-                element.style.animationDuration = `${duration}s`;
-                
-                floatingContainer.appendChild(element);
-            }
-        });
-        
-        
-        // Mobile dropdown tap support
-        document.querySelectorAll('.dropdown > a').forEach(drop => {
-            drop.addEventListener('click', e => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const content = drop.nextElementSibling;
-                    const isVisible = content.style.display === 'block';
-                    content.style.display = isVisible ? 'none' : 'block';
+                // Create more floating elements
+                for (let i = 0; i < 8; i++) {
+                    const size = Math.random() * 25 + 15;
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const delay = Math.random() * 5;
+                    const duration = Math.random() * 10 + 10;
+                    
+                    const element = document.createElement('div');
+                    element.className = 'floating-element';
+                    element.style.width = `${size}px`;
+                    element.style.height = `${size}px`;
+                    element.style.top = `${posY}%`;
+                    element.style.left = `${posX}%`;
+                    element.style.animationDelay = `${delay}s`;
+                    element.style.animationDuration = `${duration}s`;
+                    
+                    floatingContainer.appendChild(element);
                 }
             });
-        });
-
-
-        // Better touch feedback for mobile buttons
-        document.querySelectorAll('button, a').forEach(element => {
-            element.addEventListener('touchstart', () => {
-                element.style.transform = 'scale(0.98)';
+    
+            // Floating home button visibility
+            const homeButton = document.getElementById('home-button');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    homeButton.classList.add('visible');
+                } else {
+                    homeButton.classList.remove('visible');
+                }
             });
-            
-            element.addEventListener('touchend', () => {
-                element.style.transform = '';
+    
+            // Better touch feedback for mobile buttons
+            document.querySelectorAll('button, a').forEach(element => {
+                element.addEventListener('touchstart', () => {
+                    element.style.transform = 'scale(0.98)';
+                });
+                
+                element.addEventListener('touchend', () => {
+                    element.style.transform = '';
+                });
             });
-        });
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>
