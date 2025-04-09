@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IYF Admin Login | ISKCON Burla</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --primary: #6C4AB6;
+            --primary-light: #8D72E1;
+            --accent: #B9E0FF;
+            --light: #F8F6F4;
+            --dark: #2D2727;
+            --gray: #E5E7EB;
+            --dark-gray: #6B7280;
+            --error: #EF4444;
+            --success: #10B981;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: #FAFAFA;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* Modern Glassmorphism Container */
+        .login-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.05),
+                0 4px 8px rgba(0, 0, 0, 0.02),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+            padding: 3rem;
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Decorative Elements */
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108, 74, 182, 0.08) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+
+        /* Login Header */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .logo-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(108, 74, 182, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(108, 74, 182, 0.1);
+        }
+        
+        .login-header img {
+            height: 40px;
+        }
+        
+        .login-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--gray);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            outline: none;
+            background-color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 
+                0 0 0 3px rgba(141, 114, 225, 0.15),
+                0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 2.8rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+        
+        /* Error States */
+        .error-message {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .has-error .error-message {
+            display: block;
+        }
+        
+        .has-error input {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        /* Remember & Forgot */
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .remember-me input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+            color: var(--primary-light);
+        }
+        
+        /* Login Button */
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+            box-shadow: 
+                0 4px 6px rgba(108, 74, 182, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 12px rgba(108, 74, 182, 0.2),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .login-button.loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Footer Links */
+        .login-footer {
+            text-align: center;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .login-footer a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        /* Modern Notification */
+        .notification {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.1),
+                0 2px 6px rgba(0, 0, 0, 0.05);
+            transform: translateX(120%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            max-width: 320px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .notification.active {
+            transform: translateX(0);
+        }
+        
+        .notification-icon {
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .notification-content {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .notification-close {
+            margin-left: 0.75rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            font-size: 1rem;
+            background: none;
+            border: none;
+            padding: 0.25rem;
+        }
+        
+        .notification-close:hover {
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.03);
+        }
+        
+        .footer-bottom {
+            color: var(--dark-gray);
+            font-size: 0.8rem;
+        }
+
+        /* Additional Links */
+        .additional-links {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .additional-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .additional-link:hover {
+            text-decoration: underline;
+            color: var(--primary-light);
+        }
+
+        /* Full Screen Notification */
+        .fullscreen-notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+        }
+        
+        .fullscreen-notification.active {
+            transform: translateY(0);
+        }
+        
+        .fullscreen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .fullscreen-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .close-fullscreen {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-fullscreen:hover {
+            color: var(--primary);
+        }
+        
+        .fullscreen-content {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .contact-section {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .contact-section p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .contact-links {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(108, 74, 182, 0.05);
+            border-radius: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(108, 74, 182, 0.1);
+        }
+        
+        .contact-link:hover {
+            background: rgba(108, 74, 182, 0.1);
+        }
+        
+        .contact-link i {
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1.5rem;
+            }
+            
+            .login-box {
+                padding: 2rem;
+            }
+            
+            .login-header img {
+                height: 36px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+            
+            .login-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .notification {
+                top: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+                transform: translateY(-150%);
+            }
+            
+            .notification.active {
+                transform: translateY(0);
+            }
+            
+            .additional-links {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: center;
+            }
+            
+            .fullscreen-notification {
+                padding: 1.5rem;
+            }
+            
+            .fullscreen-title {
+                font-size: 1.5rem;
+            }
+        }
+    
+@media (max-width: 480px) {
+    .additional-links {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .additional-links {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        gap: 0.75rem;
+    }
+
+    .additional-link {
+        flex: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .additional-links {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+    }
+
+    .additional-link {
+        flex: 1;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .login-box {
+        max-width: 95vw !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .login-container {
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .login-box {
+        max-width: 95vw !important;
+        margin: 0 auto;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .login-header, .form-group, .remember-forgot, .additional-links, .login-button {
+        transition: none !important;
+    }
+
+    .login-box, .login-header, .form-group {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+</style>
+</head>
+<body>
+<!-- Login Container -->
+<main class="login-container">
+<div class="login-box">
+<div class="login-header">
+<div class="logo-container">
+<img alt="IYF Logo" src="https://i.imgur.com/CqBYC04.png"/>
+</div>
+<h2>Admin Dashboard</h2>
+<p>Restricted access for authorized IYF administrators only</p>
+</div>
+<form action="/api/auth/login" id="loginForm" method="POST">
+<div class="form-group" id="usernameGroup">
+<label for="username">Admin ID</label>
+<input id="username" name="username" placeholder="Enter your admin ID" required="" type="text"/>
+<div class="error-message" id="usernameError"></div>
+</div>
+<div class="form-group" id="passwordGroup">
+<label for="password">Password</label>
+<input id="password" name="password" placeholder="Enter your password" required="" type="password"/>
+<button class="password-toggle" id="togglePassword" type="button">
+<i class="fas fa-eye"></i>
+</button>
+<div class="error-message" id="passwordError"></div>
+</div>
+<div class="remember-forgot">
+<div class="remember-me">
+<input id="remember" name="remember" type="checkbox"/>
+<label for="remember">Remember this device</label>
+</div>
+<div class="forgot-password">
+<a href="#" id="forgotPassword">Forgot password?</a>
+</div>
+</div>
+<!-- Added Contact Links -->
+<div class="additional-links">
+<a class="additional-link" href="#" id="contactDeveloper">Contact Developer</a>
+<a class="additional-link" href="#" id="contactDirector">Contact IYF Director</a>
+</div>
+<button class="login-button" id="loginButton" type="submit">
+<span id="buttonText">Sign In</span>
+</button>
+<input id="csrf_token" name="csrf_token" type="hidden" value=""/>
+</form>
+</div>
+</main>
+<!-- Notification -->
+<div class="notification" id="notification">
+<i class="fas fa-shield-alt notification-icon"></i>
+<div class="notification-content" id="notificationMessage"></div>
+<button class="notification-close" id="closeNotification">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<!-- Fullscreen Notification -->
+<div class="fullscreen-notification" id="fullscreenNotification">
+<div class="fullscreen-header">
+<h2 class="fullscreen-title" id="fullscreenTitle">Contact Information</h2>
+<button class="close-fullscreen" id="closeFullscreen">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="fullscreen-content" id="fullscreenContent">
+<!-- Content will be dynamically inserted here -->
+</div>
+</div>
+<!-- Footer -->
+<footer>
+<div class="footer-bottom">
+<p>© 2025 ISKCON Burla. All rights reserved.</p>
+</div>
+</footer>
+<script>
+    // DOM Elements
+    const loginForm = document.getElementById('loginForm');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const loginButton = document.getElementById('loginButton');
+    const buttonText = document.getElementById('buttonText');
+    const usernameGroup = document.getElementById('usernameGroup');
+    const passwordGroup = document.getElementById('passwordGroup');
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notificationMessage');
+    const closeNotification = document.getElementById('closeNotification');
+    const forgotPassword = document.getElementById('forgotPassword');
+    const csrfToken = document.getElementById('csrf_token');
+    const contactDeveloper = document.getElementById('contactDeveloper');
+    const contactDirector = document.getElementById('contactDirector');
+    const fullscreenNotification = document.getElementById('fullscreenNotification');
+    const fullscreenTitle = document.getElementById('fullscreenTitle');
+    const fullscreenContent = document.getElementById('fullscreenContent');
+    const closeFullscreen = document.getElementById('closeFullscreen');
+
+    // Initialize CSRF Token (would come from your backend in a real app)
+    function initCSRFToken() {
+        // In a real app, this would come from your backend
+        // For example: fetch('/api/csrf-token').then(...)
+        csrfToken.value = 'example-csrf-token-' + Math.random().toString(36).substr(2);
+    }
+
+    // Toggle Password Visibility
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        const icon = togglePassword.querySelector('i');
+        icon.classList.toggle('fa-eye-slash');
+    });
+
+    // Show Notification
+    function showNotification(message, isError = false) {
+        notificationMessage.textContent = message;
+        notification.style.borderLeftColor = isError ? 'var(--error)' : 'var(--primary)';
+        notification.querySelector('.notification-icon').className = 
+            isError ? 'fas fa-exclamation-circle notification-icon' : 'fas fa-shield-alt notification-icon';
+        notification.classList.add('active');
+        
+        setTimeout(() => {
+            notification.classList.remove('active');
+        }, 5000);
+    }
+
+    // Close Notification
+    closeNotification.addEventListener('click', () => {
+        notification.classList.remove('active');
+    });
+
+    // Forgot Password
+    forgotPassword.addEventListener('click', (e) => {
+        e.preventDefault();
+        showNotification('Please contact the system administrator at admin@iskconburla.org for password recovery');
+    });
+
+    // Developer Contact Content
+    const developerContent = `
+        <div class="contact-section">
+            <h3>Technical Support & Development Team</h3>
+            <p>For any technical issues, bugs, or feature requests related to the IYF Admin Dashboard, please contact our development team:</p>
+            
+            <div class="contact-links">
+                <a href="mailto:dev@iskconburla.org" class="contact-link">
+                    <i class="fas fa-envelope"></i> dev@iskconburla.org
+                </a>
+                <a href="tel:+919876543210" class="contact-link">
+                    <i class="fas fa-phone"></i> +91 98765 43210
+                </a>
+                <a href="https://wa.me/919876543210" class="contact-link">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+            
+            <p>Our development team operates Monday to Friday from 10:00 AM to 6:00 PM IST. For urgent issues outside these hours, please mention "URGENT" in your email subject.</p>
+        </div>
+        
+        <div class="contact-section">
+            <h3>Common Technical Issues</h3>
+            <p><strong>Login Problems:</strong> If you're unable to login, please try resetting your password first. If the issue persists, contact us with a screenshot of any error messages.</p>
+            <p><strong>Browser Compatibility:</strong> For best performance, please use Google Chrome or Firefox latest versions.</p>
+            <p><strong>Feature Requests:</strong> We welcome suggestions for improving the dashboard. Please provide detailed descriptions of any features you'd like to see.</p>
+        </div>
+    `;
+
+    // Director Contact Content
+    const directorContent = `
+        <div class="contact-section">
+            <h3>IYF Director - HG Radha Krishna Das</h3>
+            <p>For administrative inquiries, program coordination, or general IYF-related matters, please contact the IYF Director:</p>
+            
+            <div class="contact-links">
+                <a href="mailto:director@iyfburla.org" class="contact-link">
+                    <i class="fas fa-envelope"></i> director@iyfburla.org
+                </a>
+                <a href="tel:+919876543211" class="contact-link">
+                    <i class="fas fa-phone"></i> +91 98765 43211
+                </a>
+                <a href="https://wa.me/919876543211" class="contact-link">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+            
+            <p>Please note that the director is often in meetings or traveling. For urgent matters, please call and follow up with an email.</p>
+        </div>
+        
+        <div class="contact-section">
+            <h3>IYF Office Hours</h3>
+            <p><strong>Monday-Saturday:</strong> 8:00 AM - 7:00 PM</p>
+            <p><strong>Sunday:</strong> 8:00 AM - 12:00 PM (Emergency only)</p>
+            <p><strong>Closed on:</strong> Major festivals and Ekadasi days</p>
+        </div>
+        
+        <div class="contact-section">
+            <h3>Mailing Address</h3>
+            <p>ISKCON Burla<br>
+            IYF Department<br>
+            Near Sambalpur University<br>
+            Burla, Sambalpur - 768017<br>
+            Odisha, India</p>
+        </div>
+    `;
+
+    // Show fullscreen notification
+    function showFullscreenNotification(title, content) {
+        fullscreenTitle.textContent = title;
+        fullscreenContent.innerHTML = content;
+        fullscreenNotification.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close fullscreen notification
+    function closeFullscreenNotification() {
+        fullscreenNotification.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners for contact buttons
+    contactDeveloper.addEventListener('click', (e) => {
+        e.preventDefault();
+        showFullscreenNotification('Contact Developer', developerContent);
+    });
+
+    contactDirector.addEventListener('click', (e) => {
+        e.preventDefault();
+        showFullscreenNotification('Contact IYF Director', directorContent);
+    });
+
+    closeFullscreen.addEventListener('click', closeFullscreenNotification);
+
+    // Close when clicking outside content
+    fullscreenNotification.addEventListener('click', (e) => {
+        if (e.target === fullscreenNotification) {
+            closeFullscreenNotification();
+        }
+    });
+
+    // Form Validation
+    function validateForm(data) {
+        let isValid = true;
+        
+        // Reset errors
+        usernameGroup.classList.remove('has-error');
+        passwordGroup.classList.remove('has-error');
+        usernameError.textContent = '';
+        passwordError.textContent = '';
+        
+        // Validate username
+        if (!data.username || data.username.length < 3) {
+            usernameError.textContent = 'Admin ID must be at least 3 characters';
+            usernameGroup.classList.add('has-error');
+            isValid = false;
+        }
+        
+        // Validate password
+        if (!data.password || data.password.length < 6) {
+            passwordError.textContent = 'Password must be at least 6 characters';
+            passwordGroup.classList.add('has-error');
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+
+    // Form Submission
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(loginForm);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Validate form
+        if (!validateForm(data)) {
+            return;
+        }
+        
+        // Show loading state
+        loginButton.classList.add('loading');
+        buttonText.textContent = 'Authenticating...';
+        loginButton.disabled = true;
+        
+        try {
+            // In a real application, you would use fetch or axios here
+            const response = await mockLoginAPI(data);
+            
+            if (response.success) {
+                // Successful login
+                showNotification('Login successful! Redirecting...');
+                
+                // Store token if remember me is checked
+                if (data.remember) {
+                    localStorage.setItem('authToken', response.token);
+                } else {
+                    sessionStorage.setItem('authToken', response.token);
+                }
+                
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1500);
+            } else {
+                // Show error message
+                showNotification(response.message || 'Login failed', true);
+                
+                // Highlight specific field errors if provided
+                if (response.errors) {
+                    response.errors.forEach(error => {
+                        if (error.field === 'username') {
+                            usernameError.textContent = error.message;
+                            usernameGroup.classList.add('has-error');
+                        }
+                        if (error.field === 'password') {
+                            passwordError.textContent = error.message;
+                            passwordGroup.classList.add('has-error');
+                        }
+                    });
+                }
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showNotification('An error occurred. Please try again later.', true);
+        } finally {
+            // Reset button state
+            loginButton.classList.remove('loading');
+            buttonText.textContent = 'Sign In';
+            loginButton.disabled = false;
+        }
+    });
+
+    // Mock API function (replace with actual fetch in production)
+    async function mockLoginAPI(data) {
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Mock successful login for demo purposes
+        if (data.username === "admin" && data.password === "iskconburla") {
+            return {
+                success: true,
+                token: 'mock-jwt-token-' + Math.random().toString(36).substr(2),
+                message: 'Authentication successful'
+            };
+        }
+        
+        // Mock failed login
+        return {
+            success: false,
+            message: 'Invalid Admin ID or password',
+            errors: [
+              { field: 'username', message: 'Invalid credentials' },
+                { field: 'password', message: 'Invalid credentials' }
+            ]
+        };
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+        initCSRFToken();
+        
+        // Check for existing auth token (if implementing remember me)
+        const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+        if (token) {
+            // In a real app, you might validate the token here
+            // window.location.href = '/dashboard';
+        }
+    });
+</script>
+</body>
+</html>
