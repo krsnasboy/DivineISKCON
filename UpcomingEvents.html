@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Upcoming Events | ISKCON Burla</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #6C4AB6;
+            --secondary: #8D72E1;
+            --accent: #B9E0FF;
+            --light: #F8F6F4;
+            --dark: #2D2727;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles - Matched to main page */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* ==========================================================================
+   THIN HEADER STYLING
+   --------------------------------------------------------------------------
+   Reduces vertical space in the header area while maintaining usability.
+   This padding change ensures a sleeker design.
+   ========================================================================== */
+padding: 0px 5%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(248, 246, 244, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+        
+        /* ==========================================================================
+   HEADER LOGO STYLING
+   --------------------------------------------------------------------------
+   Sets a large logo image while keeping the header compact. The logo 
+   remains consistent across all screen sizes.
+   ========================================================================== */
+.logo img {
+            height: 60px;
+            max-height: 10vh;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        /* ==========================================================================
+   LOGO TEXT STYLING
+   --------------------------------------------------------------------------
+   Sets bold header text aligned with the logo and adjusts font for
+   visibility without making the header too bulky.
+   ========================================================================== */
+.logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 180px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            color: var(--dark);
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: rgba(108, 74, 182, 0.1);
+            color: var(--primary);
+            padding-left: 25px;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            width: 28px;
+            height: 22px;
+            position: relative;
+        }
+        
+        .hamburger div {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+            transform-origin: center;
+        }
+        
+        .hamburger div:nth-child(1) {
+            top: 0;
+            left: 0;
+        }
+        
+        .hamburger div:nth-child(2) {
+            top: 9px;
+            left: 0;
+            opacity: 1;
+        }
+        
+        .hamburger div:nth-child(3) {
+            bottom: 0;
+            left: 0;
+        }
+        
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 9px;
+        }
+        
+        /* Nav overlay */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        /* Events Hero */
+        .events-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 80px 5% 50px;
+        }
+        
+        .events-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .events-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Events Container */
+        .events-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 5%;
+        }
+        
+        /* Event Cards */
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(108, 74, 182, 0.2);
+        }
+        
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+        
+        .event-details {
+            padding: 20px;
+        }
+        
+        .event-date {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .event-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .event-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+        
+        .meta-item i {
+            font-size: 0.9rem;
+        }
+        
+        .event-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .event-button:hover {
+            background: var(--secondary);
+        }
+        
+        /* Month Separator */
+        .month-separator {
+            text-align: center;
+            margin: 40px 0 20px;
+            position: relative;
+        }
+        
+        .month-separator h2 {
+            display: inline-block;
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+        }
+        
+        .month-separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+            z-index: 0;
+        }
+        
+        /* Full Screen Notification */
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .notification-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .notification-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+        
+        .notification-overlay.active .notification-content {
+            transform: translateY(0);
+        }
+        
+        .close-notification {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-notification:hover {
+            background: var(--secondary);
+            transform: rotate(90deg);
+        }
+        
+        .notification-image {
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .notification-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .notification-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .notification-date {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .notification-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .notification-details {
+            background: rgba(185, 224, 255, 0.2);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .notification-details h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .notification-details ul {
+            list-style-position: inside;
+            padding-left: 5px;
+        }
+        
+        .notification-details li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .register-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .register-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 74, 182, 0.3);
+        }
+        
+        /* Footer - Matched to main page */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 5% 25px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .footer-logo img {
+            height: 45px;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 18px rgba(108, 74, 182, 0.35);
+        }
+        
+        .social-links a:nth-child(1):hover {
+            background-color: #3b5998; /* Facebook */
+        }
+        
+        .social-links a:nth-child(2):hover {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); /* Instagram */
+        }
+        
+        .social-links a:nth-child(3):hover {
+            background-color: #ff0000; /* YouTube */
+        }
+        
+        .social-links a:nth-child(4):hover {
+            background-color: #0077b5; /* LinkedIn */
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            color: white;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        
+        /* Floating Home Button */
+        .floating-home-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .floating-home-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .floating-home-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(108, 74, 182, 0.4);
+        }
+        
+        /* Mobile Styles - Matched to main page */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -45%;
+                width: 45%;
+                height: 100vh;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                transition: var(--transition);
+                z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                padding-top: 80px;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+                padding: 0;
+            }
+            
+            nav ul li {
+                width: 100%;
+                padding: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px 20px;
+                font-size: 1rem;
+                color: var(--dark);
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.02);
+                padding: 0;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                border-radius: 0;
+            }
+            
+            .dropdown-content a {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+                color: #555;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .hamburger {
+                order: 2;
+            }
+            
+            .floating-home-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            /* Events page mobile adjustments */
+            .event-card {
+                flex-direction: column;
+            }
+            
+            .event-image {
+                width: 100%;
+                height: 180px;
+            }
+            
+            .event-details {
+                width: 100%;
+            }
+            
+            .notification-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                width: 45%;
+                left: -45%;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem !important;
+                padding: 12px 15px !important;
+            }
+            
+            .dropdown-content a {
+                font-size: 0.85rem !important;
+                padding: 10px 25px !important;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .floating-home-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .events-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .events-hero p {
+                font-size: 0.95rem;
+            }
+            
+            .notification-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Matched to main page -->
+    <header id="header">
+        <div class="logo">
+            <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
+            <span class="logo-text">ISKCON Burla</span>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="DivineISKCON_Improved_commented.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);">Events <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="UpcomingEvents.html">Upcoming Events</a>
+                        <a href="javascript:void(0);">Past Events</a>
+                        <a href="javascript:void(0);">Annual Calendar</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);">Courses <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="javascript:void(0);">Course 1</a>
+                        <a href="javascript:void(0);">Course 2</a>
+                        <a href="javascript:void(0);">Course 3</a>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0);">Temple Store</a></li>
+                <li><a href="javascript:void(0);">Contact Us</a></li>
+                <li><a href="javascript:void(0);">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="events-hero">
+            <h1>Upcoming Events</h1>
+            <p>Join us for spiritual gatherings and experience divine bliss</p>
+        </section>
+        
+        <div class="events-container">
+            <!-- June Events -->
+            <div class="month-separator">
+                <h2>June 2025</h2>
+            </div>
+            
+            <div class="event-card" data-event="1">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/JqYeZ0V.jpg" alt="Ratha Yatra Festival">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">June 15, 2025</span>
+                    <h3 class="event-title">Ratha Yatra Festival</h3>
+                    <p class="event-description">Celebrate the grand chariot festival of Lord Jagannath with kirtan, procession and feast.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>4:00 PM - 8:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Temple Premises</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="event-card" data-event="2">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/Ds2uuU6.jpeg" alt="Bhagavad-gita Seminar">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">June 22, 2025</span>
+                    <h3 class="event-title">Bhagavad-gita Seminar</h3>
+                    <p class="event-description">Discover timeless wisdom for modern life in this interactive seminar.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>10:00 AM - 1:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Temple Hall</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="event-card" data-event="3">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/pUuNtq1.jpeg" alt="Sunday Feast">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">Every Sunday</span>
+                    <h3 class="event-title">Sunday Love Feast</h3>
+                    <p class="event-description">Weekly gathering with kirtan, discourse and delicious prasadam.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>4:30 PM - 7:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Temple Hall</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- July Events -->
+            <div class="month-separator">
+                <h2>July 2025</h2>
+            </div>
+            
+            <div class="event-card" data-event="4">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/CqBYC04.png" alt="Guru Purnima">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">July 12, 2025</span>
+                    <h3 class="event-title">Guru Purnima Celebration</h3>
+                    <p class="event-description">Honor the spiritual masters on this auspicious full moon day.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>5:00 PM - 9:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Temple Altar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="event-card" data-event="5">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/dhcKR8L.png" alt="Youth Retreat">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">July 25-27, 2025</span>
+                    <h3 class="event-title">Youth Spiritual Retreat</h3>
+                    <p class="event-description">Transformative weekend for young adults with yoga, kirtan and wisdom.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Friday 5PM - Sunday 5PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>ISKCON Ashram</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- August Events -->
+            <div class="month-separator">
+                <h2>August 2025</h2>
+            </div>
+            
+            <div class="event-card" data-event="6">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/JqYeZ0V.jpg" alt="Janmashtami">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">August 17, 2025</span>
+                    <h3 class="event-title">Janmashtami - Krishna's Appearance Day</h3>
+                    <p class="event-description">24-hour celebration of Lord Krishna's divine appearance.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>6PM (16th) - 10PM (17th)</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Temple Premises</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="event-card" data-event="7">
+                <div class="event-image">
+                    <img src="https://i.imgur.com/Ds2uuU6.jpeg" alt="Kirtan Workshop">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">August 24, 2025</span>
+                    <h3 class="event-title">Kirtan Workshop</h3>
+                    <p class="event-description">Learn the art of devotional chanting in this interactive session.</p>
+                    <div class="event-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>3:00 PM - 6:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bhajan Hall</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Full Screen Notifications -->
+    <div class="notification-overlay" id="notificationOverlay">
+        <div class="notification-content">
+            <div class="close-notification" id="closeNotification">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="notification-image">
+                <img id="notificationImg" src="" alt="Event Image">
+            </div>
+            <h2 class="notification-title" id="notificationTitle"></h2>
+            <span class="notification-date" id="notificationDate"></span>
+            <p class="notification-description" id="notificationDescription"></p>
+            
+            <div class="notification-details">
+                <h4>Event Details:</h4>
+                <ul id="notificationDetails">
+                    <!-- Filled by JavaScript -->
+                </ul>
+            </div>
+            
+            <a href="#" class="register-btn">Register Now</a>
+        </div>
+    </div>
+
+    <!-- Footer - Matched to main page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img alt="ISKCON Burla Logo" src="https://i.imgur.com/CqBYC04.png"/>
+                    <span class="footer-logo-text">ISKCON Burla</span>
+                </div>
+                <p>Founded in --, ISKCON Burla is dedicated to spread love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
+                <div class="social-links">
+                    <a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
+                    <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
+                    <a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="javascript:void(0);">Our Mission</a></li>
+                    <li><a href="javascript:void(0);">Our Gurudev</a></li>
+                    <li><a href="javascript:void(0);">His teachings</a></li>
+                    <li><a href="javascript:void(0);">Founder Acharya</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="javascript:void(0);">Online Classes / Courses</a></li>
+                    <li><a href="javascript:void(0);">Daily Inspiration</a></li>
+                    <li><a href="javascript:void(0);">Books &amp; Scriptures</a></li>
+                    <li><a href="javascript:void(0);">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="javascript:void(0);">info@divineiskcon.com</a></li>
+                    <li><a href="javascript:void(0);">+91 00000 00000</a></li>
+                    <li><a href="javascript:void(0);">Visit Us</a></li>
+                    <li><a href="javascript:void(0);">Volunteer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Divine ISKCON. All rights reserved. | <a href="javascript:void(0);" style="color: rgb(85, 113, 213)">Privacy Policy</a> | <a href="javascript:void(0);">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Floating Home Button -->
+    <a class="floating-home-button" href="javascript:void(0);" id="home-button">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <script>
+        // Mobile Navigation - Matched to main page
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const navOverlay = document.getElementById('navOverlay');
+        const body = document.body;
+        
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        navOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+        });
+        
+        // Mobile dropdown tap support
+        document.querySelectorAll('.dropdown > a').forEach(drop => {
+            drop.addEventListener('click', e => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const content = drop.nextElementSibling;
+                    const isVisible = content.style.display === 'block';
+                    
+                    // Close all other dropdowns first
+                    document.querySelectorAll('.dropdown-content').forEach(d => {
+                        if (d !== content) {
+                            d.style.display = 'none';
+                        }
+                    });
+                    
+                    content.style.display = isVisible ? 'none' : 'block';
+                }
+            });
+        });
+
+        // Hide Header on Scroll Down - Matched to main page
+        let lastScroll = 0;
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                header.classList.remove('hidden');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+                header.classList.add('hidden');
+            } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+                header.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Event data for notifications
+        const eventsData = {
+            1: {
+                title: "Ratha Yatra Festival",
+                date: "June 15, 2025 | 4:00 PM - 8:00 PM",
+                image: "https://i.imgur.com/JqYeZ0V.jpg",
+                description: "Join us for the grand celebration of Lord Jagannath's chariot festival. Experience the ecstatic kirtan, divine procession, and feast honoring Lord Jagannath, Baladeva, and Subhadra. This ancient festival attracts thousands of devotees and brings immense spiritual merit to participants.",
+                details: [
+                    "Grand procession with beautifully decorated chariots",
+                    "Non-stop kirtan and devotional singing",
+                    "Special abhishekam ceremony for the deities",
+                    "Mass prasadam distribution (over 5,000 plates)",
+                    "Cultural performances and dramas",
+                    "Free parking available at nearby locations"
+                ]
+            },
+            2: {
+                title: "Bhagavad-gita Seminar",
+                date: "June 22, 2025 | 10:00 AM - 1:00 PM",
+                image: "https://i.imgur.com/Ds2uuU6.jpeg",
+                description: "Discover timeless wisdom for modern life in this interactive seminar exploring Chapter 2 of the Bhagavad-gita. Our senior devotees will guide you through practical applications of Krishna's teachings for stress management, decision making, and spiritual growth.",
+                details: [
+                    "In-depth verse-by-verse explanation",
+                    "Q&A session with senior devotees",
+                    "Guided meditation techniques",
+                    "Practical workshop on applying Gita wisdom",
+                    "Complimentary lunch prasadam",
+                    "Study materials provided"
+                ]
+            },
+            3: {
+                title: "Sunday Love Feast",
+                date: "Every Sunday | 4:30 PM - 7:00 PM",
+                image: "https://i.imgur.com/pUuNtq1.jpeg",
+                description: "Our weekly gathering featuring Bhagavad-gita class, ecstatic kirtan, and delicious prasadam feast. All are welcome to this family-friendly event that has become the highlight of many devotees' weeks.",
+                details: [
+                    "4:30 PM - Bhagavad-gita class",
+                    "5:30 PM - Arati ceremony",
+                    "6:00 PM - Kirtan and bhajans",
+                    "6:30 PM - Prasadam feast",
+                    "Special children's program available",
+                    "No prior experience needed"
+                ]
+            },
+            4: {
+                title: "Guru Purnima Celebration",
+                date: "July 12, 2025 | 5:00 PM - 9:00 PM",
+                image: "https://i.imgur.com/CqBYC04.png",
+                description: "Honor the spiritual masters on this auspicious full moon day. The program includes guru puja, bhajans, discourses on the importance of guru in spiritual life, and a grand feast. This is one of the most sacred days in the Vedic calendar.",
+                details: [
+                    "Guru puja ceremony with flowers and offerings",
+                    "Discourses by senior disciples",
+                    "Special kirtan in honor of Srila Prabhupada",
+                    "Video presentation on guru-tattva",
+                    "Grand feast with 56 items (chappan bhog)",
+                    "All disciples invited to speak about their guru"
+                ]
+            },
+            5: {
+                title: "Youth Spiritual Retreat",
+                date: "July 25-27, 2025 | Friday 5PM - Sunday 5PM",
+                image: "https://i.imgur.com/dhcKR8L.png",
+                description: "A transformative weekend for young adults (ages 18-35) featuring yoga, meditation, kirtan, workshops on Vedic wisdom, and nature activities. Limited spots available for this life-changing experience.",
+                details: [
+                    "Accommodation in ashram rooms",
+                    "Vegetarian meals provided",
+                    "Morning yoga and meditation",
+                    "Workshops on relationships and purpose",
+                    "Nature walk and outdoor kirtan",
+                    "Bonfire satsang on Saturday night"
+                ]
+            },
+            6: {
+                title: "Janmashtami - Krishna's Appearance Day",
+                date: "August 17, 2025 | 6PM (16th) - 10PM (17th)",
+                image: "https://i.imgur.com/JqYeZ0V.jpg",
+                description: "24-hour celebration of Lord Krishna's divine appearance with non-stop kirtan, drama performances, midnight arati, and grand feast. The most important festival at ISKCON, marking Krishna's descent into this world.",
+                details: [
+                    "Midnight arati at 12:00 AM",
+                    "Deity decorations with flowers and jewels",
+                    "Cultural performances every hour",
+                    "Special abhishekam with 108 items",
+                    "Continuous kirtan for 24 hours",
+                    "Grand feast served throughout the day"
+                ]
+            },
+            7: {
+                title: "Kirtan Workshop",
+                date: "August 24, 2025 | 3:00 PM - 6:00 PM",
+                image: "https://i.imgur.com/Ds2uuU6.jpeg",
+                description: "Learn the art of devotional chanting in this interactive session led by our temple's best kirtaniyas. Discover proper pronunciation, melody, rhythm, and the spiritual science behind the holy names.",
+                details: [
+                    "Introduction to mridanga and karatalas",
+                    "Proper pronunciation of mahamantra",
+                    "Harmony and call-response techniques",
+                    "History of kirtan in Gaudiya tradition",
+                    "Practical group chanting sessions",
+                    "Q&A with experienced kirtan leaders"
+                ]
+            }
+        };
+
+        // DOM Elements for notifications
+        const eventCards = document.querySelectorAll('.event-card');
+        const notificationOverlay = document.getElementById('notificationOverlay');
+        const closeNotification = document.getElementById('closeNotification');
+        const notificationImg = document.getElementById('notificationImg');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationDate = document.getElementById('notificationDate');
+        const notificationDescription = document.getElementById('notificationDescription');
+        const notificationDetails = document.getElementById('notificationDetails');
+
+        // Show notification when event card is clicked
+        eventCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const eventId = this.getAttribute('data-event');
+                const eventData = eventsData[eventId];
+                
+                // Fill notification with event data
+                notificationImg.src = eventData.image;
+                notificationTitle.textContent = eventData.title;
+                notificationDate.textContent = eventData.date;
+                notificationDescription.textContent = eventData.description;
+                
+                // Clear previous details
+                notificationDetails.innerHTML = '';
+                
+                // Add new details
+                eventData.details.forEach(detail => {
+                    const li = document.createElement('li');
+                    li.textContent = detail;
+                    notificationDetails.appendChild(li);
+                });
+                
+                // Show notification
+                notificationOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close notification
+        closeNotification.addEventListener('click', function() {
+            notificationOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close notification when clicking outside content
+        notificationOverlay.addEventListener('click', function(e) {
+            if (e.target === notificationOverlay) {
+                notificationOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Floating home button visibility
+        const homeButton = document.getElementById('home-button');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                homeButton.classList.add('visible');
+            } else {
+                homeButton.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top functionality
+        document.getElementById("home-button").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: "smooth"});
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = nav.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>
