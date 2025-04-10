@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>More About Our Temple | ISKCON Burla</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #6C4AB6;
+            --secondary: #8D72E1;
+            --accent: #B9E0FF;
+            --light: #F8F6F4;
+            --dark: #2D2727;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0px 5%; height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(248, 246, 244, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+        
+        .logo img {
+            height: 60px;
+            max-height: 10vh;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 180px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            color: var(--dark);
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: rgba(108, 74, 182, 0.1);
+            color: var(--primary);
+            padding-left: 25px;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            width: 28px;
+            height: 22px;
+            position: relative;
+        }
+        
+        .hamburger div {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+            transform-origin: center;
+        }
+        
+        .hamburger div:nth-child(1) {
+            top: 0;
+            left: 0;
+        }
+        
+        .hamburger div:nth-child(2) {
+            top: 9px;
+            left: 0;
+            opacity: 1;
+        }
+        
+        .hamburger div:nth-child(3) {
+            bottom: 0;
+            left: 0;
+        }
+        
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 9px;
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            padding: 100px 5% 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, rgba(108, 74, 182, 0.8), rgba(141, 114, 225, 0.7));
+            color: white;
+            text-align: center;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/pUuNtq1.jpeg') center/cover no-repeat;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        .page-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .page-hero p {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+        
+        /* Temple Team */
+        .team-section {
+            margin-bottom: 80px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 74, 182, 0.15);
+        }
+        
+        .team-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-card:hover .team-image img {
+            transform: scale(1.1);
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        .team-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .team-info p {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .team-info .bio {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Team Member Modal */
+        .team-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .team-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            background: var(--secondary);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .modal-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .modal-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .modal-info h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .modal-info .position {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .modal-info p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            background: rgba(108, 74, 182, 0.05);
+            padding: 80px 5%;
+            border-radius: 20px;
+            margin-bottom: 80px;
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .mission-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(108, 74, 182, 0.15);
+        }
+        
+        .mission-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(108, 74, 182, 0.25);
+        }
+        
+        .mission-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .mission-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* Daily Schedule */
+        .schedule-section {
+            margin-bottom: 80px;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .schedule-table th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .schedule-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background: white;
+            color: #555;
+        }
+        
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .schedule-table tr:hover td {
+            background: rgba(108, 74, 182, 0.03);
+        }
+        
+        .time-col {
+            font-weight: 600;
+            color: var(--primary);
+            width: 25%;
+        }
+        
+        /* Visit Us Section */
+        .visit-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 80px;
+            color: white;
+        }
+        
+        .visit-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .visit-map {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+        }
+        
+        .visit-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .visit-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .visit-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .visit-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.7;
+        }
+        
+        .visit-info p i {
+            margin-top: 3px;
+        }
+        
+        .visit-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            align-self: flex-start;
+        }
+        
+        .visit-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Floating Home Button */
+        .floating-home-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .floating-home-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .floating-home-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(108, 74, 182, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 5% 25px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .footer-logo img {
+            height: 45px;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .footer-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-size: 1.1rem;
+        }
+        
+        .footer-social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 18px rgba(108, 74, 182, 0.35);
+        }
+        
+        .footer-social-links a:nth-child(1):hover {
+            background-color: #3b5998; /* Facebook */
+        }
+        
+        .footer-social-links a:nth-child(2):hover {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); /* Instagram */
+        }
+        
+        .footer-social-links a:nth-child(3):hover {
+            background-color: #ff0000; /* YouTube */
+        }
+        
+        .footer-social-links a:nth-child(4):hover {
+            background-color: #0077b5; /* LinkedIn */
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            color: white;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -45%;
+                width: 45%;
+                height: 100vh;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                transition: var(--transition);
+                z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                padding-top: 80px;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+                padding: 0;
+            }
+            
+            nav ul li {
+                width: 100%;
+                padding: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px 20px;
+                font-size: 1rem;
+                color: var(--dark);
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.02);
+                padding: 0;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                border-radius: 0;
+            }
+            
+            .dropdown-content a {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+                color: #555;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .hamburger {
+                order: 2;
+            }
+            
+            /* Nav overlay */
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .page-hero {
+                height: 40vh;
+                min-height: 350px;
+                padding-top: 80px;
+            }
+            
+            .modal-body {
+                flex-direction: column;
+            }
+            
+            .modal-image {
+                min-width: 100%;
+            }
+            
+            .visit-container {
+                flex-direction: column;
+            }
+            
+            .visit-map {
+                height: 300px;
+            }
+            
+            .floating-home-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                width: 80%;
+                left: -80%;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem !important;
+                padding: 12px 15px !important;
+            }
+            
+            .dropdown-content a {
+                font-size: 0.85rem !important;
+                padding: 10px 25px !important;
+            }
+            
+            .logo img {
+                height: 60px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .page-hero {
+                height: 35vh;
+                min-height: 300px;
+            }
+            
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-home-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header id="header">
+    <div class="logo">
+        <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
+        <span class="logo-text">ISKCON Burla</span>
+    </div>
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0);">Events <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);">Event 1</a>
+                    <a href="javascript:void(0);">Event 2</a>
+                    <a href="javascript:void(0);">Event 3</a>
+                    <a href="javascript:void(0);">Event 4</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0);">Courses <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);">Course 1</a>
+                    <a href="javascript:void(0);">Course 2</a>
+                    <a href="javascript:void(0);">Course 3</a>
+                    <a href="javascript:void(0);">Course 4</a>
+                </div>
+            </li>
+            <li><a href="javascript:void(0);">Temple Store</a></li>
+            <li><a href="javascript:void(0);">Contact Us</a></li>
+            <li><a href="javascript:void(0);">About Us</a></li>
+        </ul>
+    </nav>
+    <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="page-hero-content">
+        <h1>More About Our Temple</h1>
+        <p>Discover the spiritual oasis of ISKCON Burla - a sacred space dedicated to spreading Krishna consciousness and serving the community</p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Temple Team Section -->
+    <section class="team-section">
+        <div class="section-title">
+            <h2>Meet Our Temple Team</h2>
+            <p>The dedicated servants who keep the temple running smoothly</p>
+        </div>
+        
+        <div class="team-grid">
+            <div class="team-card" data-member="1">
+                <div class="team-image">
+                    <img src="https://i.imgur.com/JzVS7UY.jpg" alt="Temple President">
+                </div>
+                <div class="team-info">
+                    <h3>HH Bhakti Rasamrita Swami</h3>
+                    <p>Temple President</p>
+                    <div class="bio">A disciple of HH Jayapataka Swami, he has been serving ISKCON for over 25 years and oversees all temple operations.</div>
+                </div>
+            </div>
+            
+            <div class="team-card" data-member="2">
+                <div class="team-image">
+                    <img src="https://i.imgur.com/pX9Qvz3.jpg" alt="Pujari">
+                </div>
+                <div class="team-info">
+                    <h3>Gopal Das</h3>
+                    <p>Head Pujari</p>
+                    <div class="bio">Trained in Mayapur, he has been lovingly serving the deities for 12 years with meticulous attention to detail.</div>
+                </div>
+            </div>
+            
+            <div class="team-card" data-member="3">
+                <div class="team-image">
+                    <img src="https://i.imgur.com/mN3sl5r.jpg" alt="Head Cook">
+                </div>
+                <div class="team-info">
+                    <h3>Radha Devi Dasi</h3>
+                    <p>Head Cook</p>
+                    <div class="bio">With 15 years of experience, she leads the kitchen team in preparing delicious prasadam offerings for the deities and devotees.</div>
+                </div>
+            </div>
+            
+            <div class="team-card" data-member="4">
+                <div class="team-image">
+                    <img src="https://i.imgur.com/Ds2uuU6.jpeg" alt="Youth Coordinator">
+                </div>
+                <div class="team-info">
+                    <h3>Nitai Chandra Das</h3>
+                    <p>Youth Coordinator</p>
+                    <div class="bio">Organizes youth programs, festivals, and educational activities to engage the next generation of devotees.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Member Modals -->
+    <div class="team-modal" id="member1">
+        <div class="modal-content">
+            <div class="close-modal">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="https://i.imgur.com/JzVS7UY.jpg" alt="Temple President">
+                </div>
+                <div class="modal-info">
+                    <h2>HH Bhakti Rasamrita Swami</h2>
+                    <span class="position">Temple President</span>
+                    <p>His Holiness Bhakti Rasamrita Swami has been a dedicated disciple of His Holiness Jayapataka Swami since 1995. He took sannyasa vows in 2008 and has since been instrumental in establishing several ISKCON centers across Odisha.</p>
+                    <p>Under his guidance, ISKCON Burla has grown from a small preaching center to a thriving temple with daily programs serving hundreds of devotees. He emphasizes the importance of book distribution and congregational development.</p>
+                    <p>Before joining ISKCON, he completed his engineering degree from NIT Rourkela and worked briefly as a software engineer before dedicating his life fully to Krishna consciousness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="team-modal" id="member2">
+        <div class="modal-content">
+            <div class="close-modal">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="https://i.imgur.com/pX9Qvz3.jpg" alt="Head Pujari">
+                </div>
+                <div class="modal-info">
+                    <h2>Gopal Das</h2>
+                    <span class="position">Head Pujari</span>
+                    <p>Gopal Das received his pujari training at ISKCON Mayapur and has been serving the deities at ISKCON Burla since 2010. His attention to detail and loving care for the deities is evident in their beautiful appearance and the temple's pristine altar.</p>
+                    <p>He oversees a team of 8 assistant pujaris and conducts regular training programs for new devotees interested in learning deity worship. Under his guidance, the temple has maintained excellent standards of deity worship according to ISKCON guidelines.</p>
+                    <p>Before joining ISKCON, Gopal Das studied fine arts at Sambalpur University, which helps him in decorating the deities with creative outfits and jewelry.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="team-modal" id="member3">
+        <div class="modal-content">
+            <div class="close-modal">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="https://i.imgur.com/mN3sl5r.jpg" alt="Head Cook">
+                </div>
+                <div class="modal-info">
+                    <h2>Radha Devi Dasi</h2>
+                    <span class="position">Head Cook</span>
+                    <p>Radha Devi Dasi joined ISKCON in 2005 and has been heading the temple kitchen since 2008. She specializes in preparing traditional Odia prasadam as well as North Indian and South Indian dishes for the deities.</p>
+                    <p>She leads a team of 12 cooks who prepare daily offerings for the deities and Sunday feast for 300+ devotees. Her cooking classes for temple devotees are always fully booked months in advance.</p>
+                    <p>Before dedicating her life to temple service, she ran a successful catering business in Sambalpur. She often says that cooking for Krishna is much more satisfying than cooking for any worldly client.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="team-modal" id="member4">
+        <div class="modal-content">
+            <div class="close-modal">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="https://i.imgur.com/Ds2uuU6.jpeg" alt="Youth Coordinator">
+                </div>
+                <div class="modal-info">
+                    <h2>Nitai Chandra Das</h2>
+                    <span class="position">Youth Coordinator</span>
+                    <p>Nitai Chandra Das joined ISKCON as a youth volunteer in 2012 and became full-time in 2015 after completing his B.Tech degree. He coordinates all youth activities including weekly study groups, kirtan programs, and volunteer initiatives.</p>
+                    <p>Under his leadership, the ISKCON Burla youth group has grown to over 200 active members who participate in various preaching and service activities. He also organizes the annual Youth Retreat that attracts participants from across Odisha.</p>
+                    <p>His dynamic personality and    ability to connect with young people have made him an effective ambassador for Krishna consciousness among the youth.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Temple Mission Section -->
+    <section class="mission-section">
+        <div class="section-title">
+            <h2>Our Temple Mission</h2>
+            <p>The guiding principles that inspire our service to Srila Prabhupada and Lord Krishna</p>
+        </div>
+        
+        <div class="mission-grid">
+            <div class="mission-card">
+                <div class="mission-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Scriptural Study</h3>
+                <p>To systematically propagate spiritual knowledge to society at large and to educate all people in the techniques of spiritual life.</p>
+            </div>
+            
+            <div class="mission-card">
+                <div class="mission-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>Community Service</h3>
+                <p>To bring members closer together for the purpose of teaching a simpler, more natural way of life and to propagate Krishna consciousness.</p>
+            </div>
+            
+            <div class="mission-card">
+                <div class="mission-icon">
+                    <i class="fas fa-om"></i>
+                </div>
+                <h3>Spiritual Development</h3>
+                <p>To help people develop love for God through the chanting of the holy names and following the process of bhakti-yoga.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Schedule Section -->
+    <section class="schedule-section">
+        <div class="section-title">
+            <h2>Daily Temple Schedule</h2>
+            <p>Join us in our regular spiritual activities throughout the day</p>
+        </div>
+        
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Program</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-col">4:30 AM</td>
+                    <td>Mangala Arati</td>
+                    <td>Early morning worship ceremony to awaken the Lord</td>
+                </tr>
+                <tr>
+                    <td class="time-col">5:00 AM</td>
+                    <td>Tulasi Puja</td>
+                    <td>Worship of the sacred Tulasi plant</td>
+                </tr>
+                <tr>
+                    <td class="time-col">5:30 AM</td>
+                    <td>Japa Meditation</td>
+                    <td>Chanting of Hare Krishna mantra on beads</td>
+                </tr>
+                <tr>
+                    <td class="time-col">7:00 AM</td>
+                    <td>Darshan Arati</td>
+                    <td>Morning greeting ceremony for the deities</td>
+                </tr>
+                <tr>
+                    <td class="time-col">7:30 AM</td>
+                    <td>Guru Puja</td>
+                    <td>Offering respects to the spiritual master</td>
+                </tr>
+                <tr>
+                    <td class="time-col">8:00 AM</td>
+                    <td>Prasadam Breakfast</td>
+                    <td>Sanctified vegetarian breakfast</td>
+                </tr>
+                <tr>
+                    <td class="time-col">12:00 PM</td>
+                    <td>Raj Bhoga Arati</td>
+                    <td>Midday worship ceremony</td>
+                </tr>
+                <tr>
+                    <td class="time-col">4:30 PM</td>
+                    <td>Dhupa Arati</td>
+                    <td>Evening worship ceremony</td>
+                </tr>
+                <tr>
+                    <td class="time-col">6:30 PM</td>
+                    <td>Sandhya Arati</td>
+                    <td>Sunset worship ceremony</td>
+                </tr>
+                <tr>
+                    <td class="time-col">7:00 PM</td>
+                    <td>Class on Bhagavad-gita</td>
+                    <td>Daily spiritual discourse</td>
+                </tr>
+                <tr>
+                    <td class="time-col">8:30 PM</td>
+                    <td>Shayana Arati</td>
+                    <td>Goodnight ceremony for the deities</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Visit Us Section -->
+    <section class="visit-section">
+        <div class="visit-container">
+            <div class="visit-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3698.123456789012!2d83.987654321!3d21.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDA3JzI0LjQiTiA4M8KwNTknMTUuNiJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="visit-info">
+                <h2>Visit Our Temple</h2>
+                <p><i class="fas fa-map-marker-alt"></i> ISKCON Burla, Near VSS Medical College, Sambalpur, Odisha 768017</p>
+                <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> contact@iskconburla.org</p>
+                <p><i class="fas fa-clock"></i> Open daily from 4:30 AM to 9:00 PM</p>
+                <a href="javascript:void(0);" class="visit-button">Get Directions</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Floating Home Button -->
+<a href="index.html" class="floating-home-button" id="homeButton">
+    <i class="fas fa-home"></i>
+</a>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img src="https://i.imgur.com/dhcKR8L.png" alt="ISKCON Burla logo">
+                <span class="footer-logo-text">ISKCON Burla</span>
+            </div>
+            <p>International Society for Krishna Consciousness (ISKCON) Burla is a spiritual community dedicated to practicing and promoting the teachings of Lord Krishna as revealed in the Bhagavad-gita and other Vedic scriptures.</p>
+            <div class="footer-social-links">
+                <a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
+                <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
+                <a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
+                <a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="javascript:void(0);">About Us</a></li>
+                <li><a href="javascript:void(0);">Events</a></li>
+                <li><a href="javascript:void(0);">Courses</a></li>
+                <li><a href="javascript:void(0);">Temple Store</a></li>
+                <li><a href="javascript:void(0);">Contact Us</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-links">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="javascript:void(0);">Bhagavad-gita</a></li>
+                <li><a href="javascript:void(0);">Srimad Bhagavatam</a></li>
+                <li><a href="javascript:void(0);">Chant Hare Krishna</a></li>
+                <li><a href="javascript:void(0);">Vegetarian Recipes</a></li>
+                <li><a href="javascript:void(0);">Vedic Encyclopedia</a></li>
+                <li><a href="javascript:void(0);">Donate</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-links">
+            <h3>Connect With Us</h3>
+            <ul>
+                <li><a href="javascript:void(0);">Volunteer</a></li>
+                <li><a href="javascript:void(0);">Become a Member</a></li>
+                <li><a href="javascript:void(0);">Sponsor a Program</a></li>
+                <li><a href="javascript:void(0);">Ask a Question</a></li>
+                <li><a href="javascript:void(0);">Feedback</a></li>
+                <li><a href="javascript:void(0);">Subscribe to Newsletter</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2023 ISKCON Burla. All Rights Reserved. | Designed with ❤️ by ISKCON Burla Dev Team</p>
+    </div>
+</footer>
+
+<script>
+    // Mobile Navigation
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    const navOverlay = document.getElementById('navOverlay');
+    
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        nav.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+    });
+    
+    navOverlay.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+        navOverlay.classList.remove('active');
+    });
+    
+    // Team Member Modals
+    const teamCards = document.querySelectorAll('.team-card');
+    const modals = document.querySelectorAll('.team-modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    teamCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const memberId = card.getAttribute('data-member');
+            document.getElementById(`member${memberId}`).classList.add('active');
+        });
+    });
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            button.closest('.team-modal').classList.remove('active');
+        });
+    });
+    
+    modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    });
+    
+    // Floating Home Button
+    const homeButton = document.getElementById('homeButton');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            homeButton.classList.add('visible');
+        } else {
+            homeButton.classList.remove('visible');
+        }
+    });
+    
+    // Header Scroll Effect
+    const header = document.getElementById('header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll <= 0) {
+            header.classList.remove('hidden');
+            return;
+        }
+        
+        if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+            header.classList.add('hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+            header.classList.remove('hidden');
+        }
+        
+        lastScroll = currentScroll;
+    });
+</script>
+</body>
+</html>
