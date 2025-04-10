@@ -540,7 +540,14 @@
         }
         
         /* Floating Home Button */
-        .floating-home-button {
+        
+/* ==========================================================================
+   FLOATING HOME BUTTON STYLES
+   --------------------------------------------------------------------------
+   Styles for the floating home icon that appears in the bottom-right corner
+   of the screen. It's hidden initially and becomes visible on scroll.
+   ========================================================================== */
+.floating-home-button {
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -751,6 +758,7 @@
                 top: 0;
                 left: -45%;
                 width: 45%;
+                width: 45%;
                 height: 100vh;
                 background-color: white;
                 display: flex;
@@ -817,11 +825,11 @@
             }
             
             .logo {
-                order: 2;
+                order: 1;
             }
             
             .hamburger {
-                order: 1;
+                order: 2;
             }
             
             /* Nav overlay */
@@ -848,7 +856,14 @@
                 object-position: center top;
             }
 
-            .floating-home-button {
+            
+/* ==========================================================================
+   FLOATING HOME BUTTON STYLES
+   --------------------------------------------------------------------------
+   Styles for the floating home icon that appears in the bottom-right corner
+   of the screen. It's hidden initially and becomes visible on scroll.
+   ========================================================================== */
+.floating-home-button {
                 width: 45px;
                 height: 45px;
                 font-size: 1.2rem;
@@ -909,7 +924,14 @@
                 font-size: 1rem;
             }
 
-            .floating-home-button {
+            
+/* ==========================================================================
+   FLOATING HOME BUTTON STYLES
+   --------------------------------------------------------------------------
+   Styles for the floating home icon that appears in the bottom-right corner
+   of the screen. It's hidden initially and becomes visible on scroll.
+   ========================================================================== */
+.floating-home-button {
                 width: 40px;
                 height: 40px;
                 font-size: 1.1rem;
@@ -1053,6 +1075,13 @@
 </form>
 </div>
 </section>
+
+<!-- =============================================================
+     FLOATING HOME BUTTON
+     -------------------------------------------------------------
+     A circular button that appears when the user scrolls down.
+     Clicking it scrolls the page back to the top smoothly.
+     ============================================================= -->
 <!-- Floating Home Button -->
 <a class="floating-home-button" href="javascript:void(0);" id="home-button">
 <i class="fas fa-home"></i>
@@ -1237,7 +1266,14 @@
             });
     
             // Floating home button visibility
-            const homeButton = document.getElementById('home-button');
+            
+// =============================================================
+// FLOATING HOME BUTTON VISIBILITY LOGIC
+// -------------------------------------------------------------
+// Shows the home button only when the page is scrolled down
+// more than 300px, and hides it otherwise.
+// =============================================================
+const homeButton = document.getElementById('home-button');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 300) {
                     homeButton.classList.add('visible');
@@ -1258,9 +1294,27 @@
             });
         </script>
 <script>
+
+// =============================================================
+// SCROLL TO TOP FUNCTIONALITY
+// -------------------------------------------------------------
+// When the floating home button is clicked, the page smoothly
+// scrolls to the top instead of jumping instantly.
+// =============================================================
 document.getElementById("home-button").addEventListener("click", function(e) {
     e.preventDefault();
     window.scrollTo({top: 0, behavior: "smooth"});
+});
+
+document.addEventListener('click', function(event) {
+    const isClickInsideNav = nav.contains(event.target);
+    const isClickOnHamburger = hamburger.contains(event.target);
+    if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+        navOverlay.classList.remove('active');
+        body.style.overflow = '';
+    }
 });
 </script></body>
 </html>
