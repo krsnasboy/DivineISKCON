@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Deities & Darshan | ISKCON Burla</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #6C4AB6;
+            --secondary: #8D72E1;
+            --accent: #B9E0FF;
+            --light: #F8F6F4;
+            --dark: #2D2727;
+            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0px 5%; height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(248, 246, 244, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+        
+        .logo img {
+            height: 60px;
+            max-height: 10vh;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 180px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 8px 20px;
+            color: var(--dark);
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: rgba(108, 74, 182, 0.1);
+            color: var(--primary);
+            padding-left: 25px;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            width: 28px;
+            height: 22px;
+            position: relative;
+        }
+        
+        .hamburger div {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+            transform-origin: center;
+        }
+        
+        .hamburger div:nth-child(1) {
+            top: 0;
+            left: 0;
+        }
+        
+        .hamburger div:nth-child(2) {
+            top: 9px;
+            left: 0;
+            opacity: 1;
+        }
+        
+        .hamburger div:nth-child(3) {
+            bottom: 0;
+            left: 0;
+        }
+        
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: 9px;
+        }
+        
+        /* Live Darshan Section */
+        .live-darshan {
+            padding: 100px 5% 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .live-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .live-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .live-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .live-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .live-title p {
+            color: #666;
+            font-size: 1.05rem;
+        }
+        
+        .darshan-timings {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            min-width: 280px;
+        }
+        
+        .darshan-timings h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .darshan-timings h3 i {
+            color: var(--secondary);
+        }
+        
+        .timing-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .timing-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .timing-name {
+            font-weight: 500;
+        }
+        
+        .timing-value {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        /* Deities Gallery */
+        .deities-gallery {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            aspect-ratio: 1/1;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 74, 182, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        
+        .gallery-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Deity Information */
+        .deity-info {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        
+        .content-block.reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .content-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .content-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .content-text h3 {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .content-text p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
+        }
+        
+        .content-text ul {
+            list-style: none;
+            margin: 20px 0;
+            color: #555;
+        }
+        
+        .content-text ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.7;
+        }
+        
+        .content-text ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        /* Floating Home Button */
+        .floating-home-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .floating-home-button.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .floating-home-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(108, 74, 182, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 5% 25px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .footer-logo img {
+            height: 45px;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 18px rgba(108, 74, 182, 0.35);
+        }
+        
+        .social-links a:nth-child(1):hover {
+            background-color: #3b5998; /* Facebook */
+        }
+        
+        .social-links a:nth-child(2):hover {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); /* Instagram */
+        }
+        
+        .social-links a:nth-child(3):hover {
+            background-color: #ff0000; /* YouTube */
+        }
+        
+        .social-links a:nth-child(4):hover {
+            background-color: #0077b5; /* LinkedIn */
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            color: white;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -45%;
+                width: 45%;
+                height: 100vh;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                transition: var(--transition);
+                z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                padding-top: 80px;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+                padding: 0;
+            }
+            
+            nav ul li {
+                width: 100%;
+                padding: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px 20px;
+                font-size: 1rem;
+                color: var(--dark);
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.02);
+                padding: 0;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                border-radius: 0;
+            }
+            
+            .dropdown-content a {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+                color: #555;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .hamburger {
+                order: 2;
+            }
+            
+            /* Nav overlay */
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .live-darshan {
+                padding-top: 80px;
+            }
+            
+            .live-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .darshan-timings {
+                width: 100%;
+            }
+            
+            .floating-home-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                width: 80%;
+                left: -80%;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem !important;
+                padding: 12px 15px !important;
+            }
+            
+            .dropdown-content a {
+                font-size: 0.85rem !important;
+                padding: 10px 25px !important;
+            }
+            
+            .logo img {
+                height: 60px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-home-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header id="header">
+    <div class="logo">
+        <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
+        <span class="logo-text">ISKCON Burla</span>
+    </div>
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0);">Events <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);">Event 1</a>
+                    <a href="javascript:void(0);">Event 2</a>
+                    <a href="javascript:void(0);">Event 3</a>
+                    <a href="javascript:void(0);">Event 4</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0);">Courses <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);">Course 1</a>
+                    <a href="javascript:void(0);">Course 2</a>
+                    <a href="javascript:void(0);">Course 3</a>
+                    <a href="javascript:void(0);">Course 4</a>
+                </div>
+            </li>
+            <li><a href="javascript:void(0);">Temple Store</a></li>
+            <li><a href="javascript:void(0);">Contact Us</a></li>
+            <li><a href="javascript:void(0);">About Us</a></li>
+        </ul>
+    </nav>
+    <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- Live Darshan Section -->
+<section class="live-darshan">
+    <div class="live-container">
+        <!-- Replace with your actual YouTube live stream embed code -->
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCj1VqrHhDte6oLj3WHaH1Ow&autoplay=1" allowfullscreen allow="autoplay"></iframe>
+    </div>
+    
+    <div class="live-info">
+        <div class="live-title">
+            <h1>Live Darshan from ISKCON Burla</h1>
+            <p>Experience the divine presence of Sri Sri Sita-Ram, Lakshman, and Hanuman live from our temple</p>
+        </div>
+        
+        <div class="darshan-timings">
+            <h3><i class="fas fa-clock"></i> Darshan Timings</h3>
+            <div class="timing-item">
+                <span class="timing-name">Mangala Arati</span>
+                <span class="timing-value">4:30 AM</span>
+            </div>
+            <div class="timing-item">
+                <span class="timing-name">Shringar Darshan</span>
+                <span class="timing-value">7:30 AM</span>
+            </div>
+            <div class="timing-item">
+                <span class="timing-name">Raj Bhog Arati</span>
+                <span class="timing-value">12:00 PM</span>
+            </div>
+            <div class="timing-item">
+                <span class="timing-name">Evening Darshan</span>
+                <span class="timing-value">4:30 PM</span>
+            </div>
+            <div class="timing-item">
+                <span class="timing-name">Sandhya Arati</span>
+                <span class="timing-value">6:30 PM</span>
+            </div>
+            <div class="timing-item">
+                <span class="timing-name">Shayan Arati</span>
+                <span class="timing-value">8:30 PM</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Deities Gallery -->
+<section class="deities-gallery">
+    <div class="section-title">
+        <h2>Our Divine Deities</h2>
+        <p>Behold the beautiful forms of the Lord and His eternal associates who grace our temple</p>
+    </div>
+    
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/JQ6f9WX.jpg" alt="Sri Sri Sita-Ram-Lakshman">
+            <div class="gallery-caption">
+                <h3>Sri Sri Sita-Ram-Lakshman</h3>
+                <p>The Supreme Personality of Godhead with His eternal consort and brother</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/5tG3v9N.jpg" alt="Hanuman Ji">
+            <div class="gallery-caption">
+                <h3>Hanuman Ji</h3>
+                <p>The eternal servant of Lord Rama and embodiment of devotion</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/mN3sl5r.jpg" alt="Morning Arati">
+            <div class="gallery-caption">
+                <h3>Morning Arati</h3>
+                <p>The deities being woken with sacred hymns and offerings</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/pX9Qvz3.jpg" alt="Shringar Darshan">
+            <div class="gallery-caption">
+                <h3>Shringar Darshan</h3>
+                <p>The Lords in Their beautifully adorned midday outfits</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/JzVS7UY.jpg" alt="Evening Arati">
+            <div class="gallery-caption">
+                <h3>Evening Arati</h3>
+                <p>The deities during the mesmerizing lamp ceremony</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/Ds2uuU6.jpeg" alt="Festival Celebration">
+            <div class="gallery-caption">
+                <h3>Festival Celebration</h3>
+                <p>The Lords in Their special festival attire</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/CqBYC04.png" alt="Winter Attire">
+            <div class="gallery-caption">
+                <h3>Winter Attire</h3>
+                <p>The deities adorned in warm winter clothing</p>
+            </div>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="https://i.imgur.com/dhcKR8L.png" alt="Special Occasion">
+            <div class="gallery-caption">
+                <h3>Special Occasion</h3>
+                <p>The Lords in Their exquisite ceremonial dress</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Deity Information -->
+<section class="deity-info">
+    <div class="content-block">
+        <div class="content-text">
+            <h3>About Our Deities</h3>
+            <p>The presiding deities of ISKCON Burla are Sri Sri Sita-Ram, Lakshman, and Hanuman. These beautiful forms were installed on [installation date] with great devotion and ceremony, marking a significant milestone in the spiritual landscape of Burla.</p>
+            <p>According to Vedic scriptures, the deity form of the Lord is not a mere idol but a bona fide manifestation of the Supreme Personality of Godhead who agrees to appear in this form to accept our service and devotion.</p>
+            <p>The deities are cared for with utmost love and attention by trained pujaris who follow strict standards of deity worship as established by Srila Prabhupada, the founder of ISKCON.</p>
+        </div>
+        <div class="content-image">
+            <img src="https://i.imgur.com/JQ6f9WX.jpg" alt="Deities of ISKCON Burla">
+        </div>
+    </div>
+    
+    <div class="content-block reverse">
+        <div class="content-text">
+            <h3>Significance of Deity Worship</h3>
+            <p>Deity worship (arcana) is one of the nine primary processes of devotional service described in the Bhagavata Purana. It helps focus our mind and senses on the transcendental form of the Lord.</p>
+            <ul>
+                <li>Provides a tangible focus for our devotion</li>
+                <li>Helps develop love for God through service</li>
+                <li>Purifies our consciousness through direct engagement</li>
+                <li>Allows us to offer our talents and resources to the Lord</li>
+                <li>Creates a sacred atmosphere that benefits all visitors</li>
+            </ul>
+            <p>When we see the deity, we should understand that we are directly seeing the Lord's merciful representation meant for our benefit in this age.</p>
+        </div>
+        <div class="content-image">
+            <img src="https://i.imgur.com/5tG3v9N.jpg" alt="Devotees worshiping">
+        </div>
+    </div>
+    
+    <div class="content-block">
+        <div class="content-text">
+            <h3>How to Receive the Full Benefit of Darshan</h3>
+            <p>Darshan is not merely seeing the deities but receiving their spiritual glance and blessings. Here's how to make the most of your darshan:</p>
+            <ul>
+                <li>Approach with a respectful and humble attitude</li>
+                <li>Offer your heartfelt prayers</li>
+                <li>Chant the holy names quietly (Hare Krishna mantra)</li>
+                <li>Bring an offering of flowers or fruits if possible</li>
+                <li>Stay present in the moment, avoiding distractions</li>
+                <li>Observe the details of the deities' beautiful forms</li>
+                <li>Thank the Lord for this opportunity</li>
+            </ul>
+            <p>Remember that the Lord sees not just our outward actions but the love and sincerity in our hearts.</p>
+        </div>
+        <div class="content-image">
+            <img src="https://i.imgur.com/mN3sl5r.jpg" alt="Devotee in prayer">
+        </div>
+    </div>
+</section>
+
+<!-- Floating Home Button -->
+<a class="floating-home-button" href="javascript:void(0);" id="home-button">
+    <i class="fas fa-home"></i>
+</a>
+
+<!-- Footer -->
+<footer class="">
+    <div class="footer-content">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img alt="Spiritual Harmony Logo" src="https://i.imgur.com/CqBYC04.png"/>
+                <span class="footer-logo-text">ISKCON Burla</span>
+            </div>
+            <p>Founded in --, ISKCON Burla is dedicated to spread love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
+            <div class="social-links">
+                <a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
+                <a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
+                <a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <h3>About Us</h3>
+            <ul>
+                <li><a href="javascript:void(0);">Our Mission</a></li>
+                <li><a href="javascript:void(0);">Our Gurudev</a></li>
+                <li><a href="javascript:void(0);">His teachings</a></li>
+                <li><a href="javascript:void(0);">Founder Acharya</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="javascript:void(0);">Online Classes / Courses</a></li>
+                <li><a href="javascript:void(0);">Daily Inspiration</a></li>
+                <li><a href="javascript:void(0);">Books &amp; Scriptures</a></li>
+                <li><a href="javascript:void(0);">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h3>Contact</h3>
+            <ul>
+                <li><a href="javascript:void(0);">info@divineiskcon.com</a></li>
+                <li><a href="javascript:void(0);">+91 00000 00000</a></li>
+                <li><a href="javascript:void(0);">Visit Us</a></li>
+                <li><a href="javascript:void(0);">Volunteer</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Divine ISKCON. All rights reserved. | <a href="javascript:void(0);" style="color: rgb(85, 113, 213)">Privacy Policy</a> | <a href="javascript:void(0);">Terms of Service</a></p>
+    </div>
+</footer>
+
+<script>
+    // Mobile Navigation
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    const navOverlay = document.getElementById('navOverlay');
+    const body = document.body;
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        nav.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    navOverlay.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+        navOverlay.classList.remove('active');
+        body.style.overflow = '';
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+    });
+    
+    // Mobile dropdown tap support
+    document.querySelectorAll('.dropdown > a').forEach(drop => {
+        drop.addEventListener('click', e => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const content = drop.nextElementSibling;
+                const isVisible = content.style.display === 'block';
+                
+                // Close all other dropdowns first
+                document.querySelectorAll('.dropdown-content').forEach(d => {
+                    if (d !== content) {
+                        d.style.display = 'none';
+                    }
+                });
+                
+                content.style.display = isVisible ? 'none' : 'block';
+            }
+        });
+    });
+
+    // Hide Header on Scroll Down
+    let lastScroll = 0;
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+            header.classList.remove('hidden');
+            return;
+        }
+        
+        if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+            header.classList.add('hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+            header.classList.remove('hidden');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Floating home button visibility
+    const homeButton = document.getElementById('home-button');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            homeButton.classList.add('visible');
+        } else {
+            homeButton.classList.remove('visible');
+        }
+    });
+    
+    // Gallery image hover effect for mobile
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                this.querySelector('.gallery-caption').style.opacity = 
+                    this.querySelector('.gallery-caption').style.opacity === '1' ? '0' : '1';
+            }
+        });
+    });
+    
+    // Scroll to top functionality
+    document.getElementById("home-button").addEventListener("click", function(e) {
+        e.preventDefault();
+        window.scrollTo({top: 0, behavior: "smooth"});
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = nav.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+        }
+    });
+</script>
+</body>
+</html>
