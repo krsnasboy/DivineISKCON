@@ -37,7 +37,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 15px 5%;
+            padding: 0px 5%; height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -61,14 +61,16 @@
         }
         
         .logo img {
-            height: 65px;
+            height: 60px;
+            max-height: 10vh;
+            width: auto;
             transition: var(--transition);
         }
         
         .logo-text {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--primary);
             transition: var(--transition);
         }
@@ -874,7 +876,7 @@
 
         @media (max-width: 480px) 
             nav {
-                width: 45%; /*  Resize menu container for phone (hamburger 3-bar)  */
+                width: 45%; /* It is to change size of menu container for phone (3 bars) */
                 left: -45%;
             }   { 
             
@@ -893,7 +895,7 @@
             }
 
             .logo img {
-                height: 30px;
+                height: 60px;
             }
             
             .logo-text {
@@ -1010,7 +1012,7 @@
 <h3>Upcoming Temple Project</h3>
 <p>We are humbled and excited to announce the upcoming temple project — a divine initiative to create a spiritual oasis dedicated to Lord Krishna and Srila Prabhupada's vision.</p>
 </button>
-<button class="feature-card reveal" onclick="window.location.href='#'">
+<button class="feature-card reveal" onclick="window.location.href='UpcomingEvents.html'">
 <div class="feature-icon">
 <i class="fas fa-calendar-alt"></i>
 </div>
@@ -1225,20 +1227,7 @@
     
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             
-            // Logo animation on scroll
-            window.addEventListener('scroll', () => {
-                const scrollPosition = window.scrollY;
-                const logoImg = document.getElementById('logo-img');
-                const logoText = document.querySelector('.logo-text');
-                
-                if (scrollPosition > 50) {
-                    logoImg.style.height = '30px';
-                    logoText.style.fontSize = '1.1rem';
-                } else {
-                    logoImg.style.height = '35px';
-                    logoText.style.fontSize = '1.3rem';
-                }
-            });
+            
             
             // Floating elements animation
             document.addEventListener('DOMContentLoaded', () => {
