@@ -304,6 +304,12 @@
         .cta-button:hover::before {
             transform: translateX(100%);
         }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
         
         /* Features Section */
         .features {
@@ -334,6 +340,14 @@
             max-width: 700px;
             margin: 0 auto;
             font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+
+        .quick-links-heading {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
         }
         
         .features-grid {
@@ -541,48 +555,43 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
         
-        /* Floating Home Button */
-        
-/* ==========================================================================
-   FLOATING HOME BUTTON STYLES
-   --------------------------------------------------------------------------
-   Styles for the floating home icon that appears in the bottom-right corner
-   of the screen. It's hidden initially and becomes visible on scroll.
-   ========================================================================== */
-.floating-home-button {
+        /* Floating Donate Button */
+        .floating-donate-button {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 50px;
-            height: 50px;
+            width: auto;
+            padding: 12px 20px;
             background-color: var(--primary);
             color: white;
-            border-radius: 50%;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1rem;
+            font-weight: 600;
             box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
             text-decoration: none;
+            gap: 8px;
         }
         
-        .floating-home-button.visible {
+        .floating-donate-button.visible {
             opacity: 1;
             visibility: visible;
         }
         
-        .floating-home-button:hover {
+        .floating-donate-button:hover {
             background-color: var(--secondary);
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-5px) scale(1.05);
             box-shadow: 0 8px 25px rgba(108, 74, 182, 0.4);
         }
         
         /* Footer */
-        footer {
+        .footer {
             background-color: var(--dark);
             color: white;
             padding: 70px 5% 25px;
@@ -645,15 +654,15 @@
         }
         
         .social-links a:nth-child(1):hover {
-            background-color: #3b5998; /* Facebook */
+            background-color: #ff0000; /* YouTube */
         }
         
         .social-links a:nth-child(2):hover {
-            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); /* Instagram */
+            background-color: #3b5998; /* Facebook */
         }
         
         .social-links a:nth-child(3):hover {
-            background-color: #ff0000; /* YouTube */
+            background-color: #1DA1F2; /* Twitter */
         }
         
         .social-links a:nth-child(4):hover {
@@ -704,6 +713,17 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #aaa;
             font-size: 0.85rem;
+        }
+        
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-bottom a:hover {
+            color: white;
+            text-decoration: underline;
         }
         
         /* Floating Elements Animation */
@@ -858,27 +878,24 @@
                 object-position: center top;
             }
 
+            .hero-buttons {
+                flex-direction: column;
+            }
             
-/* ==========================================================================
-   FLOATING HOME BUTTON STYLES
-   --------------------------------------------------------------------------
-   Styles for the floating home icon that appears in the bottom-right corner
-   of the screen. It's hidden initially and becomes visible on scroll.
-   ========================================================================== */
-.floating-home-button {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
+            .floating-donate-button {
+                width: auto;
+                padding: 10px 16px;
+                font-size: 0.9rem;
                 bottom: 20px;
                 right: 20px;
             }
         }
 
-        @media (max-width: 480px) 
+        @media (max-width: 480px) {
             nav {
-                width: 45%; /* It is to change size of menu container for phone (3 bars) */
+                width: 45%;
                 left: -45%;
-            }   { 
+            }
             
             nav ul li a {
                 font-size: 0.9rem !important;
@@ -926,54 +943,65 @@
                 font-size: 1rem;
             }
 
-            
-/* ==========================================================================
-   FLOATING HOME BUTTON STYLES
-   --------------------------------------------------------------------------
-   Styles for the floating home icon that appears in the bottom-right corner
-   of the screen. It's hidden initially and becomes visible on scroll.
-   ========================================================================== */
-.floating-home-button {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
+            .floating-donate-button {
+                width: auto;
+                padding: 8px 14px;
+                font-size: 0.85rem;
                 bottom: 15px;
                 right: 15px;
             }
         }
-    </style>
+    
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.hero-buttons .cta-button {
+    width: auto !important;
+    max-width: 160px !important;
+    padding: 12px 24px !important;
+    white-space: nowrap;
+    text-align: center;
+}
+@media (max-width: 480px) {
+    .hero-buttons {
+        flex-direction: row;
+    }
+    .hero-buttons .cta-button {
+        flex: 0 1 auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero-content {
+        margin-top: 0 !important;
+    }
+    .hero-buttons {
+        justify-content: flex-start !important;
+        margin-top: 10px;
+    }
+}
+
+</style>
 </head>
 <body>
 <!-- Header -->
 <header id="header">
-<div class="logo">
+<!-- ===================== ISKCON BURla LOGO ===================== --><!-- Change image src below to update the logo --><div class="logo">
 <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
 <span class="logo-text">ISKCON Burla</span>
 </div>
 <nav id="nav">
 <ul>
-<li><a href="javascript:void(0);">Home</a></li><!-- Option 1 for menu bar -->
-<li class="dropdown">
-<a href="javascript:void(0);">Events <i class="fas fa-chevron-down"></i></a><!-- Option 2 for menu bar -->
-<div class="dropdown-content">
-<a href="javascript:void(0);">Event 1</a>
-<a href="javascript:void(0);">Event 2</a>
-<a href="javascript:void(0);">Event 3</a>
-<a href="javascript:void(0);">Event 4</a>
-</div>
-</li>
-<li class="dropdown">
-<a href="javascript:void(0);">Courses <i class="fas fa-chevron-down"></i></a></li><!-- Option 3 for menu bar -->
-<li><a href="javascript:void(0);">Temple Store</a><!-- Option 4 for menu bar -->
-<div class="dropdown-content">
-<a href="javascript:void(0);">Course 1</a>
-<a href="javascript:void(0);">Course 2</a>
-<a href="javascript:void(0);">Course 3</a>
-<a href="javascript:void(0);">Course 4</a>
-</div>
-</li>
-<li><a href="ContactUs.html">Contact Us</a></li><!-- Option 5 for menu bar -->
-<li><a href="AboutUs.html">About Us</a></li><!-- Option 6 for menu bar -->
+<li><a href="javascript:void(0);">Home</a></li>
+<li><a href="javascript:void(0);">Events</a></li>
+<li><a href="javascript:void(0);">Courses</a></li>
+<li><a href="javascript:void(0);">Temple Store</a></li>
+<li><a href="ContactUs.html">Contact Us</a></li>
+<li><a href="AboutUs.html">About Us</a></li>
 </ul>
 </nav>
 <div class="hamburger" id="hamburger">
@@ -987,10 +1015,10 @@
 <!-- Hero Section -->
 <section class="hero">
 <img alt="ISKCON Burla template" class="hero-bg" src="https://i.imgur.com/pUuNtq1.jpeg" style="object-position: center top;"/>
-<div class="hero-content">
+<!-- ===================== WELCOME SECTION (Hero Text + Buttons) ===================== --><!-- You can edit the title, subtitle, and button links/texts here --><div class="hero-content" style="margin-top: 180px;">
 <h1>Welcome to ISKCON Burla </h1>
 <p>where hearts connect through devotion, and souls find their way to Krishna.</p>
-<a class="cta-button" href="Login.html">IYF Admin login</a>
+<div class="hero-buttons"><a class="cta-button" href="Login.html">IYF Admin login</a><a class="cta-button" href="index.html">Homepage</a></div>
 </div>
 <div class="floating-elements">
 <div class="floating-element" style="width: 40px; height: 40px; top: 20%; left: 10%; animation-delay: 0s;"></div>
@@ -999,11 +1027,12 @@
 </div>
 </section>
 <!-- Features Section -->
-<section class="features">
-<div class="section-title reveal">
+<!-- ===================== FEATURES SECTION ===================== --><!-- Modify temple features and cards here --><section class="features">
+<div class="section-title reveal" id="service-title">
 <h2> Every Service towards Krishna counts!</h2>
 <p>No service is too small when offered with love. Whether through time, effort, or donation — every act of devotion brings us closer to our beloved, Krishna</p>
 </div>
+<h3 class="quick-links-heading reveal">Quick Links</h3>
 <div class="features-grid">
 <button class="feature-card reveal" onclick="window.location.href='NewTempleProject.html'">
 <div class="feature-icon">
@@ -1039,7 +1068,7 @@
 </div>
 <h3>Donations &amp; Support</h3>
 <p>Support our temple through your generous donations. Your contribution helps us maintain daily services, festivals, and the upcoming temple project.</p>
-</button><button class="feature-card reveal" onclick="window.location.href='NewDeities&Darshan.html'">
+</button><button class="feature-card reveal" onclick="window.location.href='NewDeities&amp;Darshan.html'">
 <div class="feature-icon">
 <i class="fas fa-heart"></i>
 </div>
@@ -1077,19 +1106,8 @@
 </form>
 </div>
 </section>
-
-<!-- =============================================================
-     FLOATING HOME BUTTON
-     -------------------------------------------------------------
-     A circular button that appears when the user scrolls down.
-     Clicking it scrolls the page back to the top smoothly.
-     ============================================================= -->
-<!-- Floating Home Button -->
-<a class="floating-home-button" href="javascript:void(0);" id="home-button">
-<i class="fas fa-home"></i>
-</a>
 <!-- Footer -->
-<footer class="">
+<!-- ===================== FOOTER SECTION ===================== --><!-- Update contact info, links, and social media here --><div class="footer">
 <div class="footer-content">
 <div class="footer-about">
 <div class="footer-logo">
@@ -1098,9 +1116,10 @@
 </div>
 <p>Founded in --, ISKCON Burla is dedicated to spread love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
 <div class="social-links">
-<a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
-<a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
 <a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
+<a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
+<a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
+<a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
 </div>
 </div>
 <div class="footer-links">
@@ -1109,201 +1128,111 @@
 <li><a href="javascript:void(0);">Our Mission</a></li>
 <li><a href="javascript:void(0);">Our Gurudev</a></li>
 <li><a href="javascript:void(0);">His teachings</a></li>
-<li><a href="javascript:void(0);">Founder Acharya</a></li>
+<li><a href="javascript:void(0);">Our History</a></li>
+<li><a href="javascript:void(0);">Testimonials</a></li>
 </ul>
 </div>
 <div class="footer-links">
-<h3>Resources</h3>
+<h3>Quick Links</h3>
 <ul>
-<li><a href="javascript:void(0);">Online Classes / Courses</a></li>
-<li><a href="javascript:void(0);">Daily Inspiration</a>
-<li><a href="javascript:void(0);">Books &amp; Scriptures</a></li>
-<li><a href="javascript:void(0);">FAQ</a></li>
-</li></ul>
+<li><a href="javascript:void(0);">Home</a></li>
+<li><a href="javascript:void(0);">Events</a></li>
+<li><a href="javascript:void(0);">Donate</a></li>
+<li><a href="javascript:void(0);">Volunteer</a></li>
+</ul>
 </div>
 <div class="footer-links">
-<h3>Contact</h3>
+<h3>Contact Us</h3>
 <ul>
-<li><a href="javascript:void(0);">info@divineiskcon.com</a></li>
-<li><a href="javascript:void(0);">+91 00000 00000</a></li>
+<li><a href="javascript:void(0);">Address: Burla, Sambalpur, Odisha</a></li>
+<li><a href="javascript:void(0);">Phone: +91 XXXXX XXXXX</a></li>
+<li><a href="javascript:void(0);">Email: contact@iskconburla.org</a></li>
 <li><a href="javascript:void(0);">Visit Us</a></li>
-<li><a href="javascript:void(0);">Volunteer</a></li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
-<p>© 2025 Divine ISKCON. All rights reserved. | <a href="javascript:void(0);" style="color: rgb(85, 113, 213)">Privacy Policy</a> | <a href="javascript:void(0);">Terms of Service</a></p>
+<p>© 2023 ISKCON Burla. All Rights Reserved. | <a href="javascript:void(0);">Privacy Policy</a> | <a href="javascript:void(0);">Terms of Service</a></p>
 </div>
-</footer>
+</div>
+<!-- Floating Donate Button -->
+<!-- ===================== DONATE NOW FLOATING BUTTON ===================== --><!-- This button appears only after scrolling past the Service section --><a class="floating-donate-button" href="Donation&amp;Support.html">
+<i class="fas fa-donate"></i>
+Donate Now
+</a>
 <script>
-            // Mobile Navigation
-            const hamburger = document.getElementById('hamburger');
-            const nav = document.getElementById('nav');
-            const navOverlay = document.getElementById('navOverlay');
-            const body = document.body;
-            
-            hamburger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                hamburger.classList.toggle('active');
-                nav.classList.toggle('active');
-                navOverlay.classList.toggle('active');
-                body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-            });
-            
-            navOverlay.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                nav.classList.remove('active');
-                navOverlay.classList.remove('active');
-                body.style.overflow = '';
-            });
-            
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        hamburger.classList.remove('active');
-                        nav.classList.remove('active');
-                        navOverlay.classList.remove('active');
-                        body.style.overflow = '';
-                    }
-                });
-            });
-            
-            // Mobile dropdown tap support
-            document.querySelectorAll('.dropdown > a').forEach(drop => {
-                drop.addEventListener('click', e => {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        const content = drop.nextElementSibling;
-                        const isVisible = content.style.display === 'block';
-                        
-                        // Close all other dropdowns first
-                        document.querySelectorAll('.dropdown-content').forEach(d => {
-                            if (d !== content) {
-                                d.style.display = 'none';
-                            }
-                        });
-                        
-                        content.style.display = isVisible ? 'none' : 'block';
-                    }
-                });
-            });
-    
-            // Hide Header on Scroll Down
-            let lastScroll = 0;
-            const header = document.getElementById('header');
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll <= 0) {
-                    header.classList.remove('hidden');
-                    return;
-                }
-                
-                if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
-                    header.classList.add('hidden');
-                } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
-                    header.classList.remove('hidden');
-                }
-                
-                lastScroll = currentScroll;
-            });
-            
-            // Scroll Reveal Animation using Intersection Observer
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        if (entry.target.classList.contains('section-title')) {
-                            entry.target.classList.add('animate');
-                        }
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-    
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-            
-            
-            
-            // Floating elements animation
-            document.addEventListener('DOMContentLoaded', () => {
-                const floatingContainer = document.querySelector('.floating-elements');
-                
-                // Create more floating elements
-                for (let i = 0; i < 8; i++) {
-                    const size = Math.random() * 25 + 15;
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    const delay = Math.random() * 5;
-                    const duration = Math.random() * 10 + 10;
-                    
-                    const element = document.createElement('div');
-                    element.className = 'floating-element';
-                    element.style.width = `${size}px`;
-                    element.style.height = `${size}px`;
-                    element.style.top = `${posY}%`;
-                    element.style.left = `${posX}%`;
-                    element.style.animationDelay = `${delay}s`;
-                    element.style.animationDuration = `${duration}s`;
-                    
-                    floatingContainer.appendChild(element);
-                }
-            });
-    
-            // Floating home button visibility
-            
-// =============================================================
-// FLOATING HOME BUTTON VISIBILITY LOGIC
-// -------------------------------------------------------------
-// Shows the home button only when the page is scrolled down
-// more than 300px, and hides it otherwise.
-// =============================================================
-const homeButton = document.getElementById('home-button');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    homeButton.classList.add('visible');
-                } else {
-                    homeButton.classList.remove('visible');
-                }
-            });
-    
-            // Better touch feedback for mobile buttons
-            document.querySelectorAll('button, a').forEach(element => {
-                element.addEventListener('touchstart', () => {
-                    element.style.transform = 'scale(0.98)';
-                });
-                
-                element.addEventListener('touchend', () => {
-                    element.style.transform = '';
-                });
-            });
-        </script>
-<script>
+// JavaScript for header scroll behavior
+let lastScroll = 0;
+const header = document.getElementById('header');
 
-// =============================================================
-// SCROLL TO TOP FUNCTIONALITY
-// -------------------------------------------------------------
-// When the floating home button is clicked, the page smoothly
-// scrolls to the top instead of jumping instantly.
-// =============================================================
-document.getElementById("home-button").addEventListener("click", function(e) {
-    e.preventDefault();
-    window.scrollTo({top: 0, behavior: "smooth"});
-});
-
-document.addEventListener('click', function(event) {
-    const isClickInsideNav = nav.contains(event.target);
-    const isClickOnHamburger = hamburger.contains(event.target);
-    if (!isClickInsideNav && !isClickOnHamburger && nav.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        nav.classList.remove('active');
-        navOverlay.classList.remove('active');
-        body.style.overflow = '';
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+        header.classList.remove('hidden');
+        return;
     }
+    
+    if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
+        header.classList.add('hidden');
+    } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
+        header.classList.add('hidden');
+    }
+    lastScroll = currentScroll;
 });
-</script></body>
+
+// Mobile menu toggle
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+const navOverlay = document.getElementById('navOverlay');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    nav.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+});
+
+navOverlay.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    nav.classList.remove('active');
+    navOverlay.classList.remove('active');
+});
+
+// Scroll reveal animation
+const revealElements = document.querySelectorAll('.reveal');
+
+function revealOnScroll() {
+    revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll(); // Initialize check
+
+</script>
+<script>
+const donateButton = document.querySelector('.floating-donate-button');
+const serviceTitle = document.getElementById('service-title');
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    const servicePosition = serviceTitle.getBoundingClientRect().top + window.scrollY;
+
+    if (currentScroll > lastScrollTop && currentScroll > servicePosition) {
+        donateButton.classList.add('visible');
+    } else {
+        donateButton.classList.remove('visible');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+</script>
+</body>
 </html>
