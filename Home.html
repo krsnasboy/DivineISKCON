@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -14,7 +13,7 @@
             --accent: #B9E0FF;
             --light: #F8F6F4;
             --dark: #2D2727;
-            --transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            --transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
         }
         
         * {
@@ -32,92 +31,186 @@
             touch-action: pan-y;
         }
         
-        /* Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 0px 5%; 
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background-color: rgba(248, 246, 244, 0.9);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
+        /* Header Styles - Made thinner */
+        /* Enhanced Desktop Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 5%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background-color: rgba(248, 246, 244, 0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    border-bottom: 1px solid rgba(108, 74, 182, 0.1);
+}
+
+header.hidden {
+    transform: translateY(-100%);
+    box-shadow: none;
+}
+
         
-        header.hidden {
-            transform: translateY(-100%);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1001;
-        }
-        
-        .logo img {
-            height: 60px;
-            max-height: 10vh;
-            width: auto;
-            transition: var(--transition);
-        }
-        
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: var(--primary);
-            transition: var(--transition);
-        }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--primary);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.logo-text::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: all 0.3s ease;
+}
+
+.logo:hover .logo-text::after {
+    width: 100%;
+}
+
         
         /* Navigation */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
         }
         
         nav ul li {
             position: relative;
         }
         
-        nav ul li a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            position: relative;
-            white-space: nowrap;
-        }
+        .nav-link {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+}
+
+.nav-text {
+    position: relative;
+}
+
+.nav-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    transform-origin: left center;
+}
+
+.nav-link:hover .nav-underline {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+/* Menu Button and Dots */
+.nav-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: rgba(108, 74, 182, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+
+.menu-dot {
+    width: 5px;
+    height: 5px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.nav-menu-btn:hover {
+    background-color: rgba(108, 74, 182, 0.2);
+    transform: rotate(90deg);
+}
+
+.nav-menu-btn:hover .menu-dot {
+    background-color: var(--secondary);
+}
+
+/* Header Animation */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    animation: fadeInDown 0.6s both;
+}
+
+nav ul li {
+    animation: fadeInDown 0.6s both;
+}
+
+nav ul li:nth-child(1) { animation-delay: 0.1s; }
+nav ul li:nth-child(2) { animation-delay: 0.2s; }
+nav ul li:nth-child(3) { animation-delay: 0.3s; }
+nav ul li:nth-child(4) { animation-delay: 0.4s; }
+nav ul li:nth-child(5) { animation-delay: 0.5s; }
+
         
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-        
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-        
-        /* Dropdown Menu - Improved */
+        /* Enhanced Dropdown Menu */
         .dropdown {
             position: relative;
         }
@@ -126,14 +219,14 @@
             position: absolute;
             top: 100%;
             right: 0;
-            width: 250px;
+            width: 280px;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             padding: 15px 0;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(15px);
+            transform: translateY(10px);
             transition: var(--transition);
             z-index: 100;
         }
@@ -145,60 +238,101 @@
         }
         
         .dropdown-content a {
-            display: block;
-            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
             color: var(--dark);
             transition: var(--transition);
-            white-space: nowrap;
             font-size: 0.9rem;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .dropdown-content a i {
+            width: 20px;
+            text-align: center;
         }
         
         .dropdown-content a:hover {
-            background-color: rgba(108, 74, 182, 0.1);
+            background-color: rgba(108, 74, 182, 0.08);
             color: var(--primary);
-            padding-left: 25px;
+            padding-left: 28px;
         }
         
         .dropdown-login-btn {
-            display: block;
-            margin: 15px 20px 0;
-            padding: 10px 15px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: 600;
-            transition: var(--transition);
-        }
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 15px 20px 0 !important;
+    padding: 14px 20px !important;
+    background-color: var(--primary) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 4px 10px rgba(108, 74, 182, 0.2) !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+}
+
         
-        .dropdown-login-btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 74, 182, 0.3);
-            padding-left: 15px;
-        }
+.dropdown-login-btn:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(108, 74, 182, 0.3);
+    color: white;
+}
+
         
-        /* Improved Three-Bar Menu for Desktop */
-        .dropdown:last-child > a {
-            font-size: 1.2rem;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: var(--transition);
-        }
-        
-        .dropdown:last-child > a:hover {
+        /* Professional Three-Bar Menu - Redesigned */
+        .dropdown-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             background-color: rgba(108, 74, 182, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .dropdown-menu-btn:hover {
+            background-color: rgba(108, 74, 182, 0.2);
+        }
+        
+        .dropdown-menu-btn i {
+            font-size: 1.2rem;
+            color: var(--primary);
         }
         
         .dropdown:last-child .dropdown-content {
-            width: 280px;
-            padding: 20px 0;
+            right: 0;
+            width: 300px;
+            padding: 15px 0;
             max-height: 70vh;
             overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(108, 74, 182, 0.1);
+        }
+        
+        .dropdown:last-child .dropdown-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .dropdown:last-child .dropdown-content::-webkit-scrollbar-track {
+            background: rgba(108, 74, 182, 0.1);
+            border-radius: 3px;
+        }
+        
+        .dropdown:last-child .dropdown-content::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 3px;
         }
         
         .dropdown:last-child .dropdown-content a {
-            padding: 12px 25px;
+            padding: 14px 25px;
             font-size: 0.95rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
@@ -208,7 +342,7 @@
         }
         
         .dropdown:last-child .dropdown-content a:hover {
-            padding-left: 30px;
+            padding-left: 28px;
         }
         
         .dropdown:last-child .dropdown-login-btn {
@@ -217,14 +351,15 @@
             font-size: 0.95rem;
         }
         
-        /* Hamburger Menu - Hidden on desktop */
+        /* Enhanced Hamburger Menu */
         .hamburger {
             display: none;
             cursor: pointer;
             z-index: 1001;
-            width: 28px;
-            height: 22px;
+            width: 30px;
+            height: 24px;
             position: relative;
+            transition: var(--transition);
         }
         
         .hamburger div {
@@ -243,8 +378,9 @@
         }
         
         .hamburger div:nth-child(2) {
-            top: 9px;
+            top: 50%;
             left: 0;
+            transform: translateY(-50%);
             opacity: 1;
         }
         
@@ -254,8 +390,8 @@
         }
         
         .hamburger.active div:nth-child(1) {
-            transform: rotate(45deg);
-            top: 9px;
+            transform: rotate(45deg) translate(5px, 9px);
+            top: 0;
         }
         
         .hamburger.active div:nth-child(2) {
@@ -264,23 +400,40 @@
         }
         
         .hamburger.active div:nth-child(3) {
-            transform: rotate(-45deg);
-            bottom: 9px;
+            transform: rotate(-45deg) translate(5px, -9px);
+            bottom: 0;
         }
         
-        /* Mobile Menu */
+        /* Enhanced Mobile Menu - Redesigned */
         .mobile-menu {
             position: fixed;
-            top: 60px;
+            top: 60px; /* Adjusted for thinner header */
             left: -100%;
-            width: 80%;
+            width: 85%;
             max-width: 350px;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 60px); /* Adjusted for thinner header */
             background-color: white;
             transition: var(--transition);
             z-index: 1000;
             overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(108, 74, 182, 0.1);
+        }
+        
+        .mobile-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .mobile-menu::-webkit-scrollbar-track {
+            background: rgba(108, 74, 182, 0.1);
+            border-radius: 3px;
+        }
+        
+        .mobile-menu::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 3px;
         }
         
         .mobile-menu.active {
@@ -296,44 +449,76 @@
         }
         
         .mobile-menu ul li a {
-            display: block;
-            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            padding: 16px 25px;
             color: var(--dark);
             text-decoration: none;
             transition: var(--transition);
             font-size: 1rem;
+            gap: 12px;
+        }
+        
+        .mobile-menu ul li a i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary);
         }
         
         .mobile-menu ul li a:hover {
             background-color: rgba(108, 74, 182, 0.1);
             color: var(--primary);
+            padding-left: 30px;
+        }
+        
+        .mobile-submenu {
+            padding-left: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: rgba(108, 74, 182, 0.03);
+        }
+        
+        .mobile-submenu.active {
+            max-height: 500px;
+        }
+        
+        .mobile-submenu a {
+            padding-left: 35px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .mobile-submenu a i {
+            font-size: 0.8rem;
         }
         
         .mobile-login-btn {
             display: block;
-            margin: 20px;
+            margin: 25px;
             padding: 14px;
             background-color: var(--primary);
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
             text-align: center;
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(108, 74, 182, 0.2);
         }
         
         .mobile-login-btn:hover {
             background-color: var(--secondary);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 74, 182, 0.3);
+            box-shadow: 0 6px 15px rgba(108, 74, 182, 0.3);
         }
         
+        /* Menu Overlay */
         .menu-overlay {
             position: fixed;
-            top: 60px;
+            top: 60px; /* Adjusted for thinner header */
             left: 0;
             width: 100%;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 60px); /* Adjusted for thinner header */
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
             opacity: 0;
@@ -346,53 +531,46 @@
             visibility: visible;
         }
         
-        /* Hero Carousel */
+        /* Hero Carousel - Updated to match trialhome1.html */
         .hero-carousel {
             position: relative;
             width: 100%;
             height: 60vh;
             min-height: 400px;
+            margin-top: 60px; /* Adjusted for thinner header */
             overflow: hidden;
-            margin-top: 60px;
         }
         
         .carousel-slides {
-            display: flex;
             width: 100%;
             height: 100%;
-            transition: transform 0.5s ease-in-out;
-            touch-action: pan-y;
+            position: relative;
         }
         
         .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            user-select: none;
-        }
-        
-        .carousel-slide::before {
-            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(108, 74, 182, 0.7), rgba(141, 114, 225, 0.5));
-            z-index: 1;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
         
-        .carousel-slide img,
-        .carousel-slide picture {
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
+            object-position: center;
         }
         
-        /* Carousel Navigation Arrows */
+        /* Mobile-specific images */
+        .carousel-slide .mobile-img {
+            display: none;
+        }
+        
         .carousel-nav {
             position: absolute;
             top: 50%;
@@ -400,8 +578,8 @@
             display: flex;
             justify-content: space-between;
             padding: 0 20px;
-            z-index: 2;
             transform: translateY(-50%);
+            z-index: 100;
         }
         
         .carousel-arrow {
@@ -412,8 +590,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
             backdrop-filter: blur(5px);
@@ -421,18 +597,21 @@
         
         .carousel-arrow:hover {
             background-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
+        }
+        
+        .carousel-arrow i {
+            color: var(--dark);
+            font-size: 1.2rem;
         }
         
         .carousel-indicators {
             position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
             gap: 10px;
-            z-index: 2;
+            z-index: 100;
         }
         
         .carousel-indicator {
@@ -449,69 +628,74 @@
             transform: scale(1.2);
         }
         
-        /* Welcome Section - Moved below carousel */
+        /* Welcome Section */
         .welcome-section {
-            padding: 40px 5%;
+            padding: 60px 5%;
             text-align: center;
             background-color: white;
         }
         
         .welcome-section h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .welcome-section p {
+            font-size: 1.1rem;
             color: var(--dark);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
-            font-size: clamp(0.95rem, 3vw, 1.1rem);
-            opacity: 0.9;
+            line-height: 1.6;
         }
         
         /* Cards Section */
         .cards-section {
             padding: 60px 5%;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 40px;
         }
         
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            margin-top: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .card {
             background-color: white;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: var(--transition);
-            display: flex;
-            flex-direction: column;
         }
         
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(108, 74, 182, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
         
         .card-image {
-            height: 0;
-            padding-bottom: 66.66%;
-            position: relative;
+            width: 100%;
+            height: 200px;
             overflow: hidden;
         }
         
         .card-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             transition: transform 0.5s ease;
         }
         
@@ -521,221 +705,473 @@
         
         .card-content {
             padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
         
-        .card h3 {
+        .card-content h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
             color: var(--primary);
+            margin-bottom: 12px;
         }
         
-        .card p {
-            color: #666;
-            margin-bottom: 20px;
+        .card-content p {
+            color: var(--dark);
+            font-size: 0.95rem;
             line-height: 1.6;
-            flex-grow: 1;
+            margin-bottom: 20px;
         }
         
         .card-buttons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         
         .card-btn {
+            flex: 1;
             padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
+            text-align: center;
+            border-radius: 6px;
             font-weight: 500;
             font-size: 0.9rem;
+            text-decoration: none;
             transition: var(--transition);
-            text-align: center;
-            flex: 1;
         }
         
         .know-more-btn {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .know-more-btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-3px);
-        }
-        
-        .donate-btn {
-            background-color: white;
+            background-color: var(--light);
             color: var(--primary);
             border: 1px solid var(--primary);
         }
         
-        .donate-btn:hover {
+        .know-more-btn:hover {
             background-color: rgba(108, 74, 182, 0.1);
-            transform: translateY(-3px);
         }
         
-        /* Floating Donate Button */
-        .floating-donate-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: auto;
-            padding: 12px 20px;
+        .donate-btn {
             background-color: var(--primary);
             color: white;
-            border-radius: 50px;
+        }
+        
+        .donate-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(108, 74, 182, 0.3);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 5%;
+            background-color: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 18px 25px;
+            background-color: var(--light);
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(108, 74, 182, 0.1);
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: white;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-question {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .faq-item.active .faq-question i {
+            color: white;
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px 25px;
+            max-height: 500px;
+        }
+        
+        .view-all-faq {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .view-all-faq {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(108, 74, 182, 0.2);
+        }
+        
+        .view-all-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 74, 182, 0.3);
+        }
+        
+        /* Spiritual Life Questions Section */
+        .spiritual-questions-section {
+            padding: 60px 5%;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .spiritual-questions-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .spiritual-questions-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .spiritual-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(108, 74, 182, 0.2);
+            cursor: pointer;
+        }
+        
+        .spiritual-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 74, 182, 0.3);
+        }
+        
+        /* Spiritual Questions Modal */
+        .spiritual-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 80px 5% 40px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        .spiritual-modal.active {
+            transform: translateY(0);
+        }
+        
+        .spiritual-modal-close {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 44px;
+            height: 44px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spiritual-modal-close:hover {
+            background-color: var(--secondary);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .spiritual-modal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .spiritual-modal-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .spiritual-faq-item {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .spiritual-faq-question {
+            padding: 18px 25px;
+            background-color: var(--light);
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .spiritual-faq-question:hover {
+            background-color: rgba(108, 74, 182, 0.1);
+        }
+        
+        .spiritual-faq-question i {
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .spiritual-faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: white;
+            line-height: 1.6;
+        }
+        
+        .spiritual-faq-item.active .spiritual-faq-question {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .spiritual-faq-item.active .spiritual-faq-question i {
+            color: white;
+            transform: rotate(180deg);
+        }
+        
+        .spiritual-faq-item.active .spiritual-faq-answer {
+            padding: 20px 25px;
+            max-height: 500px;
+        }
+        
+        /* Floating Donate Button */
+        .floating-donate-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
+            z-index: 100;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .floating-donate-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(108, 74, 182, 0.4);
+        }
+
+        /* Scroll-based Donate Button */
+        .scroll-donate-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
             font-weight: 600;
             box-shadow: 0 5px 20px rgba(108, 74, 182, 0.3);
-            z-index: 999;
+            z-index: 100;
+            cursor: pointer;
+            transition: var(--transition);
             opacity: 0;
             visibility: hidden;
-            transition: var(--transition);
-            text-decoration: none;
-            gap: 8px;
+            transform: translateY(20px);
         }
-        
-        .floating-donate-button.visible {
+
+        .scroll-donate-btn.visible {
             opacity: 1;
             visibility: visible;
+            transform: translateY(0);
         }
-        
-        .floating-donate-button:hover {
+
+        .scroll-donate-btn:hover {
             background-color: var(--secondary);
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(108, 74, 182, 0.4);
+        }
+
+        .scroll-donate-btn i {
+            font-size: 1.2rem;
         }
         
         /* Footer */
-        .footer {
+        footer {
             background-color: var(--dark);
             color: white;
-            padding: 40px 5%;
-            margin-top: 60px;
+            padding: 60px 5% 30px;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-logo img {
-            height: 40px;
-        }
-        
-        .footer-logo-text {
+        .footer-column h3 {
             font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
         }
         
-        .footer-about p {
-            color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            font-size: 1rem;
-        }
-        
-        /* Social media hover colors */
-        .social-links a:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-        }
-        
-        .social-links a:nth-child(1):hover {
-            background-color: #ff0000;
-        }
-        
-        .social-links a:nth-child(2):hover {
-            background-color: #3b5998;
-        }
-        
-        .social-links a:nth-child(3):hover {
-            background-color: #1DA1F2;
-        }
-        
-        .social-links a:nth-child(4):hover {
-            background-color: #E1306C;
-        }
-        
-        .footer-links h3 {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: white;
-            position: relative;
-            padding-bottom: 5px;
-        }
-        
-        .footer-links h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background-color: var(--primary);
-        }
-        
-        .footer-links ul {
+        .footer-column ul {
             list-style: none;
         }
         
-        .footer-links ul li {
-            margin-bottom: 8px;
+        .footer-column ul li {
+            margin-bottom: 12px;
         }
         
-        .footer-links ul li a {
-            color: #aaa;
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: var(--transition);
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .footer-links ul li a:hover {
+        .footer-column ul li a:hover {
             color: white;
             padding-left: 5px;
         }
         
+        .footer-column ul li a i {
+            width: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        /* Enhanced Social Media Icons */
+        .footer-column ul li a.social-icon {
+            position: relative;
+            overflow: hidden;
+            padding-left: 30px;
+        }
+
+        .footer-column ul li a.social-icon i {
+            position: absolute;
+            left: 0;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li a.social-icon:hover i {
+            transform: scale(1.2);
+        }
+
+        .footer-column ul li a.facebook i {
+            background-color: #3b5998;
+        }
+
+        .footer-column ul li a.instagram i {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+
+        .footer-column ul li a.youtube i {
+            background-color: #ff0000;
+        }
+
+        .footer-column ul li a.twitter i {
+            background-color: #1DA1F2;
+        }
+        
         .footer-bottom {
             text-align: center;
+            margin-top: 50px;
             padding-top: 20px;
-            margin-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
         }
         
         /* Responsive Styles */
@@ -743,11 +1179,25 @@
             nav ul {
                 gap: 15px;
             }
+            
+            .hero-carousel {
+                height: 60vh;
+                min-height: 450px;
+            }
         }
         
         @media (max-width: 768px) {
             header {
-                padding: 0 5%;
+                padding: 10px 5%; /* Adjusted for thinner header */
+                height: 60px; /* Adjusted for thinner header */
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
             }
             
             nav.desktop-nav {
@@ -758,22 +1208,54 @@
                 display: block;
             }
             
+            .mobile-menu {
+                top: 60px; /* Adjusted for thinner header */
+                height: calc(100vh - 60px); /* Adjusted for thinner header */
+            }
+            
+            .menu-overlay {
+                top: 60px; /* Adjusted for thinner header */
+                height: calc(100vh - 60px); /* Adjusted for thinner header */
+            }
+            
             .hero-carousel {
                 height: 50vh;
                 min-height: 350px;
+                margin-top: 60px; /* Adjusted for thinner header */
             }
             
             .carousel-nav {
                 display: none;
             }
             
-            .cards-container {
-                grid-template-columns: 1fr;
+            .welcome-section h1 {
+                font-size: 2rem;
             }
             
-            /* Hide three-bar menu on mobile (using hamburger instead) */
-            .dropdown:last-child {
+            .welcome-section p {
+                font-size: 1rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .card-image {
+                height: 180px;
+            }
+
+            .scroll-donate-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            /* Show mobile images and hide desktop images on mobile */
+            .carousel-slide .desktop-img {
                 display: none;
+            }
+            
+            .carousel-slide .mobile-img {
+                display: block;
             }
         }
         
@@ -787,6 +1269,10 @@
                 min-height: 300px;
             }
             
+            .welcome-section h1 {
+                font-size: 1.8rem;
+            }
+            
             .card-buttons {
                 flex-direction: column;
             }
@@ -795,251 +1281,543 @@
                 grid-template-columns: 1fr;
             }
             
-           .mobile-menu {
+            .mobile-menu {
                 width: 85%;
             }
+            
+            .spiritual-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .scroll-donate-btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+
+            .scroll-donate-btn i {
+                font-size: 1rem;
+            }
+        }
+
+        /* Show desktop images by default */
+        .carousel-slide .desktop-img {
+            display: block;
+        }
+        
+        .carousel-slide .mobile-img {
+            display: none;
         }
 </style>
 </head>
 <body>
 <!-- Header -->
+<!-- Updated Header Section (replace the existing header in your code) -->
 <header id="header">
-<div class="logo">
-<img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
-<span class="logo-text">ISKCON Burla</span>
-</div>
-<nav class="desktop-nav">
-<ul>
-<li><a href="javascript:void(0);">Events</a></li>
-<li><a href="javascript:void(0);">Temple Store</a></li>
-<li><a href="javascript:void(0);">Gau Seva</a></li>
-<li class="dropdown">
-<a href="javascript:void(0);">Seva Opportunities</a>
+    <div class="logo">
+        <img alt="ISKCON Burla logo" id="logo-img" src="https://i.imgur.com/dhcKR8L.png"/>
+        <span class="logo-text">ISKCON Burla</span>
+    </div>
 
-</li>
-<li class="dropdown">
-<a href="javascript:void(0);"><i class="fas fa-bars"></i></a>
-<div class="dropdown-content">
-<a href="javascript:void(0);">Upcoming Temple Project</a>
-<a href="javascript:void(0);">Volunteer Seva</a>
-<a href="javascript:void(0);">Sponsor Sunday Feast</a>
-<a href="javascript:void(0);">Sunday Value Education Classes</a>
-<a href="javascript:void(0);">Deities and Darshans</a>
-<a href="javascript:void(0);">More About Our Temple</a>
-<a class="dropdown-login-btn" href="javascript:void(0);" style="color: #ffffff; background-color: #6C4AB6; font-weight: bold;">👉 IYF Admin Login</a>
-</div>
-</li>
-</ul>
-</nav>
-<div class="hamburger" id="hamburger">
-<div></div>
-<div></div>
-<div></div>
-</div>
+    <nav class="desktop-nav">
+        <ul>
+            <li>
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span class="nav-text">Events</span>
+                    <span class="nav-underline"></span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="fas fa-store"></i>
+                    <span class="nav-text">Temple Store</span>
+                    <span class="nav-underline"></span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="fas fa-cow"></i>
+                    <span class="nav-text">Gau Seva</span>
+                    <span class="nav-underline"></span>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="fas fa-hands-helping"></i>
+                    <span class="nav-text">Seva Opportunities</span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                    <span class="nav-underline"></span>
+                </a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);"><i class="fas fa-kitchen-set"></i> Cooking Seva</a>
+                    <a href="javascript:void(0);"><i class="fas fa-broom"></i> Cleaning Seva</a>
+                    <a href="javascript:void(0);"><i class="fas fa-book"></i> Book Distribution</a>
+                    <a href="javascript:void(0);"><i class="fas fa-music"></i> Kirtan Seva</a>
+                    <a href="javascript:void(0);"><i class="fas fa-hand-holding-heart"></i> Volunteer</a>
+                    <a href="javascript:void(0);" class="dropdown-login-btn">Join Seva Program</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="nav-menu-btn">
+                    <div class="menu-dot"></div>
+                    <div class="menu-dot"></div>
+                    <div class="menu-dot"></div>
+                </a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);"><i class="fas fa-home"></i> Home</a>
+                    <a href="javascript:void(0);"><i class="fas fa-info-circle"></i> About Us</a>
+                    <a href="javascript:void(0);"><i class="fas fa-images"></i> Gallery</a>
+                    <a href="javascript:void(0);"><i class="fas fa-book-open"></i> Scriptures</a>
+                    <a href="javascript:void(0);"><i class="fas fa-video"></i> Media</a>
+                    <a href="javascript:void(0);"><i class="fas fa-map-marker-alt"></i> Contact</a>
+                    <a href="javascript:void(0);" class="dropdown-login-btn">Member Login</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </header>
+
 <!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu">
 <ul>
-<li><a href="javascript:void(0);">Upcoming Temple Project</a></li>
-<li><a href="javascript:void(0);">Upcoming Events</a></li>
-<li><a href="javascript:void(0);">Gau Seva</a></li>
-<li><a href="javascript:void(0);">Temple Store</a></li>
-<li><a href="javascript:void(0);">Seva Opportunities</a></li>
-<li><a href="javascript:void(0);">Volunteer Seva</a></li>
-<li><a href="javascript:void(0);">Sponsor Sunday Feast</a></li>
-<li><a href="javascript:void(0);">Sunday Value Education Classes</a></li>
-<li><a href="javascript:void(0);">Deities and Darshans</a></li>
-<li><a href="javascript:void(0);">More About Our Temple</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-home"></i> Home</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-calendar-alt"></i> Events</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-store"></i> Temple Store</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-cow"></i> Gau Seva</a></li>
+<li class="mobile-dropdown">
+    <a href="javascript:void(0);" class="mobile-dropdown-toggle"><i class="fas fa-hands-helping"></i> Seva Opportunities <i class="fas fa-chevron-down"></i></a>
+    <div class="mobile-submenu">
+        <a href="javascript:void(0);"><i class="fas fa-kitchen-set"></i> Cooking Seva</a>
+        <a href="javascript:void(0);"><i class="fas fa-broom"></i> Cleaning Seva</a>
+        <a href="javascript:void(0);"><i class="fas fa-book"></i> Book Distribution</a>
+        <a href="javascript:void(0);"><i class="fas fa-music"></i> Kirtan Seva</a>
+        <a href="javascript:void(0);"><i class="fas fa-hand-holding-heart"></i> Volunteer</a>
+    </div>
+</li>
+<li><a href="javascript:void(0);"><i class="fas fa-info-circle"></i> About Us</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-images"></i> Gallery</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-book-open"></i> Scriptures</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-video"></i> Media</a></li>
+<li><a href="javascript:void(0);"><i class="fas fa-map-marker-alt"></i> Contact</a></li>
 </ul>
-<a class="mobile-login-btn" href="javascript:void(0);">👉 IYF Admin Login</a>
+<a href="javascript:void(0);" class="mobile-login-btn">Member Login</a>
 </div>
-<div class="menu-overlay" id="menuOverlay"></div>
-<!-- Hero Carousel with responsive images -->
-<div class="hero-carousel" id="heroCarousel">
+
+<div class="menu-overlay"></div>
+
+<!-- Hero Carousel -->
+<div class="hero-carousel">
 <div class="carousel-slides">
-<div class="carousel-slide">
-<picture>
-<source media="(min-width: 768px)" srcset="https://i.imgur.com/pUuNtq1.jpeg"/>
-<source media="(max-width: 767px)" srcset="https://i.imgur.com/pUuNtq1-mobile.jpeg"/>
-<img alt="ISKCON Temple" src="https://i.imgur.com/pUuNtq1.jpeg"/>
-</picture>
+    <div class="carousel-slide active">
+        <img src="https://i.imgur.com/JzYxQOa.jpg" alt="Temple Deity" class="desktop-img"/>
+        <img src="https://i.imgur.com/JzYxQOa-mobile.jpg" alt="Temple Deity" class="mobile-img"/>
+    </div>
+    <div class="carousel-slide">
+        <img src="https://i.imgur.com/KLmW5bF.jpg" alt="Kirtan" class="desktop-img"/>
+        <img src="https://i.imgur.com/KLmW5bF-mobile.jpg" alt="Kirtan" class="mobile-img"/>
+    </div>
+    <div class="carousel-slide">
+        <img src="https://i.imgur.com/Pq9XZ3N.jpg" alt="Prasadam" class="desktop-img"/>
+        <img src="https://i.imgur.com/Pq9XZ3N-mobile.jpg" alt="Prasadam" class="mobile-img"/>
+    </div>
 </div>
-<div class="carousel-slide">
-<picture>
-<source media="(min-width: 768px)" srcset="https://i.imgur.com/Ds2uuU6.jpeg"/>
-<source media="(max-width: 767px)" srcset="https://i.imgur.com/Ds2uuU6-mobile.jpeg"/>
-<img alt="ISKCON Deities" src="https://i.imgur.com/Ds2uuU6.jpeg"/>
-</picture>
-</div>
-<div class="carousel-slide">
-<picture>
-<source media="(min-width: 768px)" srcset="https://i.imgur.com/JqYeZvn.jpg"/>
-<source media="(max-width: 767px)" srcset="https://i.imgur.com/JqYeZvn-mobile.jpg"/>
-<img alt="Temple Project" src="https://i.imgur.com/JqYeZvn.jpg"/>
-</picture>
-</div>
-<div class="carousel-slide">
-<picture>
-<source media="(min-width: 768px)" srcset="https://i.imgur.com/mX7WzBQ.jpg"/>
-<source media="(max-width: 767px)" srcset="https://i.imgur.com/mX7WzBQ-mobile.jpg"/>
-<img alt="ISKCON Festival" src="https://i.imgur.com/mX7WzBQ.jpg"/>
-</picture>
-</div>
-</div>
-<!-- Carousel Navigation Arrows -->
 <div class="carousel-nav">
-<div class="carousel-arrow" id="prevSlide"><i class="fas fa-chevron-left"></i></div>
-<div class="carousel-arrow" id="nextSlide"><i class="fas fa-chevron-right"></i></div>
+    <div class="carousel-arrow prev"><i class="fas fa-chevron-left"></i></div>
+    <div class="carousel-arrow next"><i class="fas fa-chevron-right"></i></div>
 </div>
 <div class="carousel-indicators">
-<span class="carousel-indicator active"></span>
-<span class="carousel-indicator"></span>
-<span class="carousel-indicator"></span>
-<span class="carousel-indicator"></span>
+    <div class="carousel-indicator active"></div>
+    <div class="carousel-indicator"></div>
+    <div class="carousel-indicator"></div>
 </div>
 </div>
-<!-- Welcome Section - Moved below carousel -->
+
+<!-- Welcome Section -->
 <section class="welcome-section">
-<h1>Welcome to ISKCON Burla Official Website</h1>
-<p>Experience spiritual harmony and connect with devotees through our temple activities and services.</p>
+<h1>Welcome to ISKCON Burla</h1>
+<p>International Society for Krishna Consciousness (ISKCON) Burla is a spiritual community dedicated to practicing and promoting Bhakti Yoga as explained in the Vedic scriptures. Our mission is to spread the teachings of Lord Krishna and help individuals develop their love for God through devotional service.</p>
 </section>
+
 <!-- Cards Section -->
 <section class="cards-section">
+<h2 class="section-title">Our Activities</h2>
 <div class="cards-container">
-<!-- Card 1 -->
-<div class="card">
-<div class="card-image">
-<img alt="Upcoming Temple Project" src="https://i.imgur.com/JqYeZvn.jpg"/>
-</div>
-<div class="card-content">
-<h3>Upcoming Temple Project</h3>
-<p>Support our ambitious new temple project that will serve as a spiritual hub for devotees and spread Krishna consciousness in the region.</p>
-<div class="card-buttons">
-<a class="card-btn know-more-btn" href="javascript:void(0);">Know More</a>
-<a class="card-btn donate-btn" href="javascript:void(0);">Donate</a>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="card">
-<div class="card-image">
-<img alt="Upcoming Events" src="https://i.imgur.com/mX7WzBQ.jpg"/>
-</div>
-<div class="card-content">
-<h3>Donation for Upcoming Events</h3>
-<p>Contribute to our upcoming festivals and events that bring devotees together in celebration of Krishna consciousness.</p>
-<div class="card-buttons">
-<a class="card-btn know-more-btn" href="javascript:void(0);">Know More</a>
-<a class="card-btn donate-btn" href="javascript:void(0);">Donate</a>
-</div>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="card">
-<div class="card-image">
-<img alt="Sunday Program" src="https://i.imgur.com/9kZlHEN.jpg"/>
-</div>
-<div class="card-content">
-<h3>Sponsorships for Sunday Program</h3>
-<p>Sponsor our weekly Sunday feast and help provide prasadam to hundreds of devotees and visitors.</p>
-<div class="card-buttons">
-<a class="card-btn know-more-btn" href="javascript:void(0);">Know More</a>
-<a class="card-btn donate-btn" href="javascript:void(0);">Donate</a>
-</div>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="card">
-<div class="card-image">
-<img alt="Gau Seva" src="https://i.imgur.com/VvJkQhD.jpg"/>
-</div>
-<div class="card-content">
-<h3>Donate for Gau Seva</h3>
-<p>Support our cow protection program and contribute to the care and maintenance of our sacred cows.</p>
-<div class="card-buttons">
-<a class="card-btn know-more-btn" href="javascript:void(0);">Know More</a>
-<a class="card-btn donate-btn" href="javascript:void(0);">Donate</a>
-</div>
-</div>
-</div>
-<!-- Card 5 -->
-<div class="card">
-<div class="card-image">
-<img alt="Upcoming Festivals" src="https://i.imgur.com/qJtW8gx.jpg"/>
-</div>
-<div class="card-content">
-<h3>Upcoming Festivals</h3>
-<p>Learn about and contribute to our upcoming major festivals like Janmashtami, Rath Yatra, and Gaura Purnima.</p>
-<div class="card-buttons">
-<a class="card-btn know-more-btn" href="javascript:void(0);">Know More</a>
-<a class="card-btn donate-btn" href="javascript:void(0);">Donate</a>
-</div>
-</div>
-</div>
-<!-- Card 6 -->
-<div class="card">
-<div class="card-image">
-<img alt="Daily Darshan" src="https://i.imgur.com/4WXQy2k.jpg"/>
-</div>
-<div class="card-content">
-<h3>Daily Darshan &amp; Quotation</h3>
-<p>Support the daily worship and maintenance of our beautiful deities and receive inspiring spiritual quotes.</p>
-<div class="card-buttons">
-<a class="card-btn know-more-btn" href="javascript:void(0);">Know More</a>
-<a class="card-btn donate-btn" href="javascript:void(0);">Donate</a>
-</div>
-</div>
-</div>
+    <div class="card">
+        <div class="card-image">
+            <img src="https://i.imgur.com/9XyQZbF.jpg" alt="Daily Aarti"/>
+        </div>
+        <div class="card-content">
+            <h3>Daily Aarti</h3>
+            <p>Join us for the beautiful morning and evening aarti ceremonies where we offer our love and devotion to the deities.</p>
+            <div class="card-buttons">
+                <a href="javascript:void(0);" class="card-btn know-more-btn">Know More</a>
+                <a href="javascript:void(0);" class="card-btn donate-btn">Donate</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <img src="https://i.imgur.com/7GJkY9d.jpg" alt="Sunday Feast"/>
+        </div>
+        <div class="card-content">
+            <h3>Sunday Feast</h3>
+            <p>Weekly spiritual gathering with kirtan, lecture on Bhagavad-gita, and delicious prasadam feast.</p>
+            <div class="card-buttons">
+                <a href="javascript:void(0);" class="card-btn know-more-btn">Know More</a>
+                <a href="javascript:void(0);" class="card-btn donate-btn">Donate</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <img src="https://i.imgur.com/5vQZz9L.jpg" alt="Gau Seva"/>
+        </div>
+        <div class="card-content">
+            <h3>Gau Seva</h3>
+            <p>Participate in our cow protection program and serve these sacred animals as part of our spiritual practice.</p>
+            <div class="card-buttons">
+                <a href="javascript:void(0);" class="card-btn know-more-btn">Know More</a>
+                <a href="javascript:void(0);" class="card-btn donate-btn">Donate</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <img src="https://i.imgur.com/3mXyQ9F.jpg" alt="Youth Programs"/>
+        </div>
+        <div class="card-content">
+            <h3>Youth Programs</h3>
+            <p>Engaging activities and discussions designed to help young people connect with spiritual values.</p>
+            <div class="card-buttons">
+                <a href="javascript:void(0);" class="card-btn know-more-btn">Know More</a>
+                <a href="javascript:void(0);" class="card-btn donate-btn">Donate</a>
+            </div>
+        </div>
+    </div>
 </div>
 </section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+<h2 class="section-title">Frequently Asked Questions</h2>
+<div class="faq-container">
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>What are the temple timings?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>The temple is open daily from 4:30 AM to 1:00 PM and 4:00 PM to 8:30 PM. During special festivals, the temple remains open for extended hours.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Is there a dress code for visiting the temple?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>We recommend modest clothing that covers shoulders and knees as a sign of respect in the temple environment. Traditional Indian attire is appreciated but not mandatory.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Can I volunteer at ISKCON Burla?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>Yes! We welcome volunteers in various departments including kitchen, cleaning, gardening, book distribution, and event organization. Please visit our Seva Opportunities section for more details.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>How can I donate to ISKCON Burla?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+            <p>You can donate online through our website, in person at the temple, or via bank transfer. All donations are tax-deductible and go towards maintaining the temple and its charitable activities.</p>
+        </div>
+    </div>
+</div>
+<div class="view-all-faq">
+    <a href="javascript:void(0);" class="view-all-btn">View All FAQs <i class="fas fa-arrow-right"></i></a>
+</div>
+</section>
+
+<!-- Spiritual Life Questions Section -->
+<section class="spiritual-questions-section">
+<h2>Have Questions About Spiritual Life?</h2>
+<p>Explore answers to common spiritual questions based on the timeless wisdom of the Vedic scriptures.</p>
+<a href="javascript:void(0);" class="spiritual-btn" id="explore-spiritual-btn">Explore Now <i class="fas fa-arrow-right"></i></a>
+</section>
+
+<!-- Spiritual Questions Modal -->
+<div class="spiritual-modal" id="spiritual-modal">
+<div class="spiritual-modal-close"><i class="fas fa-times"></i></div>
+<div class="spiritual-modal-container">
+    <h2>Spiritual Questions Answered</h2>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the purpose of life according to Vedic wisdom?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>The Vedic scriptures explain that the ultimate purpose of life is to revive our eternal relationship with the Supreme Personality of Godhead, Krishna. This is achieved through the process of bhakti-yoga, or devotional service, which purifies our consciousness and frees us from the cycle of birth and death.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>Who is Krishna and why is He worshiped?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Krishna is the Supreme Personality of Godhead, the source of all incarnations and the origin of everything. He is worshiped because He is the supreme enjoyer, the supreme proprietor, and the supreme friend of all living beings. By worshiping Krishna with love and devotion, we fulfill our constitutional position as eternal servants of God.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is karma and how does it affect us?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Karma refers to the universal law of cause and effect governing all actions. Every action we perform leaves an impression that will bear fruit, either in this life or future lives. Good karma leads to favorable circumstances while bad karma leads to suffering. The goal of spiritual life is to transcend both good and bad karma through devotional service.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the difference between the soul and the body?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>The soul (atma) is the eternal spiritual spark within each living being, while the body is the temporary material covering. The soul is conscious, eternal, and full of bliss, whereas the body is unconscious, temporary, and subject to birth, disease, old age, and death. Real spiritual progress begins when we identify with our true nature as soul rather than body.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>Why do we chant Hare Krishna?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>The Hare Krishna maha-mantra is a transcendental sound vibration that connects us directly with Krishna. Chanting cleanses the heart of material desires and awakens our natural love for God. It is considered the most effective spiritual practice for this age, as recommended by the Vedas and great spiritual masters.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the significance of vegetarianism in spiritual life?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Vegetarianism promotes non-violence (ahimsa), one of the fundamental principles of spiritual life. By not killing animals for food, we cultivate compassion and purity of consciousness. Additionally, food offered to Krishna with love (prasadam) becomes spiritually nourishing and helps in our advancement in devotional service.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>How can one control the mind?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>The mind is naturally restless, but it can be controlled through regular spiritual practice. Key methods include chanting Hare Krishna, hearing spiritual knowledge, associating with devotees, and engaging in devotional service. As Krishna states in Bhagavad-gita, "For one who has conquered the mind, the mind is the best of friends; but for one who has failed to do so, the mind will be the greatest enemy."</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the importance of guru in spiritual life?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>The spiritual master is essential because he represents the disciplic succession coming from Krishna. Just as we need a teacher to learn any subject, we need a bona fide guru to understand spiritual knowledge. The guru guides the disciple out of the darkness of material existence into the light of spiritual understanding.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What happens after death?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>According to the soul's consciousness at the time of death, it receives another body in the material world or, if perfected, returns to the spiritual world. The Bhagavad-gita explains that just as a person changes clothes, the soul changes bodies. Spiritual practice aims to prepare us for leaving the material body and attaining our eternal spiritual identity.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>Why do bad things happen to good people?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>From the Vedic perspective, what we perceive as "bad" may actually be the result of our past actions (karma) or an opportunity for spiritual growth. The Supreme Lord arranges everything for our ultimate benefit, even if we can't immediately understand it. By accepting all situations as Krishna's mercy and maintaining our devotion, we transcend dualities of good and bad.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the difference between karma, jnana, and bhakti yoga?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Karma yoga is the path of selfless action, jnana yoga is the path of philosophical speculation, and bhakti yoga is the path of loving devotion. While karma and jnana can lead to temporary liberation or material benefits, bhakti yoga leads directly to eternal loving service to Krishna, which is the ultimate goal of all spiritual paths.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>Why do we offer food to Krishna before eating?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Offering food to Krishna transforms it into prasadam (the Lord's mercy). This practice acknowledges that everything belongs to God and purifies both the food and the eater. Prasadam nourishes us spiritually and helps reduce material attachments, while also protecting us from karmic reactions associated with eating.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>How can I practice spirituality in daily life?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Simple practices include chanting Hare Krishna daily, reading Bhagavad-gita, offering food to Krishna, associating with devotees, and seeing everything as connected to Krishna. The key is to do everything as an offering to Krishna with love. Even routine activities can become spiritual when performed with the right consciousness.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the significance of tulasi in devotional service?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Tulasi is a sacred plant beloved by Krishna. Worshiping and caring for tulasi plants brings great spiritual merit. Tulasi leaves are essential for worshiping Krishna, and drinking water that has touched tulasi roots purifies one of sinful reactions. Devotees often wear tulasi neckbeads as a symbol of their devotion to Krishna.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>How does bhakti yoga differ from other forms of meditation?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>While many meditation techniques aim at emptying the mind or achieving impersonal oneness, bhakti yoga focuses on developing a loving relationship with the Supreme Person, Krishna. It engages all senses in service rather than withdrawing them. Bhakti meditation includes hearing and chanting about Krishna, remembering His activities, and serving Him with love.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>Why are the Vedas important?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+          <p>The Vedas are the original spiritual knowledge given by Krishna at the beginning of creation. They contain comprehensive information about the nature of reality, the self, God, and the relationship between them. The Vedas guide humanity toward spiritual realization through various processes suited to different natures and times.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the role of women in spiritual life?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>In spiritual life, both men and women are eternal souls with equal potential to develop love for Krishna. The Vedic tradition honors women as mothers and nurturers of spiritual values. Many great female devotees in Vedic history achieved the highest levels of spiritual realization through their pure devotion to Krishna.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>How does one progress in spiritual life?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Spiritual progress is measured by one's increasing attachment to Krishna and decreasing attachment to material things. Regular practice of hearing and chanting, following the regulative principles, and serving devotees accelerates progress. The key is to develop sincere faith and enthusiasm in devotional service.</p>
+        </div>
+    </div>
+    
+    <div class="spiritual-faq-item">
+        <div class="spiritual-faq-question">
+            <span>What is the significance of Ekadashi fasting?</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="spiritual-faq-answer">
+            <p>Ekadashi (the 11th day after the full and new moons) is especially auspicious for spiritual advancement. Fasting from grains and beans on these days helps control the senses and focus the mind on Krishna. Observing Ekadashi properly can destroy the sinful reactions of eating forbidden foods and greatly please the Lord.</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Floating Donate Button -->
+
+<!-- Scroll-based Donate Button -->
+<a href="javascript:void(0);" class="scroll-donate-btn">
+    <i class="fas fa-donate"></i>
+    <span>Support Our Mission</span>
+</a>
+
 <!-- Footer -->
-<div class="footer">
+<footer>
 <div class="footer-content">
-<div class="footer-about">
-<div class="footer-logo">
-<img alt="ISKCON Burla Logo" src="https://i.imgur.com/CqBYC04.png">
-<span class="footer-logo-text">ISKCON Burla</span>
-</img></div>
-<p>Founded in --, ISKCON Burla is dedicated to spread love and service of Krishna to everyone where individuals find peace, purpose, and connection through authentic spiritual practices.</p>
-<div class="social-links">
-<a href="javascript:void(0);"><i class="fab fa-youtube"></i></a>
-<a href="javascript:void(0);"><i class="fab fa-facebook-f"></i></a>
-<a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
-<a href="javascript:void(0);"><i class="fab fa-instagram"></i></a>
-</div>
-</div>
-<div class="footer-links">
-<h3>Quick Links</h3>
-<ul>
-<li><a href="javascript:void(0);">Home</a></li>
-<li><a href="javascript:void(0);">Events</a></li>
-<li><a href="javascript:void(0);">Donate</a></li>
-<li><a href="javascript:void(0);">Volunteer</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h3>Contact Us</h3>
-<ul>
-<li><a href="javascript:void(0);">Address: Burla, Sambalpur, Odisha</a></li>
-<li><a href="javascript:void(0);">Phone: +91 XXXXX XXXXX</a></li>
-<li><a href="javascript:void(0);">Email: contact@iskconburla.org</a></li>
-</ul>
-</div>
+    <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="javascript:void(0);"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-calendar-alt"></i> Events</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-map-marker-alt"></i> Visit Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Activities</h3>
+        <ul>
+            <li><a href="javascript:void(0);"><i class="fas fa-bell"></i> Daily Aarti</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-utensils"></i> Sunday Feast</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-cow"></i> Gau Seva</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-hands-helping"></i> Volunteer</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="javascript:void(0);"><i class="fas fa-book-open"></i> Bhagavad-gita</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-book"></i> Books</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-video"></i> Videos</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-music"></i> Kirtan</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>Connect With Us</h3>
+        <ul>
+            <li><a href="javascript:void(0);" class="social-icon"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+            <li><a href="javascript:void(0);" class="social-icon"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="javascript:void(0);" class="social-icon"><i class="fab fa-youtube"></i> YouTube</a></li>
+            <li><a href="javascript:void(0);" class="social-icon"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+        </ul>
+    </div>
 </div>
 <div class="footer-bottom">
-<p>© 2023 ISKCON Burla. All Rights Reserved.</p>
+    <p>&copy; 2023 ISKCON Burla. All Rights Reserved.</p>
 </div>
-</div>
-<!-- Floating Donate Button -->
-<a class="floating-donate-button" href="javascript:void(0);">
-<i class="fas fa-donate"></i>
-Donate Now
-</a>
+</footer>
+
 <script>
-// Mobile menu toggle
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const menuOverlay = document.getElementById('menuOverlay');
+// Mobile Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+const menuOverlay = document.querySelector('.menu-overlay');
+const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
 
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
@@ -1053,10 +1831,83 @@ menuOverlay.addEventListener('click', () => {
     menuOverlay.classList.remove('active');
 });
 
-// Header scroll behavior
+mobileDropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const submenu = toggle.nextElementSibling;
+        submenu.classList.toggle('active');
+        const icon = toggle.querySelector('.fa-chevron-down');
+        icon.classList.toggle('fa-rotate-180');
+    });
+});
+
+// FAQ Toggle
+const faqQuestions = document.querySelectorAll('.faq-question, .spiritual-faq-question');
+
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+    });
+});
+
+// Carousel Functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const indicators = document.querySelectorAll('.carousel-indicator');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    currentSlide = (index + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    indicators[currentSlide].classList.add('active');
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
+
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => showSlide(index));
+});
+
+// Auto-rotate carousel
+let slideInterval = setInterval(nextSlide, 5000);
+
+// Pause on hover
+const carousel = document.querySelector('.hero-carousel');
+carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
+carousel.addEventListener('mouseleave', () => slideInterval = setInterval(nextSlide, 5000));
+
+// Spiritual Modal
+const spiritualModal = document.getElementById('spiritual-modal');
+const exploreSpiritualBtn = document.getElementById('explore-spiritual-btn');
+const spiritualModalClose = document.querySelector('.spiritual-modal-close');
+
+exploreSpiritualBtn.addEventListener('click', () => {
+    spiritualModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+spiritualModalClose.addEventListener('click', () => {
+    spiritualModal.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Header Scroll Effect
 let lastScroll = 0;
 const header = document.getElementById('header');
-const headerHeight = header.offsetHeight;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
@@ -1066,113 +1917,72 @@ window.addEventListener('scroll', () => {
         return;
     }
     
-    if (currentScroll > lastScroll && !header.classList.contains('hidden') && currentScroll > headerHeight) {
-        // Scrolling down
+    if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
         header.classList.add('hidden');
     } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
-        // Scrolling up
         header.classList.remove('hidden');
     }
     
     lastScroll = currentScroll;
 });
 
-// Hero Carousel
-const carousel = document.getElementById('heroCarousel');
-const slides = document.querySelector('.carousel-slides');
-const slideItems = document.querySelectorAll('.carousel-slide');
-const prevBtn = document.getElementById('prevSlide');
-const nextBtn = document.getElementById('nextSlide');
-const indicators = document.querySelectorAll('.carousel-indicator');
 
-let currentIndex = 0;
-const slideCount = slideItems.length;
-const slideWidth = 100; // Percentage
+// Scroll-based Donate Button with Footer Detection
+const scrollDonateBtn = document.querySelector('.scroll-donate-btn');
+const footer = document.querySelector('footer');
+const ourActivitiesSection = document.querySelector('.cards-section'); // Section after which donate button should appear
 
-// Set up automatic sliding
-let interval = setInterval(nextSlide, 5000);
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const activitiesTop = ourActivitiesSection.offsetTop;
+    const footerTop = footer.offsetTop;
 
-function goToSlide(index) {
-    if (index < 0) {
-        index = slideCount - 1;
-    } else if (index >= slideCount) {
-        index = 0;
+    if (scrollY >= activitiesTop - 100 && scrollY + window.innerHeight < footerTop) {
+        scrollDonateBtn.classList.add('visible');
+    } else {
+        scrollDonateBtn.classList.remove('visible');
     }
-    
-    slides.style.transform = `translateX(-${index * slideWidth}%)`;
-    currentIndex = index;
-    
-    // Update indicators
-    indicators.forEach((indicator, i) => {
-        indicator.classList.toggle('active', i === currentIndex);
-    });
-    
-    // Reset the interval
-    clearInterval(interval);
-    interval = setInterval(nextSlide, 5000);
-}
-
-function nextSlide() {
-    goToSlide(currentIndex + 1);
-}
-
-function prevSlide() {
-    goToSlide(currentIndex - 1);
-}
-
-// Event listeners for buttons
-nextBtn.addEventListener('click', nextSlide);
-prevBtn.addEventListener('click', prevSlide);
-
-// Event listeners for indicators
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => goToSlide(index));
 });
 
-// Touch support for carousel
+
+// View All FAQs Button
+const viewAllFaqBtn = document.querySelector('.view-all-btn');
+
+viewAllFaqBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        item.classList.add('active');
+    });
+    
+    viewAllFaqBtn.style.display = 'none';
+});
+</script>
+<script>
+// Touch Slide Support
+const heroCarousel = document.querySelector('.hero-carousel');
 let touchStartX = 0;
 let touchEndX = 0;
 
-carousel.addEventListener('touchstart', (e) => {
+heroCarousel.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
-    clearInterval(interval);
-}, {passive: true});
+});
 
-carousel.addEventListener('touchend', (e) => {
+heroCarousel.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-    interval = setInterval(nextSlide, 5000);
-}, {passive: true});
+    handleGesture();
+});
 
-function handleSwipe() {
-    const threshold = 50;
-    if (touchEndX < touchStartX - threshold) {
-        nextSlide(); // Swipe left
-    } else if (touchEndX > touchStartX + threshold) {
-        prevSlide(); // Swipe right
+function handleGesture() {
+    if (touchEndX < touchStartX - 50) {
+        nextSlide(); // Swipe Left = Next Slide
+    }
+    if (touchEndX > touchStartX + 50) {
+        prevSlide(); // Swipe Right = Previous Slide
     }
 }
-
-// Show floating donate button when scrolled
-const floatingDonateBtn = document.querySelector('.floating-donate-button');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        floatingDonateBtn.classList.add('visible');
-    } else {
-        floatingDonateBtn.classList.remove('visible');
-    }
-});
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
 </script>
+
 </body>
 </html>
