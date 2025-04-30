@@ -33,74 +33,72 @@
         
         /* Header Styles - Made thinner */
         /* Enhanced Desktop Header Styles */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0 5%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    background-color: rgba(248, 246, 244, 0.98);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-    transform: translateY(0);
-    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-    border-bottom: 1px solid rgba(108, 74, 182, 0.1);
-}
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0 5%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(248, 246, 244, 0.98);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            border-bottom: 1px solid rgba(108, 74, 182, 0.1);
+        }
 
-header.hidden {
-    transform: translateY(-100%);
-    box-shadow: none;
-}
-
+        header.hidden {
+            transform: translateY(-100%);
+            box-shadow: none;
+        }
         
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 1001;
-    transition: all 0.3s ease;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
 
-.logo:hover {
-    transform: scale(1.02);
-}
+        .logo:hover {
+            transform: scale(1.02);
+        }
 
-.logo img {
-    height: 50px;
-    width: auto;
-    transition: all 0.3s ease;
-}
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
 
-.logo-text {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: var(--primary);
-    transition: all 0.3s ease;
-    position: relative;
-}
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-.logo-text::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--secondary);
-    transition: all 0.3s ease;
-}
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: all 0.3s ease;
+        }
 
-.logo:hover .logo-text::after {
-    width: 100%;
-}
-
+        .logo:hover .logo-text::after {
+            width: 100%;
+        }
         
         /* Navigation */
         nav ul {
@@ -114,101 +112,100 @@ header.hidden {
         }
         
         .nav-link {
-    text-decoration: none;
-    color: var(--dark);
-    font-weight: 500;
-    font-size: 1.05rem;
-    transition: all 0.3s ease;
-    position: relative;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 0;
-}
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+        }
 
-.nav-text {
-    position: relative;
-}
+        .nav-text {
+            position: relative;
+        }
 
-.nav-underline {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
-    transform-origin: left center;
-}
+        .nav-underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+            transform-origin: left center;
+        }
 
-.nav-link:hover .nav-underline {
-    width: 100%;
-}
+        .nav-link:hover .nav-underline {
+            width: 100%;
+        }
 
-.nav-link:hover {
-    color: var(--primary);
-}
+        .nav-link:hover {
+            color: var(--primary);
+        }
 
-/* Menu Button and Dots */
-.nav-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background-color: rgba(108, 74, 182, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
-}
+        /* Menu Button and Dots */
+        .nav-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background-color: rgba(108, 74, 182, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px;
+        }
 
-.menu-dot {
-    width: 5px;
-    height: 5px;
-    background-color: var(--primary);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
+        .menu-dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
 
-.nav-menu-btn:hover {
-    background-color: rgba(108, 74, 182, 0.2);
-    transform: rotate(90deg);
-}
+        .nav-menu-btn:hover {
+            background-color: rgba(108, 74, 182, 0.2);
+            transform: rotate(90deg);
+        }
 
-.nav-menu-btn:hover .menu-dot {
-    background-color: var(--secondary);
-}
+        .nav-menu-btn:hover .menu-dot {
+            background-color: var(--secondary);
+        }
 
-/* Header Animation */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        /* Header Animation */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-header {
-    animation: fadeInDown 0.6s both;
-}
+        header {
+            animation: fadeInDown 0.6s both;
+        }
 
-nav ul li {
-    animation: fadeInDown 0.6s both;
-}
+        nav ul li {
+            animation: fadeInDown 0.6s both;
+        }
 
-nav ul li:nth-child(1) { animation-delay: 0.1s; }
-nav ul li:nth-child(2) { animation-delay: 0.2s; }
-nav ul li:nth-child(3) { animation-delay: 0.3s; }
-nav ul li:nth-child(4) { animation-delay: 0.4s; }
-nav ul li:nth-child(5) { animation-delay: 0.5s; }
-
+        nav ul li:nth-child(1) { animation-delay: 0.1s; }
+        nav ul li:nth-child(2) { animation-delay: 0.2s; }
+        nav ul li:nth-child(3) { animation-delay: 0.3s; }
+        nav ul li:nth-child(4) { animation-delay: 0.4s; }
+        nav ul li:nth-child(5) { animation-delay: 0.5s; }
         
         /* Enhanced Dropdown Menu */
         .dropdown {
@@ -260,29 +257,29 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
         }
         
         .dropdown-login-btn {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 15px 20px 0 !important;
-    padding: 14px 20px !important;
-    background-color: var(--primary) !important;
-    color: #fff !important;
-    border-radius: 8px !important;
-    text-align: center !important;
-    font-weight: 600 !important;
-    transition: var(--transition) !important;
-    box-shadow: 0 4px 10px rgba(108, 74, 182, 0.2) !important;
-    font-size: 1rem !important;
-    text-decoration: none !important;
-}
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 15px 20px 0 !important;
+            padding: 14px 20px !important;
+            background-color: var(--primary) !important;
+            color: #fff !important;
+            border-radius: 8px !important;
+            text-align: center !important;
+            font-weight: 600 !important;
+            transition: var(--transition) !important;
+            box-shadow: 0 4px 10px rgba(108, 74, 182, 0.2) !important;
+            font-size: 1rem !important;
+            text-decoration: none !important;
+        }
 
         
-.dropdown-login-btn:hover {
-    background-color: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(108, 74, 182, 0.3);
-    color: white;
-}
+        .dropdown-login-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 74, 182, 0.3);
+            color: white;
+        }
 
         
         /* Professional Three-Bar Menu - Redesigned */
@@ -904,7 +901,7 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
             box-shadow: 0 8px 20px rgba(108, 74, 182, 0.3);
         }
         
-        /* Spiritual Questions Modal */
+        /* Spiritual Questions Modal - Updated */
         .spiritual-modal {
             position: fixed;
             top: 0;
@@ -917,6 +914,7 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
             padding: 80px 5% 40px;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            overscroll-behavior: contain; /* Prevent scroll chaining */
         }
         
         .spiritual-modal.active {
@@ -1323,6 +1321,13 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
         .carousel-slide .mobile-img {
             display: none;
         }
+
+        /* Body class for when modal is open */
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
 </style>
 </head>
 <body>
@@ -1650,96 +1655,6 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
     
     <div class="spiritual-faq-item">
         <div class="spiritual-faq-question">
-            <span>What is the importance of guru in spiritual life?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>The spiritual master is essential because he represents the disciplic succession coming from Krishna. Just as we need a teacher to learn any subject, we need a bona fide guru to understand spiritual knowledge. The guru guides the disciple out of the darkness of material existence into the light of spiritual understanding.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>What happens after death?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>According to the soul's consciousness at the time of death, it receives another body in the material world or, if perfected, returns to the spiritual world. The Bhagavad-gita explains that just as a person changes clothes, the soul changes bodies. Spiritual practice aims to prepare us for leaving the material body and attaining our eternal spiritual identity.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>Why do bad things happen to good people?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>From the Vedic perspective, what we perceive as "bad" may actually be the result of our past actions (karma) or an opportunity for spiritual growth. The Supreme Lord arranges everything for our ultimate benefit, even if we can't immediately understand it. By accepting all situations as Krishna's mercy and maintaining our devotion, we transcend dualities of good and bad.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>What is the difference between karma, jnana, and bhakti yoga?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>Karma yoga is the path of selfless action, jnana yoga is the path of philosophical speculation, and bhakti yoga is the path of loving devotion. While karma and jnana can lead to temporary liberation or material benefits, bhakti yoga leads directly to eternal loving service to Krishna, which is the ultimate goal of all spiritual paths.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>Why do we offer food to Krishna before eating?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>Offering food to Krishna transforms it into prasadam (the Lord's mercy). This practice acknowledges that everything belongs to God and purifies both the food and the eater. Prasadam nourishes us spiritually and helps reduce material attachments, while also protecting us from karmic reactions associated with eating.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>How can I practice spirituality in daily life?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>Simple practices include chanting Hare Krishna daily, reading Bhagavad-gita, offering food to Krishna, associating with devotees, and seeing everything as connected to Krishna. The key is to do everything as an offering to Krishna with love. Even routine activities can become spiritual when performed with the right consciousness.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>What is the significance of tulasi in devotional service?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>Tulasi is a sacred plant beloved by Krishna. Worshiping and caring for tulasi plants brings great spiritual merit. Tulasi leaves are essential for worshiping Krishna, and drinking water that has touched tulasi roots purifies one of sinful reactions. Devotees often wear tulasi neckbeads as a symbol of their devotion to Krishna.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>How does bhakti yoga differ from other forms of meditation?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-            <p>While many meditation techniques aim at emptying the mind or achieving impersonal oneness, bhakti yoga focuses on developing a loving relationship with the Supreme Person, Krishna. It engages all senses in service rather than withdrawing them. Bhakti meditation includes hearing and chanting about Krishna, remembering His activities, and serving Him with love.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
-            <span>Why are the Vedas important?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="spiritual-faq-answer">
-          <p>The Vedas are the original spiritual knowledge given by Krishna at the beginning of creation. They contain comprehensive information about the nature of reality, the self, God, and the relationship between them. The Vedas guide humanity toward spiritual realization through various processes suited to different natures and times.</p>
-        </div>
-    </div>
-    
-    <div class="spiritual-faq-item">
-        <div class="spiritual-faq-question">
             <span>What is the role of women in spiritual life?</span>
             <i class="fas fa-chevron-down"></i>
         </div>
@@ -1834,12 +1749,14 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     mobileMenu.classList.toggle('active');
     menuOverlay.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
 });
 
 menuOverlay.addEventListener('click', () => {
     hamburger.classList.remove('active');
     mobileMenu.classList.remove('active');
     menuOverlay.classList.remove('active');
+    document.body.classList.remove('menu-open');
 });
 
 mobileDropdownToggles.forEach(toggle => {
@@ -1908,40 +1825,65 @@ const spiritualModalClose = document.querySelector('.spiritual-modal-close');
 
 exploreSpiritualBtn.addEventListener('click', () => {
     spiritualModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    spiritualModal.scrollTo(0, 0);
 });
 
 spiritualModalClose.addEventListener('click', () => {
     spiritualModal.classList.remove('active');
-    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.scrollBehavior = 'auto';
+    const scrollY = document.body.style.top;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    document.documentElement.style.scrollBehavior = '';
 });
 
-// Header Scroll Effect
+spiritualModal.addEventListener('click', (e) => {
+    if (e.target === spiritualModal) {
+        spiritualModal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+});
+
+// Fixed Header Scroll Effect
 let lastScroll = 0;
 const header = document.getElementById('header');
+const headerHeight = header.offsetHeight;
+const scrollThreshold = 100; // How much to scroll before hiding header
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
+    // Always show header at top of page
     if (currentScroll <= 0) {
         header.classList.remove('hidden');
         return;
     }
     
-    if (currentScroll > lastScroll && !header.classList.contains('hidden')) {
-        header.classList.add('hidden');
-    } else if (currentScroll < lastScroll && header.classList.contains('hidden')) {
-        header.classList.remove('hidden');
+    // Scrolling down past threshold
+    if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+        // Hide header only if not already hidden and scrolled past threshold
+        if (!header.classList.contains('hidden')) {
+            header.classList.add('hidden');
+        }
+    } 
+    // Scrolling up
+    else if (currentScroll < lastScroll) {
+        // Show header only if hidden
+        if (header.classList.contains('hidden')) {
+            header.classList.remove('hidden');
+        }
     }
     
     lastScroll = currentScroll;
 });
 
-
 // Scroll-based Donate Button with Footer Detection
 const scrollDonateBtn = document.querySelector('.scroll-donate-btn');
 const footer = document.querySelector('footer');
-const ourActivitiesSection = document.querySelector('.cards-section'); // Section after which donate button should appear
+const ourActivitiesSection = document.querySelector('.cards-section');
 
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -1962,43 +1904,27 @@ let touchEndX = 0;
 
 heroCarousel.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
-    clearInterval(slideInterval); // Pause auto-rotation during touch
+    clearInterval(slideInterval);
 }, {passive: true});
 
 heroCarousel.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
     handleSwipe();
-    slideInterval = setInterval(nextSlide, 5000); // Resume auto-rotation
+    slideInterval = setInterval(nextSlide, 5000);
 }, {passive: true});
 
 function handleSwipe() {
-    const threshold = 50; // Minimum swipe distance
+    const threshold = 50;
     
     if (touchEndX < touchStartX - threshold) {
-        nextSlide(); // Swipe left - next slide
+        nextSlide();
     } else if (touchEndX > touchStartX + threshold) {
-        prevSlide(); // Swipe right - previous slide
+        prevSlide();
     }
 }
 
 // Initialize the carousel
 showSlide(0);
-
-// Fix 1: Forcefully hide spiritual modal on menu open
-hamburger.addEventListener('click', () => {
-    spiritualModal.classList.remove('active');
-    document.body.style.overflow = ''; // Enable scroll
-});
-
-// Fix 2: Prevent scroll lock on body (double-safety)
-mobileMenu.addEventListener('touchstart', () => {
-    document.body.style.overflow = '';
-});
-
-// Fix 3: Make mobile menu always scrollable
-mobileMenu.style.overflowY = 'auto';
-mobileMenu.style.webkitOverflowScrolling = 'touch';
-
 </script>
 </body>
 </html>
