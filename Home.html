@@ -420,6 +420,7 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
             padding: 20px 0;
             scrollbar-width: thin;
             scrollbar-color: var(--primary) rgba(108, 74, 182, 0.1);
+            -webkit-overflow-scrolling: touch;
         }
         
         .mobile-menu::-webkit-scrollbar {
@@ -519,11 +520,12 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
             left: 0;
             width: 100%;
             height: calc(100vh - 60px); /* Adjusted for thinner header */
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
+            pointer-events: auto;
         }
         
         .menu-overlay.active {
@@ -1126,6 +1128,15 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
             transition: var(--transition);
         }
 
+        /* Contacts Column */
+        .footer-column.contacts-column h3 {
+            color: var(--accent);
+        }
+        
+        .footer-column.contacts-column ul li a {
+            white-space: nowrap;
+        }
+
         /* Enhanced Social Media Icons */
         .footer-column ul li a.social-icon {
             position: relative;
@@ -1550,7 +1561,7 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
     </div>
 </div>
 <div class="view-all-faq">
-    <a href="javascript:void(0);" class="view-all-btn">View All FAQs <i class="fas fa-arrow-right"></i></a>
+    <a href="faq.html" class="view-all-btn">View All FAQs <i class="fas fa-arrow-right"></i></a>
 </div>
 </section>
 
@@ -1770,13 +1781,13 @@ nav ul li:nth-child(5) { animation-delay: 0.5s; }
 <!-- Footer -->
 <footer>
 <div class="footer-content">
-    <div class="footer-column">
-        <h3>Quick Links</h3>
+    <div class="footer-column contacts-column">
+        <h3>Contacts</h3>
         <ul>
-            <li><a href="javascript:void(0);"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="javascript:void(0);"><i class="fas fa-calendar-alt"></i> Events</a></li>
-            <li><a href="javascript:void(0);"><i class="fas fa-info-circle"></i> About Us</a></li>
-            <li><a href="javascript:void(0);"><i class="fas fa-map-marker-alt"></i> Visit Us</a></li>
+            <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 (234) 567-890</a></li>
+            <li><a href="mailto:info@iskconburla.org"><i class="fas fa-envelope"></i> info@iskconburla.org</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-map-marker-alt"></i> Temple Address, Burla</a></li>
+            <li><a href="javascript:void(0);"><i class="fas fa-clock"></i> Open 7 days a week</a></li>
         </ul>
     </div>
     <div class="footer-column">
@@ -1944,22 +1955,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-
-// View All FAQs Button
-const viewAllFaqBtn = document.querySelector('.view-all-btn');
-
-viewAllFaqBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        item.classList.add('active');
-    });
-    
-    viewAllFaqBtn.style.display = 'none';
-});
-</script>
-<script>
 // Touch Slide Support
 const heroCarousel = document.querySelector('.hero-carousel');
 let touchStartX = 0;
@@ -1967,22 +1962,43 @@ let touchEndX = 0;
 
 heroCarousel.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
-});
+    clearInterval(slideInterval); // Pause auto-rotation during touch
+}, {passive: true});
 
 heroCarousel.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleGesture();
-});
+    handleSwipe();
+    slideInterval = setInterval(nextSlide, 5000); // Resume auto-rotation
+}, {passive: true});
 
-function handleGesture() {
-    if (touchEndX < touchStartX - 50) {
-        nextSlide(); // Swipe Left = Next Slide
-    }
-    if (touchEndX > touchStartX + 50) {
-        prevSlide(); // Swipe Right = Previous Slide
+function handleSwipe() {
+    const threshold = 50; // Minimum swipe distance
+    
+    if (touchEndX < touchStartX - threshold) {
+        nextSlide(); // Swipe left - next slide
+    } else if (touchEndX > touchStartX + threshold) {
+        prevSlide(); // Swipe right - previous slide
     }
 }
-</script>
 
+// Initialize the carousel
+showSlide(0);
+
+// Fix 1: Forcefully hide spiritual modal on menu open
+hamburger.addEventListener('click', () => {
+    spiritualModal.classList.remove('active');
+    document.body.style.overflow = ''; // Enable scroll
+});
+
+// Fix 2: Prevent scroll lock on body (double-safety)
+mobileMenu.addEventListener('touchstart', () => {
+    document.body.style.overflow = '';
+});
+
+// Fix 3: Make mobile menu always scrollable
+mobileMenu.style.overflowY = 'auto';
+mobileMenu.style.webkitOverflowScrolling = 'touch';
+
+</script>
 </body>
 </html>
