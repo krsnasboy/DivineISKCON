@@ -52,7 +52,14 @@
             border-bottom: 1px solid rgba(108, 74, 182, 0.1);
         }
 
-        header.hidden {
+        header {
+    top: 0;
+    transition: top 0.4s ease, box-shadow 0.4s ease;
+}
+
+header.hidden {
+    top: -80px !important;
+    box-shadow: none !important;
             transform: translateY(-100%);
             box-shadow: none;
         }
@@ -1847,36 +1854,29 @@ spiritualModal.addEventListener('click', (e) => {
     }
 });
 
-// Fixed Header Scroll Effect
+
+// Fixed Header Scroll Effect - Hide on scroll down, show on scroll up (final version)
 let lastScroll = 0;
 const header = document.getElementById('header');
-const headerHeight = header.offsetHeight;
-const scrollThreshold = 100; // How much to scroll before hiding header
+const scrollThreshold = 60;
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    // Always show header at top of page
+    const currentScroll = window.scrollY;
+    console.log('Scroll:', currentScroll, 'Last:', lastScroll);
+
     if (currentScroll <= 0) {
         header.classList.remove('hidden');
         return;
     }
-    
-    // Scrolling down past threshold
-    if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-        // Hide header only if not already hidden and scrolled past threshold
-        if (!header.classList.contains('hidden')) {
+
+    if (!document.body.classList.contains('modal-open')) {
+        if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
             header.classList.add('hidden');
-        }
-    } 
-    // Scrolling up
-    else if (currentScroll < lastScroll) {
-        // Show header only if hidden
-        if (header.classList.contains('hidden')) {
+        } else if (currentScroll < lastScroll) {
             header.classList.remove('hidden');
         }
     }
-    
+
     lastScroll = currentScroll;
 });
 
