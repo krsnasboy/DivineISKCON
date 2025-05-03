@@ -43,6 +43,9 @@
         touch-action: pan-y;
         line-height: 1.7;
     }
+    #donateFloatBtn {
+    display: none !important;
+}
     
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
@@ -454,6 +457,7 @@
         top: 75px; /* Adjusted to match new header height */
         left: -100%;
         width: 85%;
+        max-width: 350px;
         height: calc(100vh - 75px); /* Adjusted to match new header height */
         background-color: white;
         transition: var(--transition);
@@ -1188,53 +1192,22 @@
         width: 100%;
     }
 
-    /* Redesigned Donate Button */
     .card-donate-btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
         gap: 8px;
         padding: 8px 16px;
         border-radius: 6px;
-        background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
-        color: #2D2727;
-        font-weight: 600;
+        background-color: rgb(108, 74, 182);
+        color: white;
+        font-weight: 500;
         text-decoration: none;
         transition: var(--transition);
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        position: relative;
-        overflow: hidden;
-        border: none;
-        cursor: pointer;
-    }
-
-    .card-donate-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-        transition: 0.5s;
     }
 
     .card-donate-btn:hover {
-        background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .card-donate-btn:hover::before {
-        left: 100%;
-    }
-
-    .card-donate-btn i {
-        transition: var(--transition);
-    }
-
-    .card-donate-btn:hover i {
-        transform: scale(1.1);
+        background-color: rgb(4, 132, 161);
+        color: white;
     }
 
     .card-actions {
@@ -1453,7 +1426,7 @@
         font-weight: 300;
     }
 
-    /* Enhanced Floating Buttons */
+    /* Floating Buttons Styles */
     .floating-buttons {
         position: fixed;
         right: 30px;
@@ -1462,36 +1435,25 @@
         flex-direction: column;
         gap: 15px;
         z-index: 999;
-        transition: all 0.5s ease;
     }
+
+    .floating-btn.whatsapp-btn {
+    text-decoration: none !important;
+}
 
     .floating-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: auto;
+        width: 60px;
         height: 60px;
-        border-radius: 30px;
+        border-radius: 50%;
         color: white;
-        font-size: 1rem;
+        font-size: 1.5rem;
         box-shadow: var(--shadow-lg);
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: var(--transition);
         position: relative;
         overflow: hidden;
-        padding: 0 25px;
-        opacity: 0;
-        transform: translateY(20px);
-        visibility: hidden;
-    }
-
-    .floating-btn i {
-        font-size: 1.2rem;
-        margin-right: 10px;
-        transition: var(--transition);
-    }
-
-    .floating-btn span {
-        white-space: nowrap;
     }
 
     .floating-btn::before {
@@ -1511,14 +1473,27 @@
     }
 
     .floating-btn:hover {
-        transform: translateY(-5px) scale(1.05);
+        transform: translateY(-5px) scale(1.1);
         box-shadow: var(--shadow-xl);
     }
 
-    .floating-btn.visible {
+    .floating-btn span {
+        position: absolute;
+        right: 100%;
+        white-space: nowrap;
+        margin-right: 15px;
+        opacity: 0;
+        transition: var(--transition);
+        font-size: 1rem;
+        font-weight: 500;
+        background: rgba(0,0,0,0.7);
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+
+    .floating-btn:hover span {
         opacity: 1;
-        transform: translateY(0);
-        visibility: visible;
+        right: calc(100% + 15px);
     }
 
     .donate-btn {
@@ -1529,30 +1504,10 @@
         background: linear-gradient(135deg, #25D366, #128C7E);
     }
 
-    /* Scroll Reveal Animations - Desktop Only */
-    @media (min-width: 769px) {
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-delay-1 {
-            transition-delay: 0.1s;
-        }
-
-        .reveal-delay-2 {
-            transition-delay: 0.2s;
-        }
-
-        .reveal-delay-3 {
-            transition-delay: 0.3s;
-        }
+    /* Reveal Animation */
+    .reveal {
+        opacity: 1; /* Changed from 0 to 1 to remove scroll reveal */
+        transform: translateY(0); /* Changed from 30px to 0 to remove scroll reveal */
     }
 
     /* Decorative Elements */
@@ -1695,19 +1650,11 @@
         .floating-btn {
             width: 50px;
             height: 50px;
-            font-size: 0;
-            padding: 0;
-            border-radius: 50%;
-        }
-
-        .floating-btn i {
-            margin-right: 0;
             font-size: 1.2rem;
         }
 
-        .floating-btn.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .floating-btn:hover span {
+            display: none;
         }
     }
     
@@ -1739,11 +1686,6 @@
 
         .btn {
             width: 100%;
-        }
-
-        .floating-btn {
-            width: 45px;
-            height: 45px;
         }
     }
 
@@ -1785,6 +1727,35 @@
         background: url('https://i.imgur.com/ornamental-divider.png') center/contain no-repeat;
         opacity: 0.2;
     }
+
+    /* New class for floating button visibility */
+    .floating-btn-hidden {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+    }
+
+@media (max-width: 768px) {
+    .mobile-menu {
+        height: 100dvh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior-y: contain !important;
+        padding-bottom: 80px !important;
+    }
+}
+.reveal {
+    opacity: 0 !important;
+    visibility: hidden;
+    transform: translateY(40px);
+    transition: all 0.9s ease-out;
+}
+
+.reveal.active {
+    opacity: 1 !important;
+    visibility: visible;
+    transform: translateY(0);
+}
 </style>
 </head>
 <body>
@@ -1895,10 +1866,6 @@
 <img alt="ISKCON Burla Temple" loading="lazy" src="https://i.imgur.com/desktop-banner1.jpg"/>
 </picture>
 <div class="banner-overlay"></div>
-<div class="banner-content">
-<h2>Experience Divine Bliss</h2>
-<p>Join us in devotion and service at ISKCON Burla</p>
-</div>
 </div>
 <div class="banner-slide">
 <picture>
@@ -1907,10 +1874,6 @@
 <img alt="Sunday Feast at ISKCON" loading="lazy" src="https://i.imgur.com/desktop-banner2.jpg"/>
 </picture>
 <div class="banner-overlay"></div>
-<div class="banner-content">
-<h2>Sunday Feast Celebration</h2>
-<p>Weekly spiritual gathering with kirtan and prasadam</p>
-</div>
 </div>
 <div class="banner-slide">
 <picture>
@@ -1919,10 +1882,6 @@
 <img alt="Gau Seva at ISKCON" loading="lazy" src="https://i.imgur.com/desktop-banner3.jpg"/>
 </picture>
 <div class="banner-overlay"></div>
-<div class="banner-content">
-<h2>Serve the Sacred Cows</h2>
-<p>Participate in our Gau Seva program</p>
-</div>
 </div>
 <div class="banner-slide">
 <picture>
@@ -1931,10 +1890,6 @@
 <img alt="Book Distribution" loading="lazy" src="https://i.imgur.com/desktop-banner4.jpg"/>
 </picture>
 <div class="banner-overlay"></div>
-<div class="banner-content">
-<h2>Sacred Knowledge</h2>
-<p>Discover the wisdom of Vedic scriptures</p>
-</div>
 </div>
 <button aria-label="Previous banner" class="banner-nav prev">
 <i class="fas fa-chevron-left"></i>
@@ -1955,12 +1910,12 @@
 <h2 id="dynamic-title" style="font-size: 1.3rem; color: var(--primary); margin-bottom: 0.4rem;"></h2>
 <p id="dynamic-desc" style="font-size: 1rem; color: var(--dark); margin-bottom: 1rem;"></p>
 <a class="btn btn-primary" href="javascript:void(0);" id="dynamic-btn">Learn More</a>
-</div><section class="welcome-section" id="welcome-section">
+</div><section class="welcome-section reveal" id="welcome-section">
 <div class="container">
 <h1 class="reveal">Welcome to ISKCON Burla</h1>
-<p class="subtext reveal reveal-delay-1">Experience the divine life of devotion and joy at our temple. Join us in spiritual activities, kirtans, and service to Lord Krishna.</p>
-<div class="divider reveal reveal-delay-2"></div>
-<div class="ornamental-divider"></div>
+<p class="subtext reveal">Experience the divine life of devotion and joy at our temple. Join us in spiritual activities, kirtans, and service to Lord Krishna.</p>
+<div class="divider"></div>
+<div class="ornamental-divider reveal"></div>
 <div class="cards-grid">
 <div class="card reveal">
 <div class="card-image">
@@ -2017,8 +1972,8 @@
 <section class="cards-section">
 <div class="container">
 <div class="section-header">
-<h2 class="section-title">Our Activities</h2>
-<p class="section-subtitle">Engage in various spiritual activities and services at ISKCON Burla</p>
+<h2 class="section-title reveal">Our Activities</h2>
+<p class="section-subtitle reveal">Engage in various spiritual activities and services at ISKCON Burla</p>
 </div>
 <div class="cards-grid">
 <div class="card reveal">
@@ -2069,7 +2024,7 @@
 </div>
 </div>
 </div>
-<div class="card">
+<div class="card reveal">
 <div class="card-image">
 <img alt="Youth Programs" loading="lazy" src="https://i.imgur.com/youth-card.jpg"/>
 </div>
@@ -2085,7 +2040,7 @@
 </div>
 </div>
 </div>
-<div class="card">
+<div class="card reveal">
 <div class="card-image">
 <img alt="Book Distribution" loading="lazy" src="https://i.imgur.com/books-card.jpg"/>
 </div>
@@ -2101,7 +2056,7 @@
 </div>
 </div>
 </div>
-<div class="card">
+<div class="card reveal">
 <div class="card-image">
 <img alt="Volunteer Opportunities" loading="lazy" src="https://i.imgur.com/seva-card.jpg"/>
 </div>
@@ -2118,7 +2073,7 @@
 </div>
 </div>
 </div>
-<div class="card-actions">
+<div class="card-actions reveal">
 <a class="btn btn-primary" href="javascript:void(0);"><i class="fas fa-calendar-alt"></i> View Full Calendar</a>
 <a class="btn btn-secondary" href="javascript:void(0);"><i class="fas fa-hands-helping"></i> Volunteer Now</a>
 </div>
@@ -2128,8 +2083,8 @@
 <section class="faq-section">
 <div class="container">
 <div class="section-header">
-<h2 class="section-title">Frequently Asked Questions</h2>
-<p class="section-subtitle">Find answers to common questions about our temple and activities</p>
+<h2 class="section-title">Frequently Asked Questions</h2> <!-- Removed reveal class -->
+<p class="section-subtitle">Find answers to common questions about our temple and activities</p> <!-- Removed reveal class -->
 </div>
 <div class="faq-container">
 <div class="faq-item">
@@ -2202,12 +2157,10 @@
 </div>
 </section>
 <!-- Floating Buttons -->
-<div class="floating-buttons">
-<a class="floating-btn donate-btn" href="javascript:void(0);" id="donateFloatBtn">
+<div class="floating-buttons"><a class="floating-btn donate-btn" href="javascript:void(0);" id="donateFloatBtn" style="bottom: 40px !important; right: 20px !important; position: fixed; z-index: 1000;">
 <i class="fas fa-donate"></i>
 <span>Donate Now</span>
-</a>
-<a class="floating-btn whatsapp-btn" href="https://wa.me/1234567890" id="whatsappFloatBtn" target="_blank">
+</a><a class="floating-btn whatsapp-btn" href="https://wa.me/1234567890" id="whatsappFloatBtn" style="bottom: 30px !important; right: 20px !important; position: fixed; z-index: 1000;" target="_blank">
 <i class="fab fa-whatsapp"></i>
 <span>Chat with Us</span>
 </a>
@@ -2290,7 +2243,7 @@
         });
     });
     
-    // Banner Slider - Fixed to transition sequentially
+    // Banner Slider
     const bannerSlides = document.querySelectorAll('.banner-slide');
     const bannerDots = document.querySelectorAll('.dot');
     const prevBtn = document.querySelector('.banner-nav.prev');
@@ -2307,9 +2260,6 @@
         bannerSlides[index].classList.add('active');
         bannerDots[index].classList.add('active');
         currentSlide = index;
-        
-        // Update dynamic banner content
-        updateBannerContent(index);
     }
     
     function nextSlide() {
@@ -2363,22 +2313,6 @@
         startInterval();
     });
     
-    // Dynamic Banner Content
-    const banners = [
-        { title: 'Divine Blessings', desc: 'Experience the grace of Lord Krishna in our sacred temple', btn_text: 'Visit Temple', btn_href: 'javascript:void(0);' },
-        { title: 'Sunday Feast', desc: 'Join us for prasadam and kirtan every Sunday evening', btn_text: 'View Schedule', btn_href: 'javascript:void(0);' },
-        { title: 'Gau Seva', desc: 'Serve the sacred cows with devotion and love', btn_text: 'Support Goshala', btn_href: 'javascript:void(0);' },
-        { title: 'Sacred Knowledge', desc: 'Discover the wisdom of Vedic scriptures', btn_text: 'Explore Books', btn_href: 'javascript:void(0);' }
-    ];
-    
-    function updateBannerContent(index) {
-        document.getElementById('dynamic-title').textContent = banners[index].title;
-        document.getElementById('dynamic-desc').textContent = banners[index].desc;
-        const btn = document.getElementById('dynamic-btn');
-        btn.textContent = banners[index].btn_text;
-        btn.setAttribute('href', banners[index].btn_href);
-    }
-    
     // FAQ Accordion
     const faqQuestions = document.querySelectorAll('.faq-question');
     
@@ -2424,20 +2358,34 @@
         const welcomeSectionBottom = welcomeSectionTop + welcomeSection.offsetHeight;
         const scrollPosition = window.pageYOffset;
         const footerTop = footer.offsetTop;
-        const footerVisible = scrollPosition + window.innerHeight < footerTop + 100;
-
-        // Show buttons when scrolled past welcome section and footer is not visible
-        if (scrollPosition > welcomeSectionBottom - 300 && footerVisible) {
-            donateFloatBtn.classList.add('visible');
-            whatsappFloatBtn.classList.add('visible');
+    
+        // Show/hide based on scroll position
+        if (scrollPosition >= welcomeSectionTop && scrollPosition < footerTop) {
+            whatsappFloatBtn.classList.remove('floating-btn-hidden');
+            donateFloatBtn.classList.remove('floating-btn-hidden');
         } else {
-            donateFloatBtn.classList.remove('visible');
-            whatsappFloatBtn.classList.remove('visible');
+            whatsappFloatBtn.classList.remove('floating-btn-hidden');
+            donateFloatBtn.classList.add('floating-btn-hidden');
+        }
+    
+        // Hide both when above welcome section
+        if (scrollPosition < welcomeSectionTop) {
+            whatsappFloatBtn.classList.add('floating-btn-hidden');
+            donateFloatBtn.classList.add('floating-btn-hidden');
+        }
+    
+        // Hide donate button in footer
+        if (scrollPosition >= footerTop) {
+            donateFloatBtn.classList.add('floating-btn-hidden');
         }
     }
     
     window.addEventListener('scroll', handleFloatingButtons);
     window.addEventListener('load', handleFloatingButtons);
+    
+    // Initialize floating buttons as hidden
+    donateFloatBtn.classList.add('floating-btn-hidden');
+    whatsappFloatBtn.classList.add('floating-btn-hidden');
     
     // Header Scroll Behavior
     const header = document.getElementById('header');
@@ -2462,26 +2410,29 @@
         lastScroll = currentScroll;
     });
     
-    // Scroll Reveal Animation - Desktop Only
-    function scrollReveal() {
-        // Only run on desktop screens
-        if (window.innerWidth <= 768) return;
-
-        const reveals = document.querySelectorAll('.reveal');
-        const windowHeight = window.innerHeight;
-        const revealPoint = 150;
-
-        reveals.forEach(reveal => {
-            const revealTop = reveal.getBoundingClientRect().top;
-            
-            if (revealTop < windowHeight - revealPoint) {
-                reveal.classList.add('active');
+    // Floating Buttons Hover Effect
+    const floatingBtns = document.querySelectorAll('.floating-btn');
+    
+    floatingBtns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            const span = btn.querySelector('span');
+            if (window.innerWidth > 768) { // Only show on desktop
+                span.style.opacity = '1';
+                span.style.right = 'calc(100% + 15px)';
             }
         });
-    }
-
-    window.addEventListener('scroll', scrollReveal);
-    window.addEventListener('load', scrollReveal);
+        
+        btn.addEventListener('mouseleave', () => {
+            const span = btn.querySelector('span');
+            span.style.opacity = '0';
+            span.style.right = '100%';
+        });
+    });
+    
+    // Donate Button Click
+    document.getElementById('donateFloatBtn').addEventListener('click', () => {
+        alert('Thank you for your interest in donating! Please visit our donation page.');
+    });
     
     // Responsive Adjustments
     function handleResize() {
@@ -2500,116 +2451,150 @@
     document.addEventListener('DOMContentLoaded', () => {
         // Show first slide (already active in HTML, but ensures consistency)
         showSlide(0);
-        updateBannerContent(0);
+        
+        // Initialize any other needed functionality
     });
-</script>
-
+    </script>
 <script>
-(() => {
-    let currentSlide = 0;
-    let slideInterval;
+const banners = [
+    { title: 'Divine Blessings', desc: 'Experience the grace of Lord Krishna in our sacred temple', btn_text: 'Visit Temple', btn_href: 'javascript:void(0);' },
+    { title: 'Sunday Feast', desc: 'Join us for prasadam and kirtan every Sunday evening', btn_text: 'View Schedule', btn_href: 'javascript:void(0);' },
+    { title: 'Gau Seva', desc: 'Serve the sacred cows with devotion and love', btn_text: 'Support Goshala', btn_href: 'javascript:void(0);' },
+    { title: 'Sacred Knowledge', desc: 'Discover the wisdom of Vedic scriptures', btn_text: 'Explore Books', btn_href: 'javascript:void(0);' }
+];
+
+let currentIndex = 0;
+let autoSlideInterval;
+
+function updateBannerContent(index) {
+    document.getElementById('dynamic-title').textContent = banners[index].title;
+    document.getElementById('dynamic-desc').textContent = banners[index].desc;
+    const btn = document.getElementById('dynamic-btn');
+    btn.textContent = banners[index].btn_text;
+    btn.setAttribute('href', banners[index].btn_href);
+}
+
+function setActiveSlide(index) {
+    const slides = document.querySelectorAll('.banner-slide');
+    const dots = document.querySelectorAll('.dot');
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    updateBannerContent(index);
+    currentIndex = index;
+}
+
+function nextSlide() {
+    let newIndex = (currentIndex + 1) % banners.length;
+    setActiveSlide(newIndex);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateBannerContent(0);
+
+    document.querySelector('.banner-nav.next').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        nextSlide();
+        autoSlideInterval = setInterval(nextSlide, 5000);
+    });
+
+    document.querySelector('.banner-nav.prev').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        let newIndex = (currentIndex - 1 + banners.length) % banners.length;
+        setActiveSlide(newIndex);
+        autoSlideInterval = setInterval(nextSlide, 5000);
+    });
+
+    document.querySelectorAll('.dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            clearInterval(autoSlideInterval);
+            let index = parseInt(dot.getAttribute('data-slide'));
+            setActiveSlide(index);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        });
+    });
+
+    autoSlideInterval = setInterval(nextSlide, 5000);
+});
+</script><script>
+document.addEventListener('DOMContentLoaded', function () {
+    const bannerContainer = document.querySelector('.banner-container');
     const slides = document.querySelectorAll('.banner-slide');
     const dots = document.querySelectorAll('.dot');
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            dots[i].classList.remove('active');
-        });
+    const banners = [
+        { title: 'Divine Blessings', desc: 'Experience the grace of Lord Krishna in our sacred temple', btn_text: 'Visit Temple', btn_href: 'javascript:void(0);' },
+        { title: 'Sunday Feast', desc: 'Join us for prasadam and kirtan every Sunday evening', btn_text: 'View Schedule', btn_href: 'javascript:void(0);' },
+        { title: 'Gau Seva', desc: 'Serve the sacred cows with devotion and love', btn_text: 'Support Goshala', btn_href: 'javascript:void(0);' },
+        { title: 'Sacred Knowledge', desc: 'Discover the wisdom of Vedic scriptures', btn_text: 'Explore Books', btn_href: 'javascript:void(0);' }
+    ];
+
+    function updateBannerContent(index) {
+        document.getElementById('dynamic-title').textContent = banners[index].title;
+        document.getElementById('dynamic-desc').textContent = banners[index].desc;
+        const btn = document.getElementById('dynamic-btn');
+        btn.textContent = banners[index].btn_text;
+        btn.setAttribute('href', banners[index].btn_href);
+    }
+
+    function getCurrentIndex() {
+        return Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    }
+
+    function setActiveSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
         slides[index].classList.add('active');
         dots[index].classList.add('active');
         updateBannerContent(index);
-        currentSlide = index;
     }
 
-    function nextSlide() {
-        const nextIndex = (currentSlide + 1) % slides.length;
-        showSlide(nextIndex);
-    }
+    // Initialize first content
+    updateBannerContent(0);
 
-    function prevSlide() {
-        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prevIndex);
-    }
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-    function startInterval() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(() => {
-            nextSlide();
-        }, 3000); // 3s
-    }
+    bannerContainer.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
 
-    function updateBannerContent(index) {
-        const titles = [
-            "Experience Divine Bliss",
-            "Sunday Feast Celebration",
-            "Serve the Sacred Cows",
-            "Sacred Knowledge"
-        ];
-        const descriptions = [
-            "Join us in devotion and service at ISKCON Burla",
-            "Weekly spiritual gathering with kirtan and prasadam",
-            "Participate in our Gau Seva program",
-            "Discover the wisdom of Vedic scriptures"
-        ];
-        const btn = document.getElementById("dynamic-btn");
-        const title = document.getElementById("dynamic-title");
-        const desc = document.getElementById("dynamic-desc");
-        if (title && desc && btn) {
-            title.textContent = titles[index];
-            desc.textContent = descriptions[index];
+    bannerContainer.addEventListener('touchend', function (e) {
+        touchEndX = e.changedTouches[0].screenX;
+        const swipeDistance = touchEndX - touchStartX;
+        let currentIndex = getCurrentIndex();
+
+        if (swipeDistance < -50) {
+            let nextIndex = (currentIndex + 1) % slides.length;
+            setActiveSlide(nextIndex);
+        } else if (swipeDistance > 50) {
+            let prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+            setActiveSlide(prevIndex);
         }
-    }
+    }, false);
 
-    document.addEventListener('DOMContentLoaded', () => {
-        requestAnimationFrame(() => {
-            showSlide(0);
-            setTimeout(() => {
-                nextSlide();
-                startInterval();
-            }, 1500);
+    document.querySelectorAll('.banner-nav, .dot').forEach(el => {
+        el.addEventListener('click', () => {
+            let index = getCurrentIndex();
+            updateBannerContent(index);
         });
-
-        document.querySelector('.banner-nav.next').addEventListener('click', () => {
-            nextSlide();
-            startInterval();
-        });
-
-        document.querySelector('.banner-nav.prev').addEventListener('click', () => {
-            prevSlide();
-            startInterval();
-        });
-
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const index = parseInt(dot.getAttribute('data-slide'));
-                showSlide(index);
-                startInterval();
-            });
-        });
-
-        const bannerContainer = document.querySelector('.banner-container');
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        if (bannerContainer) {
-            bannerContainer.addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-
-            bannerContainer.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                if (touchEndX < touchStartX - 50) {
-                    nextSlide();
-                    startInterval();
-                } else if (touchEndX > touchStartX + 50) {
-                    prevSlide();
-                    startInterval();
-                }
-            });
-        }
     });
-})();
-</script>
-</body>
-</html>
+});
+</script><script>
+document.addEventListener("DOMContentLoaded", function () {
+    const reveals = document.querySelectorAll(".reveal");
+    function revealOnScroll() {
+        const windowHeight = window.innerHeight;
+        reveals.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) {
+                el.classList.add("active");
+            }
+        });
+    }
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+});
+</script></body>
+</html> 
